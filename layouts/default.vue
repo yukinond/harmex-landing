@@ -254,8 +254,8 @@ function scrollTop() {
       <div class="border-t border-[#4B4B4B] pt-12 flex lg:flex-row flex-col justify-center lg:justify-between text-[14px] leading-[17.5px] gap-12">
         <p class="text-white text-center lg:text-left">©{{ new Date().getFullYear() }} HARMEX Все права защищены.</p>
         <div class="flex lg:flex-row flex-col gap-6 items-center lg:items-end text-[#ADADAD]">
-          <a href="#">Политика конфиденциальности</a>
-          <a href="#">Пользовательское соглашение</a>
+          <a href="/docs/conf_policy.pdf">Политика конфиденциальности</a>
+          <a href="/docs/oferta.pdf">Пользовательское соглашение</a>
         </div>
       </div>
     </footer>
