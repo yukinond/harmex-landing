@@ -151,7 +151,7 @@ const handleBlur = () => {
 
         <div class="relative z-10 lg:p-6 text-white">
           <h1 class="text-2xl font-[600] lg:text-[60px] lg:leading-[72px] text-[30px] leading-[36px] mb-6">Репутация и продажи <br class="hidden lg:block"> под вашим контролем!</h1>
-          <p class="text-[#ADADAD] lg:text-[16px] lg:leading-[24px] text-[14px] leading-[21px] font-[500] mb-8 max-w-[70%] sm:max-w-[60%]">Harmex предоставляет инструменты, которые повысят ваши продажи, узнаваемость и привлекательность на популярных онлайн-площадках.</p>
+          <p class="text-[#ADADAD] lg:text-[16px] lg:leading-[24px] text-[14px] leading-[21px] font-[500] mb-8 max-w-[60%] sm:max-w-[60%]">Harmex предоставляет инструменты, которые повысят ваши продажи, узнаваемость и привлекательность на популярных онлайн-площадках.</p>
           <div class="flex gap-3">
             <button @click="navigateTo('https://app.harmex.ru/auth', { external: true })" class="btn-primary lg:h-[60px] lg:!px-[32px]">
               Попробовать
@@ -179,9 +179,12 @@ const handleBlur = () => {
 
       <section class="w-full rounded-[12px] flex items-center lg:px-16 lg:py-24 py-8 px-6 bg-white flex-col gap-8 lg:gap-16">
         <h1 class="block-title">Почему выбирают HARMEX?</h1>
-        <div class="w-full">
-          <Nuxt-Img src="/img/app.png" class="w-full"/>
+        <div class="image-container relative max-h-[200px] xs sm:max-h-[400px] lg:max-h-[476px] xl:max-h-[576px]">
+          <Nuxt-img src="/img/bg.jpeg" alt="Background"/>
+          <Nuxt-img src="/img/app.png" alt="Image" class="noblur absolute max-w-[90%] lg:max-w-[80%] top-2/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-sm" />
         </div>
+
+
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div v-for="item in harmexPluses" class="bg-[#F4F4F4] p-6 rounded-[10px] w-full">
               <div class="bg-[--primary] text-white p-3 rounded-[10px] w-fit max-h-[49px] mb-16 "> 
@@ -339,4 +342,33 @@ const handleBlur = () => {
   
 
 <style scoped>
+.image-container {
+  width: 100%;
+  overflow: hidden; 
+  border-radius: 24px;
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+}
+
+.image-container img {
+  width: 100%;
+  height: auto;
+  object-fit: cover; 
+  object-position: center; 
+  filter: blur(4px);
+}
+
+.image-container .noblur {
+  filter: none;
+}
+
+
+
+@meddia (max-width: 640px) {
+  .xs {
+    max-height: 300px;
+  }
+}
+
 </style>

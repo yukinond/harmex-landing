@@ -2,8 +2,8 @@
 </script>
 <template>
     <div class="flex flex-col gap-0 bg-[#EAEAEA38]">
-        <section class="flex flex-col gap-5 px-6 py-8 sm:pt-[64px] sm:pb-[80px] items-center justify-center bg-gradient-to-b from-[#FFFFFF] to-[#FEF5EE]">
-          <h1 class="text-[28px] leading-[33px] sm:text-[48px] sm:leading-[56px] font-700 max-w-[632px] text-center">Откройте полезные инсайты и советы для развития вашего бизнеса</h1>
+        <section class="flex flex-col gap-5 px-6 py-8 sm:pt-[64px] sm:pb-[80px] items-center justify-center bg-gradient-to-b from-[#FFFFFF] from-[45%] to-[#fef8f3] to-[100%] border-b border-[#0A0A0A12]">
+          <h1 class="text-[28px] leading-[33px] sm:text-[48px] sm:leading-[56px] font-[700] max-w-[632px] text-center text-[#1D1D1D]">Откройте полезные инсайты и советы для развития вашего бизнеса</h1>
           <p class="text-[18px] leading-[28px] font-[400] text-[#0A0A0AB2] max-w-[480px] text-center">Всё о продвижении, репутации, маркетплейсах, интернет-магазинах и стриминговых платформах.</p>
         
         </section>
@@ -105,9 +105,9 @@
                     <h1 class="block-title">Не пропускайте важное!</h1>
                     <p class="font-[500] text-[16px] leading-[24px]">Получайте лучшие материалы прямо в Telegram</p>
                 </div>
-                <button class="btn-primary !bg-[#323232] h-[58px] !px-8">
+                <a href="https://t.me/harmexpro_bot" class="btn-primary !bg-[#323232] h-[58px] !px-8 flex items-center justify-center">
                     Подписаться на Telegram-канал
-                </button>
+                </a>
             </div>
         </section>
     </div>

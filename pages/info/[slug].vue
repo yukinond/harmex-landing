@@ -169,8 +169,8 @@ const harmexPluses = ref([
 
 <template>
     <div class="flex flex-col gap-0 bg-[#EAEAEA38]">
-      <section class="flex flex-col gap-5 px-6 py-8 sm:pt-[64px] sm:pb-[80px] items-center justify-center bg-gradient-to-b from-[#FFFFFF] to-[#FEF5EE]">
-          <h1 class="text-[28px] leading-[33px] sm:text-[48px] sm:leading-[56px] font-700 max-w-[632px] text-center"> Репутация и продажи под вашим контролем на {{ mp.title }}!</h1>
+      <section class="flex flex-col gap-5 px-6 py-8 sm:pt-[64px] sm:pb-[80px] items-center justify-center bg-gradient-to-b from-[#FFFFFF] from-[45%] to-[#fef8f3] to-[100%] border-b border-[#0A0A0A12]">
+        <h1 class="text-[28px] leading-[33px] sm:text-[48px] sm:leading-[56px] font-[700] max-w-[632px] text-center text-[#1D1D1D]"> Репутация и продажи под вашим контролем на {{ mp.title }}!</h1>
           <p class="text-[18px] leading-[28px] font-[400] text-[#0A0A0AB2] max-w-[480px] text-center">Увеличивайте заказы и положительные отзывы 24/7 с Harmex — ваш надежный помощник в борьбе за высокий рейтинг и доверие клиентов!</p>
           <div class="flex gap-2">
               <button @click="navigateTo('https://app.harmex.ru/auth', { external: true })" class="btn-primary lg:h-[60px] lg:!px-[32px] !max-h-[40px] flex items-center">

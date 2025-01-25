@@ -109,7 +109,7 @@ function scrollTop() {
         <nav class="items-center gap-6 font-[500] text-[14px] leading-[17.5px] lg:flex hidden">
           <Nuxt-Link to="/blog">Блог</Nuxt-Link>
           <a href="#">Кейсы</a>
-          <a href="#">Помощь</a>
+          <Nuxt-Link to="/#contact">Помощь</Nuxt-Link>
           <a href="#">Услуги</a>
         </nav>
       </div>
@@ -236,8 +236,8 @@ function scrollTop() {
         </div>
         <div class="flex flex-col gap-4 items-end text-white">
           <a class="text-[32px] leading-[38px] lg:text-[40px] lg:leading-[48px] font-[600]" href="tel:8 (800) 550 90 30">8 (800) 550 90 30</a>
-          <a class="font-[500] text-[14px] leading-[17.5px] flex gap-3 items-center" href="#"><Nuxt-Img src="/img/footer/support.svg" class="w-5 h-5" />Служба заботы</a>
-          <a class="font-[500] text-[14px] leading-[17.5px] flex gap-3 items-center" href="#"><Nuxt-Img src="/img/footer/tg.svg" class="w-5 h-5" />Презентация Harmex</a>
+          <a class="font-[500] text-[14px] leading-[17.5px] flex gap-3 items-center" href="https://t.me/HarmexSupport_bot"><Nuxt-Img src="/img/footer/support.svg" class="w-5 h-5" />Служба заботы</a>
+          <a class="font-[500] text-[14px] leading-[17.5px] flex gap-3 items-center" href="https://t.me/harmexpro_bot"><Nuxt-Img src="/img/footer/tg.svg" class="w-5 h-5" />Презентация Harmex</a>
           <a class="mb-2 text-[16px] text-[#47A4D2]" href="mailto:info@harmex.ru">info@harmex.ru</a>
           <div class="mb-2 text-right flex flex-col gap-1.5">
             <p class="text-[16px]">Московская область, г. Истра, п. Октябрьской фабрики, дом 26</p>
