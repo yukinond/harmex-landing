@@ -56,6 +56,10 @@ function navigateToSite(url:string, disabled:boolean) {
   persistedStore.setCurrent(url)
   navigateTo(`/info/${persistedStore.current}`)
 }
+
+function scrollTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 </script>
 
 <template>
@@ -226,7 +230,7 @@ function navigateToSite(url:string, disabled:boolean) {
           <div v-for="item in popupData.slice(0, 4)" :key="item.value" class="flex flex-col gap-3 font-[600] text-[14px] leading-[18px]">
             <p class="text-white">{{ item.title }}</p>
             <div v-for="subItem in item.subItems.slice(0, 5)" :key="subItem.value" class="flex flex-col gap-3 text-[#ADADAD]">
-              <span class="font-[400] text-[14px] leading-[17.5px] lg:leading-[26px] text-[#E8E8E8]">{{ subItem.title }}</span>
+              <Nuxt-Link :to="subItem.disabled ? '' : `/info/${subItem.value}`" class="font-[400] text-[14px] leading-[17.5px] lg:leading-[26px] text-[#E8E8E8]">{{ subItem.title }}</Nuxt-Link>
             </div>
           </div>
         </div>
@@ -243,7 +247,7 @@ function navigateToSite(url:string, disabled:boolean) {
             <span class="text-[14px] text-[#ADADAD]">
               Наверх
             </span>
-            <a href="#header" class="btn-primary max-h-[42px] flex items-center"><Icon name="octicon:arrow-up-24" class="w-5 h-7 text-black" /></a>
+            <button @click="scrollTop" class="btn-primary max-h-[42px] flex items-center"><Icon name="octicon:arrow-up-24" class="w-5 h-7 text-black" /></button>
           </div>
         </div>
       </div>

@@ -13,7 +13,7 @@
             <div class="flex lg:flex-row flex-col gap-6 w-full ">
                 <div class="flex flex-col flex-1">
                     <!-- <Nuxt-Img :src="'/img/blog.svg'" class="w-full h-1/2" /> -->
-                    <div class="min-h-[248px] w-full bg-[#F7F7F7] rounded-lg"></div>
+                    <Nuxt-Link to="/blog/1" class="min-h-[248px] w-full bg-[#F7F7F7] rounded-lg"></Nuxt-Link >
                     <div class="px-[16px] py-8 flex flex-col gap-3">
                     <div class="flex justify-between mb-1">
                         <p class="text-[16px] leading-[24px] font-[500] text-[--primary]">Отзывы</p>
@@ -22,13 +22,13 @@
                         300
                         </span>
                     </div>
-                    <p class="font-[600] text-[20px] leading-[28px]">Как повысить рейтинг вашего продукта и привлечь больше клиентов?</p>
+                    <Nuxt-Link to="/blog/1" class="font-[600] text-[20px] leading-[28px]">Как повысить рейтинг вашего продукта и привлечь больше клиентов?</Nuxt-Link>
                     <p class="font-[400] text-[15px] leading-[24px] text-[#0A0A0AB2]"> One key feature of any blogging platform is the ability to schedule posts for future publication. </p>
                     </div>
                 </div>
                 <div class="flex flex-col flex-1">
                     <!-- <Nuxt-Img :src="'/img/blog.svg'" class="w-full h-1/2" /> -->
-                    <div class="min-h-[248px] w-full bg-[#F7F7F7] rounded-lg"></div>
+                    <Nuxt-Link to="/blog/1" class="min-h-[248px] w-full bg-[#F7F7F7] rounded-lg"></Nuxt-Link>
                     <div class="px-[16px] py-8 flex flex-col gap-3">
                     <div class="flex justify-between mb-1">
                         <p class="text-[16px] leading-[24px] font-[500] text-[--primary]">Отзывы</p>
@@ -37,13 +37,13 @@
                         300
                         </span>
                     </div>
-                    <p class="font-[600] text-[20px] leading-[28px]">Как повысить рейтинг вашего продукта и привлечь больше клиентов?</p>
+                    <Nuxt-Link to="/blog/1" class="font-[600] text-[20px] leading-[28px]">Как повысить рейтинг вашего продукта и привлечь больше клиентов?</Nuxt-Link>
                     <p class="font-[400] text-[15px] leading-[24px] text-[#0A0A0AB2]"> One key feature of any blogging platform is the ability to schedule posts for future publication. </p>
                     </div>
                 </div>
                 <div class="flex flex-col flex-1">
                     <!-- <Nuxt-Img :src="'/img/blog.svg'" class="w-full h-1/2" /> -->
-                    <div class="min-h-[248px] w-full bg-[#F7F7F7] rounded-lg"></div>
+                    <Nuxt-Link to="/blog/1" class="min-h-[248px] w-full bg-[#F7F7F7] rounded-lg"></Nuxt-Link>
                     <div class="px-[16px] py-8 flex flex-col gap-3">
                     <div class="flex justify-between mb-1">
                         <p class="text-[16px] leading-[24px] font-[500] text-[--primary]">Отзывы</p>
@@ -52,7 +52,7 @@
                         300
                         </span>
                     </div>
-                    <p class="font-[600] text-[20px] leading-[28px]">Как повысить рейтинг вашего продукта и привлечь больше клиентов?</p>
+                    <Nuxt-Link to="/blog/1" class="font-[600] text-[20px] leading-[28px]">Как повысить рейтинг вашего продукта и привлечь больше клиентов?</Nuxt-Link>
                     <p class="font-[400] text-[15px] leading-[24px] text-[#0A0A0AB2]"> One key feature of any blogging platform is the ability to schedule posts for future publication. </p>
                     </div>
                 </div>
@@ -64,12 +64,12 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full ">
                 <div class="flex flex-col flex-1" v-for="(item, index) in 15" :key="item">
                     <!-- <Nuxt-Img :src="'/img/blog.svg'" class="w-full h-1/2" /> -->
-                    <div class="min-h-[248px] w-full bg-[#F7F7F7] rounded-lg"></div>
+                    <Nuxt-Link to="/blog/1" class="min-h-[248px] w-full bg-[#F7F7F7] rounded-lg"></Nuxt-Link>
                     <div class="px-[16px] py-8 flex flex-col gap-3">
                     <div class="flex justify-between mb-1">
                         <p class="text-[16px] leading-[24px] font-[500] text-[--primary]">Категория</p>
                     </div>
-                    <p class="font-[600] text-[20px] leading-[28px]">Статья {{ index+1 }}</p>
+                    <Nuxt-Link to="/blog/1" class="font-[600] text-[20px] leading-[28px]">Статья {{ index+1 }}</Nuxt-Link>
                     <p class="font-[400] text-[15px] leading-[24px] text-[#0A0A0AB2]"> Краткое описание статьи в 1-2 предложения. </p>
                     <div class="flex justify-between">
                         <div class="text-[#0A0A0AB2] flex items-center gap-3">

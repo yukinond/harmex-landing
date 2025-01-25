@@ -6,8 +6,8 @@
           <h1 class="text-[28px] leading-[33px] sm:text-[48px] sm:leading-[56px] font-700 max-w-[632px] text-center">Как повысить рейтинг вашего продукта и привлечь больше клиентов?</h1>
           <p class="text-[18px] leading-[28px] font-[400] text-[#0A0A0AB2] max-w-[480px] text-center">Одной из ключевых особенностей любой платформы для ведения блогов является возможность планировать публикацию постов на будущее.</p>
         </section>
-        <section class=" py-20  flex flex-col justify-center items-center bg-white ">
-            <div class="flex flex-col w-full max-w-[70%] items-center justify-center gap-6">
+        <section class="px-6 py-20 lg:py-20  flex flex-col justify-center items-center bg-white ">
+            <div class="flex flex-col w-full lg:max-w-[70%] items-center justify-center gap-6">
                 <Nuxt-Img src="/img/finance.svg" class="w-full flex mx-auto"/>
                 <div class="flex justify-between mb-1 w-full">
                     <p class="text-[16px] leading-[24px] font-[500] text-[--primary]">Отзывы</p>
@@ -20,6 +20,14 @@
                     <div class="flex flex-col gap-2.5">
                         <p class="text-[18px] leading-[27px] font-[400] text-[#98989A]">Имя автора</p>
                         <p class="text-[18px] leading-[27px] font-[400] ">Доктор Эмили Уокер</p>
+                    </div>
+                    <div class="flex flex-col gap-2.5">
+                        <p class="text-[18px] leading-[27px] font-[400] text-[#98989A]">Дата публикации</p>
+                        <p class="text-[18px] leading-[27px] font-[400] ">31.08.2023</p>
+                    </div>
+                    <div class="flex flex-col gap-2.5">
+                        <p class="text-[18px] leading-[27px] font-[400] text-[#98989A]">Время чтения</p>
+                        <p class="text-[18px] leading-[27px] font-[400] ">10 минут</p>
                     </div>
                 </div>
                 <h2 class="title-gray">Откройте для себя советы, лучшие практики и углубленные статьи, которые помогут вам оптимизировать вашу работу, упростить задачи и оставаться на шаг впереди в вашем пути к продуктивности.</h2>
