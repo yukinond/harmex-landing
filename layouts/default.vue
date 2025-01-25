@@ -63,7 +63,7 @@ function scrollTop() {
 </script>
 
 <template>
-  <div class="overflow-auto" :class="{ 'px-1.5' : route.name === 'index'}">
+  <div :class="{ 'px-1.5' : route.name === 'index',  }">
     <header id="header" class="flex justify-between items-center h-[84px] px-3 bg-white " :class="{ 'mb-1.5 rounded-b-xl shadow-[2px_1px_7px_1px_rgba(0,_0,_0,_0.1)]' : route.name === 'index', 'lg:px-[calc(10%)]' : route.name !== 'index'}">
       <div class="flex gap-6">
         <Nuxt-Link to="/">

@@ -20,6 +20,7 @@ body {
 
 #header {
     position: sticky;
+    position: -webkit-sticky;
     top: 0;
     z-index: 100;
 }
@@ -82,7 +83,6 @@ html, body, .overflow-auto {
     color: #fff;
 }
 
-
 .block-title {
     font-weight: 600;
     font-size: 40px;
@@ -93,28 +93,29 @@ html, body, .overflow-auto {
 .no-scroll {
     overflow: hidden;
     height: 100vh;
-  }
+}
   
-  #mobile-menu {
+#mobile-menu {
     overflow-y: auto; 
-  }
-  .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(8px); 
-    z-index: 49; 
-    overflow: hidden;
-  }
+}
 
-  .emoji-container {
-    font-family: 'Noto Color Emoji', sans-serif;
-    font-size: 24px; 
-    line-height: 1.2;
-  }
+.overlay {
+position: fixed;
+top: 0;
+left: 0;
+width: 100vw;
+height: 100vh;
+background-color: rgba(0, 0, 0, 0.5);
+backdrop-filter: blur(8px); 
+z-index: 49; 
+overflow: hidden;
+}
+
+.emoji-container {
+font-family: 'Noto Color Emoji', sans-serif;
+font-size: 24px; 
+line-height: 1.2;
+}
   
 @media (max-width: 1024px) {
     .block-title {
