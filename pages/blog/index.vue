@@ -37,8 +37,8 @@
                         300
                         </span>
                     </div>
-                    <Nuxt-Link to="/blog/1" class="font-[600] text-[20px] leading-[28px]">Как повысить рейтинг вашего продукта и привлечь больше клиентов?</Nuxt-Link>
-                    <p class="font-[400] text-[15px] leading-[24px] text-[#0A0A0AB2]"> One key feature of any blogging platform is the ability to schedule posts for future publication. </p>
+                    <Nuxt-Link to="/blog/1" class="font-[600] text-[20px] leading-[28px]">Высокий рейтинг — ключ к успеху на любых платформах.</Nuxt-Link>
+                    <p class="font-[400] text-[15px] leading-[24px] text-[#0A0A0AB2]"> Одной из ключевых функций любой платформы для ведения блогов является возможность планировать публикацию постов на будущее. </p>
                     </div>
                 </div>
                 <div class="flex flex-col flex-1">
@@ -46,14 +46,14 @@
                     <Nuxt-Link to="/blog/1" class="min-h-[248px] w-full bg-[#F7F7F7] rounded-lg"></Nuxt-Link>
                     <div class="px-[16px] py-8 flex flex-col gap-3">
                     <div class="flex justify-between mb-1">
-                        <p class="text-[16px] leading-[24px] font-[500] text-[--primary]">Отзывы</p>
+                        <p class="text-[16px] leading-[24px] font-[500] text-[--primary]">Привлекательность</p>
                         <span class="text-[#0A0A0AB2] flex items-center gap-3">
                         <Icon name="uil:eye" class="w-6 h-6 text-[#0A0A0A73]" />
                         300
                         </span>
                     </div>
-                    <Nuxt-Link to="/blog/1" class="font-[600] text-[20px] leading-[28px]">Как повысить рейтинг вашего продукта и привлечь больше клиентов?</Nuxt-Link>
-                    <p class="font-[400] text-[15px] leading-[24px] text-[#0A0A0AB2]"> One key feature of any blogging platform is the ability to schedule posts for future publication. </p>
+                    <Nuxt-Link to="/blog/1" class="font-[600] text-[20px] leading-[28px]">Секреты повышения рейтинга: от анализа до действий.</Nuxt-Link>
+                    <p class="font-[400] text-[15px] leading-[24px] text-[#0A0A0AB2]"> Одной из ключевых функций любой платформы для ведения блогов является возможность планировать публикацию постов на будущее. </p>
                     </div>
                 </div>
             </div>
