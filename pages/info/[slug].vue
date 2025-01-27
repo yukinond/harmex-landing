@@ -241,8 +241,8 @@ onMounted(() => {
               <p class="font-[600] text-[20px] leading-[28px] mr-6">{{ item.title }}</p>
               <p class="text-[#0A0A0AB2] text-[18px] leading-[28px] mr-6">{{ item.description }}</p>
             </div>
-            <div class="flex w-full pr-6 mt-1">
-              <Nuxt-Img :src="item.image" class="w-[100%] h-[170px] object-fill" />
+            <div class="flex w-full pr-6 mt-1 justify-center">
+              <Nuxt-Img :src="item.image" class="w-[100%] object-fill h-[170px] max-w" />
             </div>
           </div>
         </div>
@@ -384,6 +384,9 @@ onMounted(() => {
 .fade-leave-to {
   transform: translateX(-100%);
 }
-
-
+@media (min-width: 2000px) {
+  .max-w {
+    max-width: 400px;
+  }
+}
 </style>
