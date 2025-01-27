@@ -109,7 +109,7 @@ function scrollTop() {
         <nav class="items-center gap-6 font-[500] text-[14px] leading-[17.5px] lg:flex hidden">
           <Nuxt-Link to="/blog">Блог</Nuxt-Link>
           <a href="#">Кейсы</a>
-          <Nuxt-Link to="/#contact">Помощь</Nuxt-Link>
+          <Nuxt-Link :to="route.name === 'index' ? '#contact' : '/#footer'">Помощь</Nuxt-Link>
           <a href="#">Услуги</a>
         </nav>
       </div>
@@ -179,10 +179,10 @@ function scrollTop() {
         </div>
         
         <div class="gap-6 font-[500] text-[14px] leading-[17.5px] flex-col flex items-start">
-          <Nuxt-Link to="/blog" >Блог</Nuxt-Link>
-          <a class="text-left" href="#">Кейсы</a>
-          <a class="text-left" href="#">Помощь</a>
-          <a class="text-left" href="#">Услуги</a>
+          <Nuxt-Link to="/blog" @click="toggleOpen">Блог</Nuxt-Link>
+          <a class="text-left" href="#" @click="toggleOpen">Кейсы</a>
+          <Nuxt-Link to="/#contact" @click="toggleOpen">Помощь</Nuxt-Link>
+          <a class="text-left" href="#" @click="toggleOpen">Услуги</a>
         </div>
         <div class="dropdown ">
           <button class="dropbtn font-[500] text-[14px] leading-[17.5px] flex my-auto gap-1.5" @click="toggleDropdown">
@@ -223,7 +223,7 @@ function scrollTop() {
     </Transition>
     </header>
     <slot class="!z-1" />
-    <footer class="mt-1.5 rounded-xl rounded-b-none bg-[#323232] px-6 py-8 lg:p-16 flex flex-col gap-12">
+    <footer id="footer" class="mt-1.5 rounded-xl rounded-b-none bg-[#323232] px-6 py-8 lg:p-16 flex flex-col gap-12">
       <Nuxt-Img src="/img/footer/logo-white.svg" class="w-full max-w-[139px] min-h-[44px]" />
       <div class="flex sm:flex-row flex-col justify-between gap-12">
         <div class="flex sm:flex-row flex-col gap-12 lg:gap-20 flex-wrap">
@@ -236,8 +236,8 @@ function scrollTop() {
         </div>
         <div class="flex flex-col gap-4 items-end text-white">
           <a class="text-[32px] leading-[38px] lg:text-[40px] lg:leading-[48px] font-[600]" href="tel:8 (800) 550 90 30">8 (800) 550 90 30</a>
-          <a class="font-[500] text-[14px] leading-[17.5px] flex gap-3 items-center" href="https://t.me/HarmexSupport_bot"><Nuxt-Img src="/img/footer/support.svg" class="w-5 h-5" />Служба заботы</a>
-          <a class="font-[500] text-[14px] leading-[17.5px] flex gap-3 items-center" href="https://t.me/harmexpro_bot"><Nuxt-Img src="/img/footer/tg.svg" class="w-5 h-5" />Презентация Harmex</a>
+          <a class="font-[500] text-[14px] leading-[17.5px] flex gap-3 items-center" href="https://t.me/HarmexSupport_bot" target="_blank" rel="noopener noreferrer"><Nuxt-Img src="/img/footer/support.svg" class="w-5 h-5" />Служба заботы</a>
+          <a class="font-[500] text-[14px] leading-[17.5px] flex gap-3 items-center" href="https://t.me/harmexpro_bot" target="_blank" rel="noopener noreferrer"><Nuxt-Img src="/img/footer/tg.svg" class="w-5 h-5" />Презентация Harmex</a>
           <a class="mb-2 text-[16px] text-[#47A4D2]" href="mailto:info@harmex.ru">info@harmex.ru</a>
           <div class="mb-2 text-right flex flex-col gap-1.5">
             <p class="text-[16px]">Московская область, г. Истра, п. Октябрьской фабрики, дом 26</p>
@@ -254,8 +254,8 @@ function scrollTop() {
       <div class="border-t border-[#4B4B4B] pt-12 flex lg:flex-row flex-col justify-center lg:justify-between text-[14px] leading-[17.5px] gap-12">
         <p class="text-white text-center lg:text-left">©{{ new Date().getFullYear() }} HARMEX Все права защищены.</p>
         <div class="flex lg:flex-row flex-col gap-6 items-center lg:items-end text-[#ADADAD]">
-          <a href="/docs/conf_policy.pdf">Политика конфиденциальности</a>
-          <a href="/docs/oferta.pdf">Пользовательское соглашение</a>
+          <a href="/docs/conf_policy.pdf" target="_blank" rel="noopener noreferrer">Политика конфиденциальности</a>
+          <a href="/docs/oferta.pdf" target="_blank" rel="noopener noreferrer">Пользовательское соглашение</a>
         </div>
       </div>
     </footer>

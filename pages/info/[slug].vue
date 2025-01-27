@@ -206,7 +206,7 @@ onMounted(() => {
 
       <section class="bg-white py-14 px-6 lg:px-[120px] lg:pt-14 lg:pb-[112px] flex flex-col gap-8 lg:gap-14 justify-center items-center w-full" >
         <h1 class="text-[24px] leading-[28px] lg:text-[48px] lg:leading-[58px] font-[700] text-center"> Почему выбирают HARMEX?</h1>
-        <Nuxt-Img src="/img/harmex.svg" class="w-full max-w-[1120px] max-h-[700px flex mx-auto"/>
+        <Nuxt-Img src="/img/harmex.svg" class="w-full max-w-[1120px] max-h-[700px] flex mx-auto"/>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div v-for="item in harmexPluses" class="bg-[#F4F4F4] p-6 rounded-[10px] w-full">
               <div class="bg-[--primary] text-white p-3 rounded-[10px] w-fit max-h-[49px] mb-16 "> 
@@ -241,32 +241,40 @@ onMounted(() => {
               <p class="font-[600] text-[20px] leading-[28px] mr-6">{{ item.title }}</p>
               <p class="text-[#0A0A0AB2] text-[18px] leading-[28px] mr-6">{{ item.description }}</p>
             </div>
-            <div class="flex w-full pr-6 mt-1 justify-center">
-              <Nuxt-Img :src="item.image" class="w-[100%] object-fill h-[170px] max-w" />
-            </div>
           </div>
+          
         </div>
+        <!-- <div class="relative w-full overflow-hidden justify-center">
+            <div class="flex w-full items-center overflow-y-auto max-w-[50%] mx-auto">
+              <Nuxt-Img
+                v-for="(item, index) in stepsBlock"
+                :key="index"
+                :src="item.image"
+                class="w-full h-auto max-w-[100%] object-contain mb-6"
+              />
+            </div>
+        </div> -->
 
       </section>
 
       <section class="bg-white flex flex-col py-0 px-0 lg:px-16 items-center justify-center">
-        <div id="slideshow" class="relative overflow-hidden h-[400px] lg:min-h-[800px] w-full -my-10 sm:my-0">
+        <div id="slideshow" class="relative overflow-hidden h-[400px] lg:min-h-[800px] w-full -mt-5 -mb-10 sm:my-0 z-0">
           <transition-group name="fade" tag="div">
             <div
-              v-for="(slide, index) in slides"
+              v-for="(slide, index) in stepsBlock"
               :key="index"
               v-show="currentIndex === index"
-              class="absolute w-full h-full"
+              class="absolute w-full h-full lg:h-[580px] xl:h-[100%]"
             >
               <NuxtImg 
-                :src="slide.content"
-                class="w-[100%] h-[100%] object-fill " 
+                :src="slide.image"
+                class="w-full lg:w-[90%]  object-fill flex max-w-[1500px] mx-auto rounded-md" 
                 alt="Finance image"
               />
             </div>
           </transition-group>
         </div>
-        <a href="#contact" class="my-10 lg:mt-30">
+        <a href="#contact" class="my-10 -mt-10 sm:mt-0 lg:-mt-32 xl:mt-20 z-10">
           <button class="btn-primary flex gap-3 !rounded-3xl !bg-[#04201A] !font-[400]">
             <Icon name="lucide:phone" class="w-5 h-5"/>
             <span>Обратный звонок</span>
