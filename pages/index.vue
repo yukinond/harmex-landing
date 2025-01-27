@@ -181,7 +181,7 @@ const handleBlur = () => {
         <h1 class="block-title">Почему выбирают HARMEX?</h1>
         <div class="image-container relative max-h-[200px] xs sm:max-h-[400px] lg:max-h-[476px] xl:max-h-[576px]">
           <Nuxt-img src="/img/bg.jpeg" alt="Background"/>
-          <Nuxt-img src="/img/app.png" alt="Image" class="noblur absolute max-w-[90%] lg:max-w-[80%] top-2/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-sm" />
+          <Nuxt-img src="/img/app.png" alt="Image" class="noblur absolute max-w-[90%] lg:max-w-[80%] top-2/3 2xl:top-[10%] 2xl:-translate-y-0 left-1/2 transform -translate-x-1/2 lg:-translate-y-1/2 rounded-sm" />
         </div>
 
 

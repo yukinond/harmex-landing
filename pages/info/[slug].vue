@@ -13,22 +13,22 @@ const stepsBlockData = ref([
   {
     title: 'Пополнение баланса',
     text: 'Вы можете пополнить баланс с физической карты, бизнес-карты или расчётного счёта — быстро и удобно.',
-    image: '/img/step1.png',
+    image: '/img/steps/step1.png',
   },
   {
     title: 'Выбор услуги',
     text: 'Ознакомьтесь с каталогом услуг или запросите необходимую услугу, подходящую для вашего бизнеса.',
-    image: '/img/step2.png',
+    image: '/img/steps/step2.png',
   },
   {
     title: 'Создание заказа',
     text: 'Запланируйте выполнение заказа в любое удобное время — услуга будет выполнена точно в срок.',
-    image: '/img/step3.png',
+    image: '/img/steps/step3.png',
   },
   {
     title: 'Отчётность',
     text: 'Вся информация о финансовых операциях, выполнении услуг и результатах доступна в вашем личном кабинете.',
-    image: '/img/step4.png',
+    image: '/img/steps/step4.png',
   }
 ])
 
@@ -128,18 +128,22 @@ const stepsBlock = ref([
   {
     title: 'Пополнение баланса',
     description: 'Вы можете пополнить баланс с физической карты, бизнес-карты или расчётного счёта — быстро и удобно.',
+    image: '/img/mpSteps/step1.png',
   },
   {
     title: 'Выбор услуги',
     description: 'Ознакомьтесь с каталогом услуг или запросите необходимую услугу, подходящую для вашего бизнеса.',
+    image: '/img/mpSteps/step2.png',
   },
   {
     title: 'Создание заказа',
     description: 'Запланируйте выполнение заказа в любое удобное время — услуга будет выполнена точно в срок.',
+    image: '/img/mpSteps/step3.png',
   },
   {
     title: 'Отчётность',
     description: 'Вся информация о финансовых операциях, выполнении услуг и результатах доступна в вашем личном кабинете.',
+    image: '/img/mpSteps/step4.png',
   },
 ])
 
@@ -165,6 +169,19 @@ const harmexPluses = ref([
     text: 'Делаем ваш продукт популярным в интернете, стимулируя спрос и повышая доверие покупателей.',
   },
 ])
+
+const slides = [
+  { type: "desktop", content: "/img/slider/finance.svg" },
+  { type: "desktop", content: "/img/slider/step2.svg" },
+];
+
+const currentIndex = ref(0);
+
+onMounted(() => {
+  setInterval(() => {
+    currentIndex.value = (currentIndex.value + 1) % slides.length;
+  }, 3500);
+});
 </script>
 
 <template>
@@ -212,131 +229,161 @@ const harmexPluses = ref([
           Простое управление услугами в 4 шага
         </h1>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-          <div class="flex flex-col gap-1" v-for="(item, index) in stepsBlock">
-            <li class="flex w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-1 after:inline-block" 
+          <div class="flex flex-col gap-1 justify-between" v-for="(item, index) in stepsBlock">
+            <div class="flex flex-col gap-1">
+              <li class="flex w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-1 after:inline-block" 
                 :class="{ 'after:bg-[linear-gradient(to_right,_#6366F1_50%,_white_50%)]': index === 0, 'after:bg-white': index !== 0 }">
-              <span class="flex items-center justify-center w-8 h-8 rounded-full shrink-0" 
-                    :class="{ 'bg-[#6366F1] text-white': index === 0, 'bg-white border': index !== 0 }">
-                {{ index+1 }}
-              </span>
-            </li>
-            <p class="font-[600] text-[20px] leading-[28px] mr-6">{{ item.title }}</p>
-            <p class="text-[#0A0A0AB2] text-[18px] leading-[28px] mr-6">{{ item.description }}</p>
+                <span class="flex items-center justify-center w-8 h-8 rounded-full shrink-0" 
+                      :class="{ 'bg-[#6366F1] text-white': index === 0, 'bg-white border': index !== 0 }">
+                  {{ index+1 }}
+                </span>
+              </li>
+              <p class="font-[600] text-[20px] leading-[28px] mr-6">{{ item.title }}</p>
+              <p class="text-[#0A0A0AB2] text-[18px] leading-[28px] mr-6">{{ item.description }}</p>
+            </div>
+            <div class="flex w-full pr-6 mt-1">
+              <Nuxt-Img :src="item.image" class="w-[100%] h-[170px] object-fill" />
+            </div>
           </div>
         </div>
 
       </section>
 
       <section class="bg-white flex flex-col py-0 px-0 lg:px-16 items-center justify-center">
-        <NuxtImg 
-          src="/img/finance.svg" 
-          class="w-[100%] h-[100%] object-fill hidden sm:flex" 
-          alt="Finance image"
-        />
-        <NuxtImg 
-          src="/img/financeMobile.svg" 
-          class="w-[100%] h-[100%] object-fill flex sm:hidden -my-36" 
-          alt="Finance image"
-        />
-        <div class="w-full flex gap-4 justify-center items-center">
-          <button class="btn-circle flex items-center justify-center">
-              <Icon name="uil:arrow-left" class="w-4 h-4" />
-          </button>
-          <button class="btn-circle flex items-center justify-center">
-              <Icon name="uil:arrow-right" class="w-4 h-4" />
-          </button>
+        <div id="slideshow" class="relative overflow-hidden h-[400px] lg:min-h-[800px] w-full -my-10 sm:my-0">
+          <transition-group name="fade" tag="div">
+            <div
+              v-for="(slide, index) in slides"
+              :key="index"
+              v-show="currentIndex === index"
+              class="absolute w-full h-full"
+            >
+              <NuxtImg 
+                :src="slide.content"
+                class="w-[100%] h-[100%] object-fill " 
+                alt="Finance image"
+              />
+            </div>
+          </transition-group>
         </div>
-        <a href="#contact" class="my-10 lg:mt-20">
+        <a href="#contact" class="my-10 lg:mt-30">
           <button class="btn-primary flex gap-3 !rounded-3xl !bg-[#04201A] !font-[400]">
             <Icon name="lucide:phone" class="w-5 h-5"/>
             <span>Обратный звонок</span>
           </button>
         </a>
-
       </section>
 
-        <section class="w-full flex flex-col gap-16 py-8 px-6 lg:py-24 lg:px-28">
-          <h1 class="block-title">Тарифы для любого бизнеса</h1>
-          <div class="flex lg:flex-row flex-col gap-5">
-            <div
-              v-if="mp"
-              v-for="(item, key) in mp.price"
-              :key="key"
-              class="flex flex-col gap-4 flex-1 p-8 rounded-2xl bg-white"
-            >
-              <div class="flex justify-between">
-                <!-- Используем key для выбора эмодзи -->
-                <p class="text-[18px] leading-[28px] text-[#667085]">
-                  <span class="emoji-container">{{ emojis[key] }}</span> {{ item.title }}
-                </p>
-                <span
-                  class="text-[--primary] bg-[#FFF0E9] rounded-2xl py-1 px-3"
-                  v-if="item.title === 'Рост'"
-                >
-                  Популярный
-                </span>
-              </div>
-              <p class="text-[50px] leading-[60px] font-[600]">от {{ item.value }}</p>
-              <p class="text-[#667085] text-[16px] leading-[24px]">{{ item.description }}</p>
-              <button class="mt-4 btn-primary h-[48px] text-[16px] leading-[24px]" @click="navigateTo('https://app.harmex.ru/auth', { external: true })">Выбрать тариф</button>
+      <section class="w-full flex flex-col gap-16 py-8 px-6 lg:py-24 lg:px-28">
+        <h1 class="block-title">Тарифы для любого бизнеса</h1>
+        <div class="flex lg:flex-row flex-col gap-5">
+          <div
+            v-if="mp"
+            v-for="(item, key) in mp.price"
+            :key="key"
+            class="flex flex-col gap-4 flex-1 p-8 rounded-2xl bg-white"
+          >
+            <div class="flex justify-between">
+              <p class="text-[18px] leading-[28px] text-[#667085]">
+                <span class="emoji-container">{{ emojis[key] }}</span> {{ item.title }}
+              </p>
+              <span
+                class="text-[--primary] bg-[#FFF0E9] rounded-2xl py-1 px-3"
+                v-if="item.title === 'Рост'"
+              >
+                Популярный
+              </span>
             </div>
-
+            <p class="text-[50px] leading-[60px] font-[600]">от {{ item.value }}</p>
+            <p class="text-[#667085] text-[16px] leading-[24px]">{{ item.description }}</p>
+            <button class="mt-4 btn-primary h-[48px] text-[16px] leading-[24px]" @click="navigateTo('https://app.harmex.ru/auth', { external: true })">Выбрать тариф</button>
           </div>
-        </section>
 
-        <section class="w-full rounded-[12px] flex items-center lg:px-[64px] py-8 px-6 lg:py-20 bg-white flex-col ">
-            <h1 class="lg:text-[30px] text-[24px] leading-[36px] font-[700] mb-10 lg:mb-12">До и После</h1>
-            <p class="text-[#4B5563] text-[16px] font-[400] leading-[25px] mb-8">Сравните карточки до работы с нами (низкий рейтинг) и после (4.9). Примеры наглядно показывают, как изменяется эффективность.</p>
-            <Slider />
-        </section>
+        </div>
+      </section>
 
-        <section class="w-full rounded-[12px] flex items-center py-8 px-6 lg:py-20 lg:px-[195px] bg-white flex-col lg:gap-12 gap-14">
+      <section class="w-full rounded-[12px] flex items-center lg:px-[64px] py-8 px-6 lg:py-20 bg-white flex-col ">
+          <h1 class="lg:text-[30px] text-[24px] leading-[36px] font-[700] mb-10 lg:mb-12">До и После</h1>
+          <p class="text-[#4B5563] text-[16px] font-[400] leading-[25px] mb-8">Сравните карточки до работы с нами (низкий рейтинг) и после (4.9). Примеры наглядно показывают, как изменяется эффективность.</p>
+          <Slider />
+      </section>
 
-            <div class="flex lg:flex-row flex-col justify-between gap-8">
-            <div class="flex flex-col justify-start ">
-                <h1 class="text-[24px] leading-[29px] lg:text-[40px] lg:leading-[48px] font-[600] max-w-[507px] !text-left">Часто задаваемые вопросы</h1>
-                <Nuxt-Img src="/img/questMan.svg" class="hidden lg:flex max-w-[240px] max-h-[285px]" />
-            </div>
+      <section class="w-full rounded-[12px] flex items-center py-8 px-6 lg:py-20 lg:px-[195px] bg-white flex-col lg:gap-12 gap-14">
 
-            <div class="lg:w-1/2 lg:max-w-1/2 w-full ">
-                <Accordion
-                v-for="(section, index) in sections"
-                :key="index"
-                :title="section.title"
-                :isOpen="openIndex === index"
-                @update:isOpen="handleAccordionToggle(index)"
-                >
-                <div v-html="section.content"></div>
-                </Accordion>
+          <div class="flex lg:flex-row flex-col justify-between gap-8">
+          <div class="flex flex-col justify-start ">
+              <h1 class="text-[24px] leading-[29px] lg:text-[40px] lg:leading-[48px] font-[600] max-w-[507px] !text-left">Часто задаваемые вопросы</h1>
+              <Nuxt-Img src="/img/questMan.svg" class="hidden lg:flex max-w-[240px] max-h-[285px]" />
+          </div>
 
-            </div>  
-            </div>
-        </section>
+          <div class="lg:w-1/2 lg:max-w-1/2 w-full ">
+              <Accordion
+              v-for="(section, index) in sections"
+              :key="index"
+              :title="section.title"
+              :isOpen="openIndex === index"
+              @update:isOpen="handleAccordionToggle(index)"
+              >
+              <div v-html="section.content"></div>
+              </Accordion>
 
-        <section id="contact" class="w-full rounded-[12px] flex lg:flex-row flex-col items-center py-8 px-6 lg:p-16 bg-[--primary] gap-6 lg:gap-12 justify-between">
-            <div class="flex flex-col gap-6 max-w-[100%] sm:max-w-[50%] xl:max-w-[36%] text-white">
-            <h1 class="text-[24px] leading-[29px] lg:text-[40px] lg:leading-[48px] font-[600] !text-left">Будьте активнее, проще и ближе к своим клиентам с Harmex!</h1>
-            <p class="font-[500] text-[14px] leading-[21px] lg:text-[16px] lg:leading-[24px]">Есть вопросы, пожелания или предложения? Напишите нам или оставьте заявку — мы свяжемся с вами максимально быстро!</p>
-            </div>
-            <div class="flex flex-col gap-3 max-w-[100%] sm:max-w-[50%] lg:max-w-[40%] xl:max-w-[30%]">
-            <div class="flex lg:flex-row flex-col gap-1.5">
-                <input
-                id="phone-input"
-                v-model="phone"
-                placeholder="Введите номер телефона"
-                @focus="handleFocus"
-                @blur="handleBlur"
-                @input="formatPhone"
-                class="w-full px-4 py-3 text-[14px] font-medium rounded-[10px] border border-gray-300 h-[60px]"
-                />
-            <button class="btn-black">Отправить</button>
-            </div>
-            <p class="font-[400] text-[12px] leading-[16px] text-[#323232A3]">
-                Согласен на обработку и хранение моих персональных данных в соответствии с <a class="text-[#323232]" href="#">Условиями</a>
-            </p>
-            </div>
-        </section>
+          </div>  
+          </div>
+      </section>
+
+      <section id="contact" class="w-full rounded-[12px] flex lg:flex-row flex-col items-center py-8 px-6 lg:p-16 bg-[--primary] gap-6 lg:gap-12 justify-between">
+          <div class="flex flex-col gap-6 max-w-[100%] sm:max-w-[50%] xl:max-w-[36%] text-white">
+          <h1 class="text-[24px] leading-[29px] lg:text-[40px] lg:leading-[48px] font-[600] !text-left">Будьте активнее, проще и ближе к своим клиентам с Harmex!</h1>
+          <p class="font-[500] text-[14px] leading-[21px] lg:text-[16px] lg:leading-[24px]">Есть вопросы, пожелания или предложения? Напишите нам или оставьте заявку — мы свяжемся с вами максимально быстро!</p>
+          </div>
+          <div class="flex flex-col gap-3 max-w-[100%] sm:max-w-[50%] lg:max-w-[40%] xl:max-w-[30%]">
+          <div class="flex lg:flex-row flex-col gap-1.5">
+              <input
+              id="phone-input"
+              v-model="phone"
+              placeholder="Введите номер телефона"
+              @focus="handleFocus"
+              @blur="handleBlur"
+              @input="formatPhone"
+              class="w-full px-4 py-3 text-[14px] font-medium rounded-[10px] border border-gray-300 h-[60px]"
+              />
+          <button class="btn-black">Отправить</button>
+          </div>
+          <p class="font-[400] text-[12px] leading-[16px] text-[#323232A3]">
+              Согласен на обработку и хранение моих персональных данных в соответствии с <a class="text-[#323232]" href="#">Условиями</a>
+          </p>
+          </div>
+      </section>
     </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+
+#slideshow > div { 
+  position: absolute; 
+  top: 10px; 
+  left: 10px; 
+  right: 10px; 
+  bottom: 10px; 
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+}
+
+.fade-enter-from, .fade-leave-to {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.fade-enter-to, .fade-leave-from {
+  opacity: 1;
+  transform: translateX(0); 
+}
+
+.fade-leave-to {
+  transform: translateX(-100%);
+}
+
+
+</style>
