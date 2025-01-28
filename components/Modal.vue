@@ -1,7 +1,7 @@
 <template>
   <div class="modal-overlay flex items-center " @click="$emit('close')">
 
-    <div class="modal relative h-fit w-full lg:w-[80%]">
+    <div class="modal relative h-fit w-fit lg:max-w-[60%]">
       <button class="absolute lg:flex hidden top-2 -right-10 text-white" @click="$emit('close')">
         <Icon name="material-symbols:close-rounded" class="w-10 h-10" />
       </button>
@@ -31,7 +31,7 @@
 .modal {
   text-align: center;
   background-color: white;
-  padding: 60px 0;
+  padding: 30px 0;
   border-radius: 20px;
 }
 .close {

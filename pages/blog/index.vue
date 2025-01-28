@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { mainArticles } from '~/data/articles/articles';
 </script>
 <template>
     <div class="flex flex-col gap-0 bg-[#EAEAEA38]">
@@ -11,9 +12,10 @@
         <section class="w-full rounded-[12px] flex items-center py-8 px-6 lg:p-16 lg:py-20  bg-white flex-col gap-12">
             <h1 class="block-title">Популярные статьи</h1>
             <div class="flex lg:flex-row flex-col gap-6 w-full ">
-                <div class="flex flex-col flex-1">
-                    <!-- <Nuxt-Img :src="'/img/blog.svg'" class="w-full h-1/2" /> -->
-                    <Nuxt-Link to="/blog/1" class="min-h-[248px] w-full bg-[#F7F7F7] rounded-lg"></Nuxt-Link >
+                <div v-for="(item, index) in mainArticles" class="flex flex-col flex-1">
+                    <Nuxt-Link :to="`/blog/${item.id}`" class="w-full bg-[#F7F7F7] rounded-lg">           
+                        <Nuxt-Img :src="`/img/articles/main${index + 1}.png`" class="w-full rounded-lg object-fi"  />
+                    </Nuxt-Link>
                     <div class="px-[16px] py-8 flex flex-col gap-3">
                     <div class="flex justify-between mb-1">
                         <p class="text-[16px] leading-[24px] font-[500] text-[--primary]">Отзывы</p>
@@ -22,38 +24,8 @@
                         300
                         </span>
                     </div>
-                    <Nuxt-Link to="/blog/1" class="font-[600] text-[20px] leading-[28px]">Как повысить рейтинг вашего продукта и привлечь больше клиентов?</Nuxt-Link>
-                    <p class="font-[400] text-[15px] leading-[24px] text-[#0A0A0AB2]"> One key feature of any blogging platform is the ability to schedule posts for future publication. </p>
-                    </div>
-                </div>
-                <div class="flex flex-col flex-1">
-                    <!-- <Nuxt-Img :src="'/img/blog.svg'" class="w-full h-1/2" /> -->
-                    <Nuxt-Link to="/blog/1" class="min-h-[248px] w-full bg-[#F7F7F7] rounded-lg"></Nuxt-Link>
-                    <div class="px-[16px] py-8 flex flex-col gap-3">
-                    <div class="flex justify-between mb-1">
-                        <p class="text-[16px] leading-[24px] font-[500] text-[--primary]">Отзывы</p>
-                        <span class="text-[#0A0A0AB2] flex items-center gap-3">
-                        <Icon name="uil:eye" class="w-6 h-6 text-[#0A0A0A73]" />
-                        300
-                        </span>
-                    </div>
-                    <Nuxt-Link to="/blog/1" class="font-[600] text-[20px] leading-[28px]">Высокий рейтинг — ключ к успеху на любых платформах.</Nuxt-Link>
-                    <p class="font-[400] text-[15px] leading-[24px] text-[#0A0A0AB2]"> Одной из ключевых функций любой платформы для ведения блогов является возможность планировать публикацию постов на будущее. </p>
-                    </div>
-                </div>
-                <div class="flex flex-col flex-1">
-                    <!-- <Nuxt-Img :src="'/img/blog.svg'" class="w-full h-1/2" /> -->
-                    <Nuxt-Link to="/blog/1" class="min-h-[248px] w-full bg-[#F7F7F7] rounded-lg"></Nuxt-Link>
-                    <div class="px-[16px] py-8 flex flex-col gap-3">
-                    <div class="flex justify-between mb-1">
-                        <p class="text-[16px] leading-[24px] font-[500] text-[--primary]">Привлекательность</p>
-                        <span class="text-[#0A0A0AB2] flex items-center gap-3">
-                        <Icon name="uil:eye" class="w-6 h-6 text-[#0A0A0A73]" />
-                        300
-                        </span>
-                    </div>
-                    <Nuxt-Link to="/blog/1" class="font-[600] text-[20px] leading-[28px]">Секреты повышения рейтинга: от анализа до действий.</Nuxt-Link>
-                    <p class="font-[400] text-[15px] leading-[24px] text-[#0A0A0AB2]"> Одной из ключевых функций любой платформы для ведения блогов является возможность планировать публикацию постов на будущее. </p>
+                    <Nuxt-Link :to="`/blog/${item.id}`" class="font-[600] text-[20px] leading-[28px]">{{ item.title }}</Nuxt-Link>
+                    <p class="font-[400] text-[15px] leading-[24px] text-[#0A0A0AB2]">{{ item.description }} </p>
                     </div>
                 </div>
             </div>
@@ -105,7 +77,7 @@
                     <h1 class="block-title">Не пропускайте важное!</h1>
                     <p class="font-[500] text-[16px] leading-[24px]">Получайте лучшие материалы прямо в Telegram</p>
                 </div>
-                <a href="https://t.me/harmexpro_bot" class="btn-primary !bg-[#323232] h-[58px] !px-8 flex items-center justify-center">
+                <a href="https://t.me/harmexpro_bot" target="_blank" rel="noopener noreferrer"  class="btn-primary !bg-[#323232] h-[58px] !px-8 flex items-center justify-center">
                     Подписаться на Telegram-канал
                 </a>
             </div>

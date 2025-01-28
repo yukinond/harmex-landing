@@ -115,13 +115,13 @@ function scrollTop() {
       </div>
       <div class="h-full lg:flex hidden">
         <div class="flex items-center h-full" :class="{ 'px-1.5 border-l border-l-[#E8E8E8]': route.name === 'index' }">
-          <button class="btn-ghost flex items-center gap-1.5" @click="navigateTo('https://app.harmex.ru/', { external: true })">
+          <a href="https://app.harmex.ru/register" target="_blank" rel="noopener noreferrer" class="btn-ghost">
             <Icon name="ep:user" class="w-5 h-5" />
             Войти
-          </button>
+          </a>
         </div>
         <div class="flex items-center h-full" :class="{ 'pl-3 border-l border-l-[#E8E8E8] ': route.name === 'index' }">
-          <button class="btn-primary" @click="navigateTo('https://app.harmex.ru/register', { external: true })">
+          <button href="https://app.harmex.ru/register" target="_blank" rel="noopener noreferrer" class="btn-primary">
             Регистрация
           </button>
         </div>
@@ -167,15 +167,15 @@ function scrollTop() {
           </div>
         </button>
         <div class="flex items-center w-full">
-          <button class="btn-primary  w-full" @click="navigateTo('https://app.harmex.ru/register', { external: true })">
+          <a href="https://app.harmex.ru/register" target="_blank" rel="noopener noreferrer" class="btn-primary">
             Регистрация
-          </button>
+          </a>
         </div>
         <div class="flex items-center  w-full">
-          <button class="btn-ghost flex items-center gap-1.5  w-full " @click="navigateTo('https://app.harmex.ru/', { external: true })">
+          <a href="https://app.harmex.ru/register" target="_blank" rel="noopener noreferrer" class="btn-ghost">
             <Icon name="ep:user" class="w-5 h-5 -ml-3.5" />
             Войти
-          </button>
+          </a>
         </div>
         
         <div class="gap-6 font-[500] text-[14px] leading-[17.5px] flex-col flex items-start">
@@ -235,12 +235,12 @@ function scrollTop() {
           </div>
         </div>
         <div class="flex flex-col gap-4 items-end text-white">
-          <a class="text-[32px] leading-[38px] lg:text-[40px] lg:leading-[48px] font-[600]" href="tel:8 (800) 550 90 30">8 (800) 550 90 30</a>
+          <a class="text-[32px] leading-[38px] lg:text-[40px] lg:leading-[48px] font-[600]" href="tel:8 (964) 726 50 61">+7 964 726-50-61</a>
           <a class="font-[500] text-[14px] leading-[17.5px] flex gap-3 items-center" href="https://t.me/HarmexSupport_bot" target="_blank" rel="noopener noreferrer"><Nuxt-Img src="/img/footer/support.svg" class="w-5 h-5" />Служба заботы</a>
           <a class="font-[500] text-[14px] leading-[17.5px] flex gap-3 items-center" href="https://t.me/harmexpro_bot" target="_blank" rel="noopener noreferrer"><Nuxt-Img src="/img/footer/tg.svg" class="w-5 h-5" />Презентация Harmex</a>
           <a class="mb-2 text-[16px] text-[#47A4D2]" href="mailto:info@harmex.ru">info@harmex.ru</a>
           <div class="mb-2 text-right flex flex-col gap-1.5">
-            <p class="text-[16px]">Московская область, г. Истра, п. Октябрьской фабрики, дом 26</p>
+            <p class="text-[16px]">Саратовская обл., г. Ртищево, ул. Пролетарская, д. 2, кв. 87</p>
             <p class="text-[14px] text-[#ADADAD]">Пн-Пт: с 8:00 до 20:00, Сб-Вс: с 10:00 до 18:00</p>
           </div>
           <div class="flex gap-3 items-center">

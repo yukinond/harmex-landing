@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { data } from '~/data/content';
+import { mainArticles } from '~/data/articles/articles';
 
 const appData = ref(data);
 const harmexPluses = ref([
@@ -164,6 +165,23 @@ if (process.client) {
     }
   );
 }
+
+const videos = ref(
+  [
+    {
+      video: '/videos/video1.mp4',
+      image: '/videos/video1.png'
+    },
+    {
+      video: '/videos/video2.mp4',
+      image: '/videos/video2.png'
+    },
+    {
+      video: '/videos/video3.mov',
+      image: '/videos/video3.png'
+    },
+  ]
+)
 </script>
 
 <template>
@@ -271,22 +289,24 @@ if (process.client) {
         </h1>
         <div class="flex justify-center flex-col md:flex-row gap-6 p-4 items-center w-full lg:w-3/5">
           <div
+            v-for="(review, index) in videos"
             class="relative w-full md:w-1/3 h-[435px] bg-gray-900 rounded-lg overflow-hidden group hover:shadow-lg"
+            :class="{  'h-[435px]' : index !== 1, 'h-[463px]' : index === 1 }"
           >
-            <img
-              src="/videos/video-1.png"
+            <Nuxt-Img
+              :src="review.image"
               alt="Видео 1"
               class="w-full h-full object-cover"
             />
             <button
               class="absolute h-[52px] top-4 left-1/2 -translate-x-1/2 px-4 py-2 w-[calc(100%-48px)] flex justify-center items-center bg-white bg-opacity-100 text-black text-base font-semibold rounded-lg opacity-100 lg:opacity-0 group-hover:opacity-100 transition-all"
-              @click="openVideo('/videos/video.mp4')"
+              @click="openVideo(review.video)"
             >
               Смотреть видео
             </button>
           </div>
 
-          <div
+          <!-- <div
             class="relative w-full md:w-1/3 h-[463px] bg-gray-900 rounded-lg overflow-hidden group hover:shadow-lg"
           >
             <img
@@ -317,12 +337,12 @@ if (process.client) {
             >
               Смотреть видео
             </button>
-          </div>
+          </div> -->
         </div>
 
         <Modal v-show="showVideo" @close="closeVideo">
           <video
-            class="w-full h-full"
+            class="w-fit max-h-[500px] flex mx-auto rounded-lg"
             controls
             autoplay
             :src="currentVideo"
@@ -331,51 +351,26 @@ if (process.client) {
       </section>
 
       <section class="w-full rounded-[12px] flex items-center py-8 px-6 lg:p-16  bg-white flex-col gap-12">
-        <h1 class="block-title">Блоги</h1>
+        <h1 class="block-title">Наш блог</h1>
         <div class="flex lg:flex-row flex-col gap-6 w-full sm:max-w-[60%] lg:w-full">
-          <div class="flex flex-col flex-1">
-            <!-- <Nuxt-Img :src="'/img/blog.svg'" class="w-full h-1/2" /> -->
-            <div class="min-h-[248px] w-full bg-[#F7F7F7] rounded-lg"></div>
+          <div v-for="(item, index) in mainArticles" class="flex flex-col flex-1">
+            <Nuxt-Link :to="`/blog/${item.id}`" class="w-full bg-[#F7F7F7] rounded-lg">           
+               <Nuxt-Img :src="`/img/articles/main${index + 1}.png`" class="w-full rounded-lg object-fi"  />
+            </Nuxt-Link>
             <div class="px-[16px] py-8 flex flex-col gap-3">
               <div class="flex justify-between mb-1">
-                <p class="text-[16px] leading-[24px] font-[500] text-[--primary]">Отзывы</p>
+                <p class="text-[16px] leading-[24px] font-[500] text-[--primary]">Статья</p>
                 <span class="text-[#0A0A0AB2] flex items-center gap-3">
                   <Icon name="uil:eye" class="w-6 h-6 text-[#0A0A0A73]" />
                   300
                 </span>
               </div>
-              <p class="font-[600] text-[20px] leading-[28px]">Как повысить рейтинг вашего продукта и привлечь больше клиентов?</p>
-              <p class="font-[400] text-[15px] leading-[24px] text-[#0A0A0AB2]"> One key feature of any blogging platform is the ability to schedule posts for future publication. </p>
-            </div>
-          </div>
-          <div class="flex flex-col flex-1">
-            <!-- <Nuxt-Img :src="'/img/blog.svg'" class="w-full h-1/2" /> -->
-            <div class="min-h-[248px] w-full bg-[#F7F7F7] rounded-lg"></div>
-            <div class="px-[16px] py-8 flex flex-col gap-3">
-              <div class="flex justify-between mb-1">
-                <p class="text-[16px] leading-[24px] font-[500] text-[--primary]">Отзывы</p>
-                <span class="text-[#0A0A0AB2] flex items-center gap-3">
-                  <Icon name="uil:eye" class="w-6 h-6 text-[#0A0A0A73]" />
-                  300
-                </span>
-              </div>
-              <p class="font-[600] text-[20px] leading-[28px]">Как повысить рейтинг вашего продукта и привлечь больше клиентов?</p>
-              <p class="font-[400] text-[15px] leading-[24px] text-[#0A0A0AB2]"> One key feature of any blogging platform is the ability to schedule posts for future publication. </p>
-            </div>
-          </div>
-          <div class="flex flex-col flex-1">
-            <!-- <Nuxt-Img :src="'/img/blog.svg'" class="w-full h-1/2" /> -->
-            <div class="min-h-[248px] w-full bg-[#F7F7F7] rounded-lg"></div>
-            <div class="px-[16px] py-8 flex flex-col gap-3">
-              <div class="flex justify-between mb-1">
-                <p class="text-[16px] leading-[24px] font-[500] text-[--primary]">Отзывы</p>
-                <span class="text-[#0A0A0AB2] flex items-center gap-3">
-                  <Icon name="uil:eye" class="w-6 h-6 text-[#0A0A0A73]" />
-                  300
-                </span>
-              </div>
-              <p class="font-[600] text-[20px] leading-[28px]">Как повысить рейтинг вашего продукта и привлечь больше клиентов?</p>
-              <p class="font-[400] text-[15px] leading-[24px] text-[#0A0A0AB2]"> One key feature of any blogging platform is the ability to schedule posts for future publication. </p>
+              <Nuxt-Link :to="`/blog/${item.id}`" class="font-[600] text-[20px] leading-[28px]">
+                {{ item.title }}
+              </Nuxt-Link>
+              <p class="font-[400] text-[15px] leading-[24px] text-[#0A0A0AB2]"> 
+                {{ item.description }}  
+              </p>
             </div>
           </div>
         </div>

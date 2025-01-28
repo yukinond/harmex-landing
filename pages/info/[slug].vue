@@ -213,7 +213,9 @@ const content =  [
       points: [
         "Автоматизация процессов: Решайте задачи без лишних действий.",
         "Все в одном месте: Личный кабинет как центр управления.",
-        "ИИ-помощники: Умные алгоритмы для быстрых и эффективных решений."
+        "ИИ-помощники: Умные алгоритмы для быстрых и эффективных решений.",
+        "Поддержка многоканальных продаж: Управляйте товарами и заказами с разных маркетплейсов и интернет-магазинов в одном интерфейсе.",
+        "Персонализированные рекомендации: ИИ-алгоритмы предлагают оптимальные стратегии для повышения продаж на основе ваших данных."
       ]
     }
 ]
@@ -239,7 +241,7 @@ onMounted(() => {
 
 onMounted(() => {
   setInterval(() => {
-    currentIndex.value = (currentIndex.value + 1) % slides.length;
+    currentIndex.value = (currentIndex.value + 1) % stepsBlock.value.length; 
   }, 3500);
   setInterval(() => {
   const currentIndex = content.findIndex(item => item.value === currentContent.value);
@@ -249,7 +251,7 @@ onMounted(() => {
 
     currentContent.value = content[nextIndex].value;
   }
-}, 10000);
+}, 30000);
 });
 </script>
 
@@ -275,7 +277,7 @@ onMounted(() => {
       <section class="bg-white px-6 lg:px-[120px] py-12 lg:py-14 flex flex-col gap-14">
         <div class="flex flex-col justify-center items-center gap-5">
           <h1 class="block-title">Почему Harmex важен для вашего бизнеса?</h1>
-          <p class="text-[18px] leading-[28px] font-[400] text-[#0A0A0AB2] max-w-[480px] text-center">Скрытые ошибки, которые мешают вам выйти в топ и увеличить продажи на Wildberries</p>
+          <p class="text-[18px] leading-[28px] font-[400] text-[#0A0A0AB2] max-w-[480px] text-center">Скрытые ошибки, которые мешают вам выйти в топ и увеличить продажи на {{ mp.title }}</p>
         </div>
         <div class="flex justify-between gap-8  lg:w-[50%] max-w-[600px] mx-auto">
           <div class="flex flex-col gap-6 items-center" v-for="item in content">
@@ -295,17 +297,21 @@ onMounted(() => {
               class="absolute w-full h-full lg:h-[580px] xl:h-[100%] "
               
             >
-              <div class="flex md:flex-row flex-col p-4 md:p-12 gap-12 bg-[#F7F7F7] rounded-2xl container overflow-hidden"  >          
+              <div class="flex w-full justify-between md:flex-row flex-col p-4 md:p-12 gap-12 bg-[#F7F7F7] rounded-2xl overflow-hidden"  >          
                 <div class="flex flex-col gap-8" ref="contentBlock" :style="blockHeight !== 0 ? { height: blockHeight + 'px' } : {}">
                   <p class="text-[20px] leading-[24px] md:font-[600] md:text-[24px] md:leading-[29px]">Как эту задачу решил Harmex:</p>
                   <div class="flex gap-3 items-center" v-for="item in content.find(item => item.value === currentContent).points">
                     <div class="w-[20px] h-[20px] flex items-center justify-center">
                       <Icon name="icon-park-solid:check-one" class="w-[20px] h-[20px] text-[--primary]"/>
                     </div>
-                    <p class="text-[#5A556B] text-[16px] leading-[24px] font-[500]">{{ item }}</p>
+                    <p class="text-[#5A556B] text-[16px] leading-[24px] font-[500]">         
+                      <span>{{ item.split(':')[0] }}:</span>
+                      <br />
+                      <span>{{ item.split(':')[1].trim() }}</span> 
+                    </p>
                   </div>
                   </div>
-                  <div class="bg-white rounded-xl w-1/2" />
+                  <div class="bg-white rounded-xl w-1/2 max-w-[1200px]" />
               </div>
             </div>
           </transition-group>
@@ -505,13 +511,5 @@ onMounted(() => {
   .max-w {
     max-width: 400px;
   }
-}
-
-.container {
-  transition: transform 1s ease;
-}
-
-.move-left-right {
-  transform: translateX(-300px);
 }
 </style>
