@@ -181,7 +181,7 @@ if (process.client) {
 
         <div class="relative z-10 lg:p-6 text-white">
           <h1 class="text-2xl font-[600] lg:text-[60px] lg:leading-[72px] text-[30px] leading-[36px] mb-6">Репутация и продажи <br class="hidden lg:block"> под вашим контролем!</h1>
-          <p class="text-[#ADADAD] lg:text-[16px] lg:leading-[24px] text-[14px] leading-[21px] font-[500] mb-8 max-w-[60%] sm:max-w-[60%]">Harmex предоставляет инструменты, которые повысят ваши продажи, узнаваемость и привлекательность на популярных онлайн-площадках.</p>
+          <p class="text-[#ADADAD] lg:text-[16px] lg:leading-[24px] text-[14px] leading-[21px] font-[500] mb-8 max-w-[60%] sm:max-w-[60%]">Harmex предоставляет инструменты, которые повысят ваши продажи, <br> узнаваемость и привлекательность на популярных онлайн-площадках.</p>
           <div class="flex gap-3">
             <button @click="navigateTo('https://app.harmex.ru/auth', { external: true })" class="btn-primary lg:h-[60px] lg:!px-[32px]">
               Попробовать

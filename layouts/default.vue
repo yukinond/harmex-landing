@@ -110,7 +110,7 @@ function scrollTop() {
           <Nuxt-Link to="/blog">Блог</Nuxt-Link>
           <a href="#">Кейсы</a>
           <Nuxt-Link :to="route.name === 'index' ? '#contact' : '/#footer'">Помощь</Nuxt-Link>
-          <a href="#">Услуги</a>
+          <a href="#">Калькулятор</a>
         </nav>
       </div>
       <div class="h-full lg:flex hidden">
@@ -182,7 +182,7 @@ function scrollTop() {
           <Nuxt-Link to="/blog" @click="toggleOpen">Блог</Nuxt-Link>
           <a class="text-left" href="#" @click="toggleOpen">Кейсы</a>
           <Nuxt-Link to="/#contact" @click="toggleOpen">Помощь</Nuxt-Link>
-          <a class="text-left" href="#" @click="toggleOpen">Услуги</a>
+          <a class="text-left" href="#" @click="toggleOpen">Калькулятор</a>
         </div>
         <div class="dropdown ">
           <button class="dropbtn font-[500] text-[14px] leading-[17.5px] flex my-auto gap-1.5" @click="toggleDropdown">
