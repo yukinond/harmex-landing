@@ -1,10 +1,14 @@
 <script setup>
-  import { ref } from 'vue';
+  import { ref, watchEffect } from 'vue';
   
   const currentSlide = ref(0);
-  const slideGroups = [
+  const persistedStore = usePersistedStore();
+  const current = ref('wildberries')
+  const isStoreReady = ref(false);
+
+  const slideGroups = ref([
     {
-      before: '/img/example.svg',
+      before: `/img/example.svg`,
       after: '/img/example.svg',
     },
     {
@@ -15,93 +19,86 @@
       before: '/img/example.svg',
       after: '/img/example.svg',
     },
-  ];
-  
+  ]);
+
+  watchEffect(() => {
+    if (persistedStore.current) {
+      current.value = persistedStore.current
+      isStoreReady.value = true; 
+    }
+  });
+
   const nextSlide = () => {
-    currentSlide.value = (currentSlide.value + 1) % slideGroups.length;
+    currentSlide.value = (currentSlide.value + 1) % slideGroups.value.length;
   };
-  
+
   const prevSlide = () => {
-    currentSlide.value = (currentSlide.value - 1 + slideGroups.length) % slideGroups.length;
+    currentSlide.value = (currentSlide.value - 1 + slideGroups.value.length) % slideGroups.value.length;
   };
 </script>
 
 <template>
-    <div class="slider-container w-full overflow-hidden">
+  <div v-if="isStoreReady" class="slider-container w-full overflow-hidden">
+    <div
+      ref="sliderTrack"
+      class="slider-track flex transition-transform duration-500"
+      :style="{ transform: `translateX(-${currentSlide * 100}%)` }"
+    >
       <div
-        ref="sliderTrack"
-        class="slider-track flex transition-transform duration-500"
-        :style="{ transform: `translateX(-${currentSlide * 100}%)` }"
+        v-for="(group, index) in slideGroups"
+        :key="index"
+        class="slider-item grid sm:grid-cols-2 grid-cols-1 gap-8 w-full flex-shrink-0"
       >
-        <div
-          v-for="(group, index) in slideGroups"
-          :key="index"
-          class="slider-item grid sm:grid-cols-2 grid-cols-2 gap-8 w-full flex-shrink-0"
-        >
-          <NuxtImg :src="group.before" class="image" />
-          <NuxtImg :src="group.after" class="image" />
+        <div class="image-group">
+          <div class="text-[20px] font-[600] leading-[28px] mb-4 flex">До</div>
+          <NuxtImg :src="`/img/reviews/${persistedStore.current}/Before${index + 1}.png`" class="image" />
+        </div>
+
+        <div class="image-group">
+          <div class="text-[20px] font-[600] leading-[28px] mb-4 flex">После</div>
+          <NuxtImg :src="`/img/reviews/${persistedStore.current}/After${index + 1}.png`" class="image" />
         </div>
       </div>
     </div>
-  
-    <div class="w-full flex gap-4 justify-center items-center mt-4">
-      <button
-        class="btn-circle prev-btn flex items-center justify-center"
-        @click="prevSlide"
-        aria-label="Предыдущий слайд"
-      >
-        <Icon name="uil:arrow-left" class="w-4 h-4" />
-      </button>
-      <button
-        class="btn-circle next-btn flex items-center justify-center"
-        @click="nextSlide"
-        aria-label="Следующий слайд"
-      >
-        <Icon name="uil:arrow-right" class="w-4 h-4" />
-      </button>
-    </div>
-  </template>
-  
-  <style scoped>
-  .slider-container {
-    width: 100%;
-    overflow: hidden;
+  </div>
+
+  <div v-if="current !== 'flowwow'" class="w-full flex gap-4 justify-center items-center mt-4">
+    <button
+      class="btn-circle prev-btn flex items-center justify-center"
+      @click="prevSlide"
+      aria-label="Предыдущий слайд"
+    >
+      <Icon name="uil:arrow-left" class="w-4 h-4" />
+    </button>
+    <button
+      class="btn-circle next-btn flex items-center justify-center"
+      @click="nextSlide"
+      aria-label="Следующий слайд"
+    >
+      <Icon name="uil:arrow-right" class="w-4 h-4" />
+    </button>
+  </div>
+</template>
+
+<style scoped>
+  .label {
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 8px;
   }
-  
-  .slider-track {
+
+  .image-group {
     display: flex;
-    will-change: transform;
+    flex-direction: column;
+    align-items: center;
   }
-  
-  .slider-item {
-    width: 100%;
-    flex-shrink: 0;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-  }
-  
+
   .image {
-    width: 100%;
+    width: 80%;
     height: auto;
     border-radius: 8px;
-  }
-  
-  .btn-circle {
-    width: 40px;
-    height: 40px;
-    border: none;
-    border-radius: 50%;
-    background: #f3f4f6;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background 0.3s;
+    margin: auto;
   }
-  
-  .btn-circle:hover {
-    background: #e5e7eb;
-  }
-  </style>
-  
+</style>

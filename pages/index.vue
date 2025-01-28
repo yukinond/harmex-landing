@@ -134,6 +134,36 @@ const handleBlur = () => {
     phone.value = "";
   }
 };
+
+const showVideo = ref(false);
+
+// Путь к текущему видео (динамически подставляемое)
+const currentVideo = ref("");
+
+// Функция для открытия модального окна с видео
+const openVideo = (videoPath:any) => {
+  currentVideo.value = videoPath;
+  showVideo.value = true;
+};
+
+// Функция для закрытия модального окна
+const closeVideo = () => {
+  showVideo.value = false;
+  currentVideo.value = "";
+};
+
+if (process.client) {
+  watch(
+    () => showVideo.value,
+    (isActive) => {
+      if (isActive) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
+    }
+  );
+}
 </script>
 
 <template>
@@ -229,11 +259,75 @@ const handleBlur = () => {
         </a>
       </section>
 
-      <section class="w-full rounded-[12px] flex items-center lg:px-[66px] py-8 px-6 lg:py-20 bg-white flex-col ">
+      <!-- <section class="w-full rounded-[12px] flex items-center lg:px-[66px] py-8 px-6 lg:py-20 bg-white flex-col ">
         <h1 class="lg:text-[30px] text-[24px] leading-[36px] font-[700] mb-10 lg:mb-12">До и После</h1>
         <p class="text-[#4B5563] text-[16px] font-[400] leading-[25px] mb-8">Сравните карточки до работы с нами (низкий рейтинг) и после (4.9). Примеры наглядно показывают, как изменяется эффективность.</p>
         <Slider />
+      </section> -->
 
+      <section class="w-full rounded-[12px] flex items-center lg:px-[66px] py-8 px-6 lg:py-20 bg-white flex-col">
+        <h1 class="lg:text-[30px] text-[24px] leading-[36px] font-[700] mb-10 lg:mb-12">
+          Отзывы клиентов
+        </h1>
+        <div class="flex justify-center flex-col md:flex-row gap-6 p-4 items-center w-full lg:w-3/5">
+          <div
+            class="relative w-full md:w-1/3 h-[435px] bg-gray-900 rounded-lg overflow-hidden group hover:shadow-lg"
+          >
+            <img
+              src="/videos/video-1.png"
+              alt="Видео 1"
+              class="w-full h-full object-cover"
+            />
+            <button
+              class="absolute h-[52px] top-4 left-1/2 -translate-x-1/2 px-4 py-2 w-[calc(100%-48px)] flex justify-center items-center bg-white bg-opacity-100 text-black text-base font-semibold rounded-lg opacity-100 lg:opacity-0 group-hover:opacity-100 transition-all"
+              @click="openVideo('/videos/video.mp4')"
+            >
+              Смотреть видео
+            </button>
+          </div>
+
+          <div
+            class="relative w-full md:w-1/3 h-[463px] bg-gray-900 rounded-lg overflow-hidden group hover:shadow-lg"
+          >
+            <img
+              src="/videos/video-1.png"
+              alt="Видео 2"
+              class="w-full h-full object-cover"
+            />
+            <button
+              class="absolute h-[52px] top-4 left-1/2 -translate-x-1/2 px-4 py-2 w-[calc(100%-48px)] flex justify-center items-center bg-white bg-opacity-100 text-black text-base font-semibold rounded-lg opacity-100 lg:opacity-0 group-hover:opacity-100 transition-all"
+              @click="openVideo('/videos/video.mp4')"
+            >
+              Смотреть видео
+            </button>
+
+          </div>
+
+          <div
+            class="relative w-full md:w-1/3 h-[435px] bg-gray-900 rounded-lg overflow-hidden group hover:shadow-lg"
+          >
+            <img
+              src="/videos/video-1.png"
+              alt="Видео 3"
+              class="w-full h-full object-cover"
+            />
+            <button
+              class="absolute h-[52px] top-4 left-1/2 -translate-x-1/2 px-4 py-2 w-[calc(100%-48px)] flex justify-center items-center bg-white bg-opacity-100 text-black text-base font-semibold rounded-lg opacity-100 lg:opacity-0 group-hover:opacity-100 transition-all"
+              @click="openVideo('/videos/video.mp4')"
+            >
+              Смотреть видео
+            </button>
+          </div>
+        </div>
+
+        <Modal v-show="showVideo" @close="closeVideo">
+          <video
+            class="w-full h-full"
+            controls
+            autoplay
+            :src="currentVideo"
+          ></video>
+        </Modal>
       </section>
 
       <section class="w-full rounded-[12px] flex items-center py-8 px-6 lg:p-16  bg-white flex-col gap-12">

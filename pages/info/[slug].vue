@@ -177,10 +177,79 @@ const slides = [
 
 const currentIndex = ref(0);
 
+const content =  [
+    {
+      title: "Безопасность",
+      value: 'security',
+      icon: 'bitcoin-icons:shield-outline',
+      // image: "/path/to/security-image.jpg",
+      points: [
+        "Автоматическая защита: Круглосуточная безопасность без вашего участия.",
+        "Никаких скрытых затрат: Вся инфраструктура уже включена — ничего докупать не нужно.",
+        "Соблюдение стандартов: Мы строго следим за нормами безопасности маркетплейсов.",
+        "Круглосуточный мониторинг: Ваши данные под защитой 24/7.",
+        "Контроль покупок: Ограничение до 6 покупок в месяц для вашего спокойствия.",
+        "Верификация аккаунтов: Каждый пользователь проходит строгую проверку."
+      ]
+    },
+    {
+      title: "Скорость",
+      value: 'speed',
+      icon: 'formkit:time',
+      // image: "/path/to/speed-image.jpg",
+      points: [
+        "Планирование заказов: Создавайте заказы на дни и недели вперед в пару кликов.",
+        "Отслеживание в реальном времени: Все статусы заказов доступны мгновенно.",
+        "Экономия времени: Освобождаем до 3 часов в день для важных задач.",
+        "Автоматическая отчетность: Готовые отчеты сразу после завершения заказов.",
+        "Упрощенные финансовые операции: Все расчеты на нашей стороне."
+      ]
+    },
+    {
+      title: "Результативность",
+      value: 'results',
+      icon: 'ph:intersect-duotone',
+      // image: "/path/to/results-image.jpg", 
+      points: [
+        "Автоматизация процессов: Решайте задачи без лишних действий.",
+        "Все в одном месте: Личный кабинет как центр управления.",
+        "ИИ-помощники: Умные алгоритмы для быстрых и эффективных решений."
+      ]
+    }
+]
+const currentContent = ref('security');
+const contentBlock = ref(null);
+const blockHeight = ref(0);
+
+const getBlockHeight = async () => {
+  await nextTick(); 
+
+  if (contentBlock.value && contentBlock.value.length > 0) {
+    const firstBlock = contentBlock.value[0];
+    
+    if (firstBlock) {
+      blockHeight.value = firstBlock.offsetHeight; 
+    }
+  }
+};
+
+onMounted(() => {
+  getBlockHeight();
+});
+
 onMounted(() => {
   setInterval(() => {
     currentIndex.value = (currentIndex.value + 1) % slides.length;
   }, 3500);
+  setInterval(() => {
+  const currentIndex = content.findIndex(item => item.value === currentContent.value);
+
+  if (currentIndex !== -1) {
+    const nextIndex = (currentIndex + 1) % content.length;
+
+    currentContent.value = content[nextIndex].value;
+  }
+}, 10000);
 });
 </script>
 
@@ -188,24 +257,64 @@ onMounted(() => {
     <div class="flex flex-col gap-0 bg-[#EAEAEA38]">
       <section class="flex flex-col gap-5 px-6 py-8 sm:pt-[64px] sm:pb-[80px] items-center justify-center bg-gradient-to-b from-[#FFFFFF] from-[45%] to-[#fef8f3] to-[100%] border-b border-[#0A0A0A12]">
         <h1 class="text-[28px] leading-[33px] sm:text-[48px] sm:leading-[56px] font-[700] max-w-[632px] text-center text-[#1D1D1D]"> Репутация и продажи под вашим контролем на {{ mp.title }}!</h1>
-          <p class="text-[18px] leading-[28px] font-[400] text-[#0A0A0AB2] max-w-[480px] text-center">Увеличивайте заказы и положительные отзывы 24/7 с Harmex — ваш надежный помощник в борьбе за высокий рейтинг и доверие клиентов!</p>
-          <div class="flex gap-2">
-              <button @click="navigateTo('https://app.harmex.ru/auth', { external: true })" class="btn-primary lg:h-[60px] lg:!px-[32px] !max-h-[40px] flex items-center">
-                Попробовать
-                <Icon name="lucide:arrow-right" class="w-5 h-5 ml-1"/>
+        <p class="text-[18px] leading-[28px] font-[400] text-[#0A0A0AB2] max-w-[480px] text-center">Увеличивайте заказы и положительные отзывы 24/7 с Harmex — ваш надежный помощник в борьбе за высокий рейтинг и доверие клиентов!</p>
+        <div class="flex gap-2">
+            <button @click="navigateTo('https://app.harmex.ru/auth', { external: true })" class="btn-primary lg:h-[60px] lg:!px-[32px] !max-h-[40px] flex items-center">
+              Попробовать
+              <Icon name="lucide:arrow-right" class="w-5 h-5 ml-1"/>
+            </button>
+            <a href="#contact">
+              <button class="btn-primary flex gap-3 !bg-white !font-[400] !text-black !max-h-[40px]">
+                <Icon name="lucide:phone" class="w-5 h-5"/>
+                <span>Обратный звонок</span>
               </button>
-              <a href="#contact">
-                <button class="btn-primary flex gap-3 !bg-white !font-[400] !text-black !max-h-[40px]">
-                  <Icon name="lucide:phone" class="w-5 h-5"/>
-                  <span>Обратный звонок</span>
-                </button>
-              </a>
+            </a>
+        </div>
+      </section>
+
+      <section class="bg-white px-6 lg:px-[120px] py-12 lg:py-14 flex flex-col gap-14">
+        <div class="flex flex-col justify-center items-center gap-5">
+          <h1 class="block-title">Почему Harmex важен для вашего бизнеса?</h1>
+          <p class="text-[18px] leading-[28px] font-[400] text-[#0A0A0AB2] max-w-[480px] text-center">Скрытые ошибки, которые мешают вам выйти в топ и увеличить продажи на Wildberries</p>
+        </div>
+        <div class="flex justify-between gap-8  lg:w-[50%] max-w-[600px] mx-auto">
+          <div class="flex flex-col gap-6 items-center" v-for="item in content">
+            <button @click="[currentContent = item.value]" class="flex justify-center items-center btn-primary w-16 h-16" :class="{ '!bg-[#F7F7F7] !text-black': item.value !== currentContent }">
+              <Icon :name="item.icon" class="w-7 h-7"/>
+            </button>
+            <p class="md:text-[20px] text-[12px] font-[600] leading-[30px]">{{ item.title }}</p>
           </div>
-        </section>
+        </div>
+
+        <div id="slideshow"  class="relative overflow-hidden min-h-[400px] w-full -mb-32 lg:-mb-0  sm:my-0 z-0" :style="blockHeight !== 0 ? { height: blockHeight+150 + 'px' } : {height: '800px'}" >
+          <transition-group name="fade" tag="div">
+            <div
+              v-for="(slide, index) in content"
+              :key="index"
+              v-show="currentContent === slide.value"
+              class="absolute w-full h-full lg:h-[580px] xl:h-[100%] "
+              
+            >
+              <div class="flex md:flex-row flex-col p-4 md:p-12 gap-12 bg-[#F7F7F7] rounded-2xl container overflow-hidden"  >          
+                <div class="flex flex-col gap-8" ref="contentBlock" :style="blockHeight !== 0 ? { height: blockHeight + 'px' } : {}">
+                  <p class="text-[20px] leading-[24px] md:font-[600] md:text-[24px] md:leading-[29px]">Как эту задачу решил Harmex:</p>
+                  <div class="flex gap-3 items-center" v-for="item in content.find(item => item.value === currentContent).points">
+                    <div class="w-[20px] h-[20px] flex items-center justify-center">
+                      <Icon name="icon-park-solid:check-one" class="w-[20px] h-[20px] text-[--primary]"/>
+                    </div>
+                    <p class="text-[#5A556B] text-[16px] leading-[24px] font-[500]">{{ item }}</p>
+                  </div>
+                  </div>
+                  <div class="bg-white rounded-xl w-1/2" />
+              </div>
+            </div>
+          </transition-group>
+        </div>
+      </section>
 
 
       <section class="bg-white py-14 px-6 lg:px-[120px] lg:pt-14 lg:pb-[112px] flex flex-col gap-8 lg:gap-14 justify-center items-center w-full" >
-        <h1 class="text-[24px] leading-[28px] lg:text-[48px] lg:leading-[58px] font-[700] text-center"> Почему выбирают HARMEX?</h1>
+        <h1 class="block-title text-center"> Почему выбирают HARMEX?</h1>
         <Nuxt-Img src="/img/harmex.svg" class="w-full max-w-[1120px] max-h-[700px] flex mx-auto"/>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div v-for="item in harmexPluses" class="bg-[#F4F4F4] p-6 rounded-[10px] w-full">
@@ -332,7 +441,7 @@ onMounted(() => {
               :isOpen="openIndex === index"
               @update:isOpen="handleAccordionToggle(index)"
               >
-              <div v-html="section.content"></div>
+                <div v-html="section.content"></div>
               </Accordion>
 
           </div>  
@@ -396,5 +505,13 @@ onMounted(() => {
   .max-w {
     max-width: 400px;
   }
+}
+
+.container {
+  transition: transform 1s ease;
+}
+
+.move-left-right {
+  transform: translateX(-300px);
 }
 </style>
