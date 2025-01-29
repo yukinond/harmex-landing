@@ -187,9 +187,8 @@ const handleBlur = () => {
 
 const getBlockHeight = async () => {
   await nextTick(); 
-  const windowWidth = window.innerWidth;
   if (contentBlock.value && contentBlock.value.length > 0) {
-    const firstBlock = windowWidth >= 1024 ? contentBlock.value[0] : contentBlock.value[2];
+    const firstBlock = contentBlock.value[0];
     
     if (firstBlock) {
       blockHeight.value = firstBlock.offsetHeight; 
@@ -283,7 +282,7 @@ onMounted(() => {
                 <div class="relative lg:w-[45%] lg:max-w-[566px] max-h-[400px] lg:max-h-full lg:h-full flex lg:my-auto overflow-hidden rounded-xl">
                   <Nuxt-img 
                     :src="`/img/buisnessBlock/${slide.value}.png`" 
-                    class="w-full h-full sm:object-contain rounded-xl"
+                    class="w-full h-full object-contain rounded-xl"
                   />
                 </div>
               </div>
