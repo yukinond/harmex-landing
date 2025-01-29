@@ -266,7 +266,7 @@ onMounted(() => {
               class="absolute w-full h-full lg:h-[580px] xl:h-[100%] -mb-20"
             >
               <div class="flex w-full justify-between lg:flex-row flex-col p-4 md:p-12 gap-4 md:gap-12 bg-[#F7F7F7] rounded-2xl overflow-hidden" ref="contentBlock" :style="blockHeight !== 0 ? { height: blockHeight + 'px' } : {}">          
-                <div class="flex flex-col gap-3 md:gap-8 flex-1">
+                <div class="flex flex-col gap-3 md:gap-8 lg:flex-1">
                   <p class="text-[18px] leading-[24px] md:font-[600] md:text-[24px] md:leading-[29px]">Как эту задачу решил Harmex:</p>
                   <div class="flex gap-3 items-center" v-for="item in content.find(item => item.value === currentContent).points">
                     <div class="w-[20px] h-[20px] flex items-center justify-center">
@@ -279,7 +279,7 @@ onMounted(() => {
                     </p>
                   </div>
                 </div>
-                <div class="relative min-h-[300px] lg:w-[45%] lg:max-w-[566px] max-h-[400px] lg:max-h-full lg:h-full flex lg:my-auto overflow-hidden rounded-xl">
+                <div class="relative min-h-[300px] lg:w-[45%] lg:max-w-[566px] lg:max-h-full lg:h-full flex lg:my-auto overflow-hidden rounded-xl flex-1 lg:flex-none max-h-[312px]">
                   <Nuxt-img 
                     :src="`/img/buisnessBlock/${slide.value}.png`" 
                     class="w-full h-full object-cover lg:object-contain rounded-xl"
