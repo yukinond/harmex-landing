@@ -59,7 +59,8 @@ export const mainArticles =[
       },
     ],
       "author": "Игорь Вист",
-      "date": "30.01.25"
+      "date": "30.01.25",
+      "category": "Авито",
     },
     {
       "id": 'unique-id-2',
@@ -149,7 +150,8 @@ export const mainArticles =[
         },
       ],
       "author": "Игорь Вист",
-      "date": "30.01.25"
+      "date": "30.01.25",
+      "category": "Маркетплейсы",
     },
     {
         "id": 'unique-id-3',
@@ -212,6 +214,7 @@ export const mainArticles =[
             }
           ],
         "author": "Игорь Вист",
-        "date": "30.01.25"
+        "date": "30.01.25",
+        "category": "Маркетплейсы",
     }
   ]

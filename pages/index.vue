@@ -245,10 +245,10 @@ const videos = ref(
 
       <section class="w-full rounded-[12px] flex items-center lg:px-16 lg:py-24 py-8 px-6 bg-white flex-col gap-8 lg:gap-16">
         <h1 class="block-title">Почему выбирают HARMEX?</h1>
-        <div class="image-container relative max-h-[200px] xs sm:max-h-[400px] lg:max-h-[476px] xl:max-h-[576px]">
-          <Nuxt-img src="/img/app.png" alt="Background"/>
-          <!-- <Nuxt-img src="/img/app.png" alt="Image" class="noblur absolute max-w-[90%] lg:max-w-[80%] top-2/3 2xl:top-[10%] 2xl:-translate-y-0 left-1/2 transform -translate-x-1/2 lg:-translate-y-1/2 rounded-sm" /> -->
+        <div class="relative max-h-[200px] sm:max-h-[400px] lg:max-h-[476px] xl:max-h-none overflow-hidden rounded-lg">
+          <Nuxt-img src="/img/app.png" alt="Background" class="w-full h-full object-cover" />
         </div>
+
 
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -320,7 +320,7 @@ const videos = ref(
               />
               <button
                 v-if="index === 1"
-                class="absolute h-[52px] top-[calc(50%-26px)] left-1/2 z-10  -translate-x-1/2 px-4 py-2 w-fit flex justify-center items-center bg-inherit border border-[--primary]  text-[--primary] text-white text-base font-semibold rounded-full opacity-100 lg:opacity-100 group-hover:opacity-100 transition-all"
+                class="absolute h-[52px] top-[calc(50%-26px)] left-1/2 z-10  -translate-x-1/2 px-[12px] py-2 w-fit flex justify-center items-center bg-inherit border-[2.5px] border-[--primary] text-[--primary] font-semibold rounded-full opacity-100 lg:opacity-100 group-hover:opacity-100 transition-all"
                 @click="openVideo(review.video)"
               >
                 <Icon name="lucide:play" class="w-6 h-6" />
@@ -337,7 +337,7 @@ const videos = ref(
                 class="w-full h-full object-cover"
               />
               <button
-                class="absolute w-14 h-14 top-[calc(50%-16px)] z-10 left-1/2  -translate-x-1/2 px-3 py-2 flex justify-center items-center bg-inherit border border-[--primary]  text-[--primary]  text-base font-semibold rounded-full opacity-100 lg:opacity-100 group-hover:opacity-100 transition-all"
+                class="absolute w-14 h-14 top-[calc(50%-16px)] z-10 left-1/2  -translate-x-1/2 px-3 py-2 flex justify-center items-center bg-inherit border-2 border-[--primary]  text-[--primary]  text-base font-semibold rounded-full opacity-100 lg:opacity-100 group-hover:opacity-100 transition-all"
                 @click="openVideo(visibleVideos[1].video)"
               >
                 <Icon name="lucide:play" class="w-6 h-6" />
@@ -370,7 +370,7 @@ const videos = ref(
             </Nuxt-Link>
             <div class="px-[16px] py-8 flex flex-col gap-3">
               <div class="flex justify-between mb-1">
-                <p class="text-[16px] leading-[24px] font-[500] text-[--primary]">Статья</p>
+                <p class="text-[16px] leading-[24px] font-[500] text-[--primary]">{{ item.category}}</p>
                 <span class="text-[#0A0A0AB2] flex items-center gap-3">
                   <Icon name="uil:eye" class="w-6 h-6 text-[#0A0A0A73]" />
                   300
@@ -455,7 +455,7 @@ const videos = ref(
   width: 100%;
   height: auto;
   object-fit: cover; 
-  object-position: center; 
+  object-position: start; 
   /* filter: blur(4px); */
 }
 
@@ -470,8 +470,4 @@ const videos = ref(
     max-height: 300px;
   }
 }
-
-  .flex > div {
-    transition: transform 0.3s ease-in-out;
-  }
 </style>

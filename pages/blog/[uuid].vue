@@ -37,7 +37,7 @@ const formattedContent = computed(() => {
     </section>
 
     <section
-      class="px-6 py-20 lg:py-20 flex flex-col justify-center items-center bg-white"
+      class="px-4 lg:px-6 py-20 lg:py-20 flex flex-col justify-center items-center bg-white"
     >
       <div
         class="flex flex-col w-full lg:max-w-[70%] items-center justify-center gap-6"
@@ -48,34 +48,34 @@ const formattedContent = computed(() => {
         />
         <div class="flex justify-between mb-1 w-full">
           <p class="text-[16px] leading-[24px] font-[500] text-[--primary]">
-            Статья
+            {{ data.category }}
           </p>
           <span class="text-[#0A0A0AB2] flex items-center gap-3">
             <Icon name="uil:eye" class="w-6 h-6 text-[#0A0A0A73]" /> 300
           </span>
         </div>
-        <div class="grid grid-cols-3 rounded-xl p-4 bg-[#F7F7F7] w-full">
+        <div class="grid grid-cols-3 sm:grid-cols-3 whitespace-nowrap rounded-xl px-2 py-4 sm:p-4 bg-[#F7F7F7] w-full text-[12px] leading-[20px] sm:text-[18px] sm:leading-[27px] font-[400]">
           <div class="flex flex-col gap-2.5">
-            <p class="text-[18px] leading-[27px] font-[400] text-[#98989A]">
+            <p class="text-[#98989A]">
               Имя автора
             </p>
-            <p class="text-[18px] leading-[27px] font-[400] ">
+            <p >
               {{ data.author }}
             </p>
           </div>
           <div class="flex flex-col gap-2.5">
-            <p class="text-[18px] leading-[27px] font-[400] text-[#98989A]">
+            <p class="text-[#98989A]">
               Дата публикации
             </p>
-            <p class="text-[18px] leading-[27px] font-[400] ">
+            <p >
               {{ data.date }}
             </p>
           </div>
           <div class="flex flex-col gap-2.5">
-            <p class="text-[18px] leading-[27px] font-[400] text-[#98989A]">
+            <p class="text-[#98989A]">
               Время чтения
             </p>
-            <p class="text-[18px] leading-[27px] font-[400] ">10 минут</p>
+            <p >10 минут</p>
           </div>
         </div>
 
