@@ -187,13 +187,11 @@ const handleBlur = () => {
 
 const getBlockHeight = async () => {
   await nextTick(); 
-  console.log(contentBlock.value);
   if (contentBlock.value && contentBlock.value.length > 0) {
     const firstBlock = contentBlock.value[0];
     
     if (firstBlock) {
       blockHeight.value = firstBlock.offsetHeight; 
-      console.log(blockHeight.value);
     }
   }
 };
