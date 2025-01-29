@@ -197,7 +197,7 @@ const getBlockHeight = async () => {
 };
 
 onMounted(() => {
-  mp.value = 'wildberries'
+  persistedStore.current ? persistedStore.current : persistedStore.current = 'wildberries'
   store.info[persistedStore.current].title ? mp.value = store.info[persistedStore.current] : navigateTo('/')
   getBlockHeight();
   window.addEventListener('resize', getBlockHeight);
