@@ -187,12 +187,10 @@ const handleBlur = () => {
 
 const getBlockHeight = async () => {
   await nextTick(); 
-  console.log('contentBlock.value', contentBlock.value)
   if (contentBlock.value && contentBlock.value.length > 0) {
     const firstBlock = contentBlock.value[0];
-    console.log('firstBlock', firstBlock)
+    
     if (firstBlock) {
-      console.log('firstBlock.offsetHeight', firstBlock.offsetHeight)
       blockHeight.value = firstBlock.offsetHeight; 
     }
   }
@@ -210,43 +208,19 @@ onUnmounted(() => {
   window.removeEventListener('resize', getBlockHeight);
 });
 
-async function dynamicHeight(index:number) {
-  await nextTick(); 
-  if (contentBlock.value && contentBlock.value.length > 0) {
-    const currentBlock = contentBlock.value[index];
-    console.log('firstBlock', currentBlock)
-    if (currentBlock) {
-      console.log('firstBlock.offsetHeight', currentBlock.offsetHeight)
-      blockHeight.value = currentBlock.offsetHeight; 
-    }
-  }
-
-  return blockHeight.value
-}
-// const dynamicHeight = computed(() => ({
-//   height: blockHeight.value !== 0 ? `${blockHeight.value + 150}px` : '800px'
-// }));
-
-watch(currentContent, async () => {
-  await nextTick();
-  getBlockHeight();
-});
-
-
-
 onMounted(() => {
   setInterval(() => {
     currentIndex.value = (currentIndex.value + 1) % stepsBlock.value.length; 
   }, 3500);
   setInterval(() => {
-    const currentIndex = content.findIndex(item => item.value === currentContent.value);
+  const currentIndex = content.findIndex(item => item.value === currentContent.value);
 
-    if (currentIndex !== -1) {
-      const nextIndex = (currentIndex + 1) % content.length;
+  if (currentIndex !== -1) {
+    const nextIndex = (currentIndex + 1) % content.length;
 
-      currentContent.value = content[nextIndex].value;
-    }
-  }, 30000);
+    currentContent.value = content[nextIndex].value;
+  }
+}, 30000);
 });
 </script>
 
@@ -283,17 +257,16 @@ onMounted(() => {
           </div>
         </div>
 
-        <div id="slideshow"  class="relative overflow-visible min-h-[400px] w-full sm:my-0 z-0" :style="blockHeight !== 0 ? { height: blockHeight + 'px' } : {}" >
+        <div id="slideshow"  class="relative overflow-hidden min-h-[400px] w-full -mb-32 lg:-mb-0  sm:my-0 z-0" :style="blockHeight !== 0 ? { height: blockHeight+150 + 'px' } : {height: '800px'}" >
           <transition-group name="fade" tag="div">
             <div
               v-for="(slide, index) in content"
               :key="index"
               v-show="currentContent === slide.value"
-              class="absolute w-full h-full lg:h-[580px] xl:h-[100%] max-h-[800px]"
-              :style="blockHeight !== 0 ? { height: blockHeight + 'px' } : {}"
+              class="absolute w-full h-full lg:h-[580px] xl:h-[100%] -mb-20"
             >
-              <div class="flex w-full justify-between lg:flex-row flex-col p-4 md:p-12 gap-4 md:gap-12 bg-[#F7F7F7] rounded-2xl overflow-hidden" ref="contentBlock" >          
-                <div class="flex flex-col gap-3 md:gap-8">
+              <div class="flex w-full justify-between lg:flex-row flex-col p-4 md:p-12 gap-4 md:gap-12 bg-[#F7F7F7] rounded-2xl overflow-hidden" ref="contentBlock" :style="blockHeight !== 0 ? { height: blockHeight + 'px' } : {}">          
+                <div class="flex flex-col gap-3 md:gap-8 flex-1">
                   <p class="text-[18px] leading-[24px] md:font-[600] md:text-[24px] md:leading-[29px]">Как эту задачу решил Harmex:</p>
                   <div class="flex gap-3 items-center" v-for="item in content.find(item => item.value === currentContent).points">
                     <div class="w-[20px] h-[20px] flex items-center justify-center">
@@ -306,14 +279,16 @@ onMounted(() => {
                     </p>
                   </div>
                 </div>
-                <div class="w-full lg:max-w-[40%] rounded-lg overflow-hidden flex items-center">
-                  <Nuxt-img :src="`/img/buisnessBlock/${slide.value}.png`" class="w-full min-h-[312px] lg:min-h-0 object-contain rounded-2xl" />
+                <div class="relative min-h-[300px] lg:w-[45%] lg:max-w-[566px] max-h-[400px] lg:max-h-full lg:h-full flex lg:my-auto overflow-hidden rounded-xl">
+                  <Nuxt-img 
+                    :src="`/img/buisnessBlock/${slide.value}.png`" 
+                    class="w-full h-full object-cover lg:object-contain rounded-xl"
+                  />
                 </div>
               </div>
             </div>
           </transition-group>
         </div>
-
       </section>
 
 
@@ -471,9 +446,10 @@ onMounted(() => {
 
 #slideshow > div { 
   position: absolute; 
-  top: 0px; 
-  left: 0px; 
-  right: 0px; 
+  top: 10px; 
+  left: 10px; 
+  right: 10px; 
+  bottom: 10px; 
 }
 
 .fade-enter-active, .fade-leave-active {
