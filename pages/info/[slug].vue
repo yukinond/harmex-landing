@@ -235,6 +235,7 @@ const getBlockHeight = async () => {
   }
 };
 
+
 onMounted(() => {
   getBlockHeight();
 });
@@ -294,12 +295,11 @@ onMounted(() => {
               v-for="(slide, index) in content"
               :key="index"
               v-show="currentContent === slide.value"
-              class="absolute w-full h-full lg:h-[580px] xl:h-[100%] "
-              
+              class="absolute w-full h-full lg:h-[580px] xl:h-[100%] -mb-20"
             >
-              <div class="flex w-full justify-between md:flex-row flex-col p-4 md:p-12 gap-12 bg-[#F7F7F7] rounded-2xl overflow-hidden"  >          
-                <div class="flex flex-col gap-8" ref="contentBlock" :style="blockHeight !== 0 ? { height: blockHeight + 'px' } : {}">
-                  <p class="text-[20px] leading-[24px] md:font-[600] md:text-[24px] md:leading-[29px]">Как эту задачу решил Harmex:</p>
+              <div class="flex w-full justify-between lg:flex-row flex-col p-4 md:p-12 gap-4 md:gap-12 bg-[#F7F7F7] rounded-2xl overflow-hidden" ref="contentBlock" :style="blockHeight !== 0 ? { height: blockHeight + 'px' } : {}">          
+                <div class="flex flex-col gap-6 md:gap-8 max-w-1/3">
+                  <p class="text-[18px] leading-[24px] md:font-[600] md:text-[24px] md:leading-[29px]">Как эту задачу решил Harmex:</p>
                   <div class="flex gap-3 items-center" v-for="item in content.find(item => item.value === currentContent).points">
                     <div class="w-[20px] h-[20px] flex items-center justify-center">
                       <Icon name="icon-park-solid:check-one" class="w-[20px] h-[20px] text-[--primary]"/>
@@ -310,8 +310,13 @@ onMounted(() => {
                       <span>{{ item.split(':')[1].trim() }}</span> 
                     </p>
                   </div>
-                  </div>
-                  <div class="bg-white rounded-xl w-1/2 max-w-[1200px]" />
+                </div>
+                <div class="relative w-full lg:max-w-[566px] max-h-[400px] lg:max-h-full lg:h-full flex lg:my-auto">
+                  <Nuxt-img 
+                    :src="`/img/buisnessBlock/${index+1}.png`" 
+                    class="w-full h-full object-contain lg:object-cover rounded-xl"
+                  />
+                </div>
               </div>
             </div>
           </transition-group>

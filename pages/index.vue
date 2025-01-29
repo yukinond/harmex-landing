@@ -138,16 +138,32 @@ const handleBlur = () => {
 
 const showVideo = ref(false);
 
-// Путь к текущему видео (динамически подставляемое)
 const currentVideo = ref("");
+const activeIndex = ref(0);
 
-// Функция для открытия модального окна с видео
+function nextSlide() {
+      activeIndex.value = (activeIndex.value + 1) % videos.value.length;
+}
+
+function prevSlide() {
+      activeIndex.value = (activeIndex.value - 1 + videos.value.length) % videos.value.length;
+}
+
+
+const visibleVideos = computed(() => {
+  const total = videos.value.length;
+  return [
+    videos.value[(activeIndex.value - 1 + total) % total],
+    videos.value[activeIndex.value],
+    videos.value[(activeIndex.value + 1) % total]
+  ];
+})
+
 const openVideo = (videoPath:any) => {
   currentVideo.value = videoPath;
   showVideo.value = true;
 };
 
-// Функция для закрытия модального окна
 const closeVideo = () => {
   showVideo.value = false;
   currentVideo.value = "";
@@ -199,7 +215,9 @@ const videos = ref(
 
         <div class="relative z-10 lg:p-6 text-white">
           <h1 class="text-2xl font-[600] lg:text-[60px] lg:leading-[72px] text-[30px] leading-[36px] mb-6">Репутация и продажи <br class="hidden lg:block"> под вашим контролем!</h1>
-          <p class="text-[#ADADAD] lg:text-[16px] lg:leading-[24px] text-[14px] leading-[21px] font-[500] mb-8 max-w-[60%] sm:max-w-[60%]">Harmex предоставляет инструменты, которые повысят ваши продажи, <br> узнаваемость и привлекательность на популярных онлайн-площадках.</p>
+          <p class="text-[#ADADAD] lg:text-[15px] lg:leading-[24px] text-[14px] leading-[21px] font-[500] mb-8 max-w-[250px] sm:max-w-full">
+            Harmex предоставляет инструменты, которые <br> повысят ваши продажи, узнаваемость и <span class="hidden sm:inline"><br></span> привлекательность на популярных онлайн-площадках.
+          </p>
           <div class="flex gap-3">
             <button @click="navigateTo('https://app.harmex.ru/auth', { external: true })" class="btn-primary lg:h-[60px] lg:!px-[32px]">
               Попробовать
@@ -228,8 +246,8 @@ const videos = ref(
       <section class="w-full rounded-[12px] flex items-center lg:px-16 lg:py-24 py-8 px-6 bg-white flex-col gap-8 lg:gap-16">
         <h1 class="block-title">Почему выбирают HARMEX?</h1>
         <div class="image-container relative max-h-[200px] xs sm:max-h-[400px] lg:max-h-[476px] xl:max-h-[576px]">
-          <Nuxt-img src="/img/bg.jpeg" alt="Background"/>
-          <Nuxt-img src="/img/app.png" alt="Image" class="noblur absolute max-w-[90%] lg:max-w-[80%] top-2/3 2xl:top-[10%] 2xl:-translate-y-0 left-1/2 transform -translate-x-1/2 lg:-translate-y-1/2 rounded-sm" />
+          <Nuxt-img src="/img/app.png" alt="Background"/>
+          <!-- <Nuxt-img src="/img/app.png" alt="Image" class="noblur absolute max-w-[90%] lg:max-w-[80%] top-2/3 2xl:top-[10%] 2xl:-translate-y-0 left-1/2 transform -translate-x-1/2 lg:-translate-y-1/2 rounded-sm" /> -->
         </div>
 
 
@@ -283,61 +301,54 @@ const videos = ref(
         <Slider />
       </section> -->
 
-      <section class="w-full rounded-[12px] flex items-center lg:px-[66px] py-8 px-6 lg:py-20 bg-white flex-col">
+      <section id="reviews" class="w-full rounded-[12px] flex items-center lg:px-[66px] py-8 px-6 lg:py-20 bg-white flex-col">
         <h1 class="lg:text-[30px] text-[24px] leading-[36px] font-[700] mb-10 lg:mb-12">
           Отзывы клиентов
         </h1>
-        <div class="flex justify-center flex-col md:flex-row gap-6 p-4 items-center w-full lg:w-3/5">
-          <div
-            v-for="(review, index) in videos"
-            class="relative w-full md:w-1/3 h-[435px] bg-gray-900 rounded-lg overflow-hidden group hover:shadow-lg"
-            :class="{  'h-[435px]' : index !== 1, 'h-[463px]' : index === 1 }"
-          >
-            <Nuxt-Img
-              :src="review.image"
-              alt="Видео 1"
-              class="w-full h-full object-cover"
-            />
-            <button
-              class="absolute h-[52px] top-4 left-1/2 -translate-x-1/2 px-4 py-2 w-[calc(100%-48px)] flex justify-center items-center bg-white bg-opacity-100 text-black text-base font-semibold rounded-lg opacity-100 lg:opacity-0 group-hover:opacity-100 transition-all"
-              @click="openVideo(review.video)"
+        <div class="relative flex flex-col items-center w-full overflow-hidden">
+           <div class="flex justify-center flex-row gap-6 p-4 items-center w-full lg:w-3/5">
+           <div
+              v-for="(review, index) in visibleVideos"
+              :key="index"
+              class="relative w-full md:w-1/3 h-[435px] rounded-lg overflow-hidden group hover:shadow-lg md:flex hidden"
+              :class="{ 'h-[435px]': index !== 1, 'h-[463px]': index === 1 }"
             >
-              Смотреть видео
-            </button>
+              <Nuxt-Img
+                :src="review.image"
+                alt="Видео"
+                class="w-full h-full object-cover"
+              />
+              <button
+                v-if="index === 1"
+                class="absolute h-[52px] top-[calc(50%-26px)] left-1/2 z-10  -translate-x-1/2 px-4 py-2 w-fit flex justify-center items-center bg-inherit border border-[--primary]  text-[--primary] text-white text-base font-semibold rounded-full opacity-100 lg:opacity-100 group-hover:opacity-100 transition-all"
+                @click="openVideo(review.video)"
+              >
+                <Icon name="lucide:play" class="w-6 h-6" />
+              </button>
+            </div>
+
+            <!-- mobile -->
+            <div
+              class="relative w-full min-w-[300px] md:min-w-0 h-[463px] sm:w-1/3 rounded-lg overflow-hidden group hover:shadow-lg md:hidden flex"
+            >
+              <Nuxt-Img
+                :src="visibleVideos[1].image"
+                alt="Видео"
+                class="w-full h-full object-cover"
+              />
+              <button
+                class="absolute w-14 h-14 top-[calc(50%-16px)] z-10 left-1/2  -translate-x-1/2 px-3 py-2 flex justify-center items-center bg-inherit border border-[--primary]  text-[--primary]  text-base font-semibold rounded-full opacity-100 lg:opacity-100 group-hover:opacity-100 transition-all"
+                @click="openVideo(visibleVideos[1].video)"
+              >
+                <Icon name="lucide:play" class="w-6 h-6" />
+              </button>
+            </div>
+          </div> 
+
+          <div class="justify-center gap-10 sm:absolute  sm:top-1/2  w-full px-4 flex sm:justify-between lg:left-1/2 lg:-translate-x-1/2 lg:max-w-[80%]">
+            <button @click="prevSlide" class="bg-inherit border border-[#7f7f7f] bg-opacity-50 w-10 h-10 flex items-center text-white p-2 rounded-full"><Icon name="lucide:arrow-left" class="w-5 h-5 text-[#7f7f7f]"/></button>
+            <button @click="nextSlide" class="bg-inherit border border-[#7f7f7f] bg-opacity-50 w-10 h-10 flex items-center text-white p-2 rounded-full"><Icon name="lucide:arrow-right" class="w-10 h-10 text-[#7f7f7f]"/></button>
           </div>
-
-          <!-- <div
-            class="relative w-full md:w-1/3 h-[463px] bg-gray-900 rounded-lg overflow-hidden group hover:shadow-lg"
-          >
-            <img
-              src="/videos/video-1.png"
-              alt="Видео 2"
-              class="w-full h-full object-cover"
-            />
-            <button
-              class="absolute h-[52px] top-4 left-1/2 -translate-x-1/2 px-4 py-2 w-[calc(100%-48px)] flex justify-center items-center bg-white bg-opacity-100 text-black text-base font-semibold rounded-lg opacity-100 lg:opacity-0 group-hover:opacity-100 transition-all"
-              @click="openVideo('/videos/video.mp4')"
-            >
-              Смотреть видео
-            </button>
-
-          </div>
-
-          <div
-            class="relative w-full md:w-1/3 h-[435px] bg-gray-900 rounded-lg overflow-hidden group hover:shadow-lg"
-          >
-            <img
-              src="/videos/video-1.png"
-              alt="Видео 3"
-              class="w-full h-full object-cover"
-            />
-            <button
-              class="absolute h-[52px] top-4 left-1/2 -translate-x-1/2 px-4 py-2 w-[calc(100%-48px)] flex justify-center items-center bg-white bg-opacity-100 text-black text-base font-semibold rounded-lg opacity-100 lg:opacity-0 group-hover:opacity-100 transition-all"
-              @click="openVideo('/videos/video.mp4')"
-            >
-              Смотреть видео
-            </button>
-          </div> -->
         </div>
 
         <Modal v-show="showVideo" @close="closeVideo">
@@ -434,7 +445,7 @@ const videos = ref(
 .image-container {
   width: 100%;
   overflow: hidden; 
-  border-radius: 24px;
+  border-radius: 12px;
   display: flex;
   justify-content: center; 
   align-items: center; 
@@ -445,7 +456,7 @@ const videos = ref(
   height: auto;
   object-fit: cover; 
   object-position: center; 
-  filter: blur(4px);
+  /* filter: blur(4px); */
 }
 
 .image-container .noblur {
@@ -460,4 +471,7 @@ const videos = ref(
   }
 }
 
+  .flex > div {
+    transition: transform 0.3s ease-in-out;
+  }
 </style>
