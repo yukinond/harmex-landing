@@ -262,8 +262,6 @@ onMounted(() => {
             <p class="md:text-[20px] text-[12px] font-[600] leading-[30px]">{{ item.title }}</p>
           </div>
         </div>
-        {{ dynamicHeight }}
-        {{ blockHeight !== 0 ? 'height: ' + blockHeight + 'px' : '' }}
         <div id="slideshow"  class="relative overflow-hidden min-h-[400px] w-full -mb-32 lg:-mb-0  sm:my-0 z-0" :style="dynamicHeight" >
           <transition-group name="fade" tag="div">
             <div
