@@ -196,16 +196,22 @@ const getBlockHeight = async () => {
   }
 };
 
+const dynamicHeight = computed(() => ({
+  height: blockHeight.value !== 0 ? `${blockHeight.value }px` : '800px'
+}));
+
+watch(currentContent, async () => {
+  await nextTick();
+  getBlockHeight();
+});
+
+
 onMounted(() => {
   persistedStore.current ? persistedStore.current : persistedStore.current = 'wildberries'
   store.info[persistedStore.current].title ? mp.value = store.info[persistedStore.current] : navigateTo('/')
   getBlockHeight();
   window.addEventListener('resize', getBlockHeight);
 
-});
-
-onUnmounted(() => {
-  window.removeEventListener('resize', getBlockHeight);
 });
 
 onMounted(() => {
@@ -243,7 +249,7 @@ onMounted(() => {
         </div>
       </section>
 
-      <section class="bg-white px-6 lg:px-[120px] py-12 lg:py-14 flex flex-col gap-14">
+      <section class="bg-white px-6 lg:px-[120px] py-12 lg:py-14 flex flex-col gap-14 pb-[136px] lg:pb-14">
         <div class="flex flex-col justify-center items-center gap-5">
           <h1 class="block-title">Почему Harmex важен для вашего бизнеса?</h1>
           <p class="text-[18px] leading-[28px] font-[400] text-[#0A0A0AB2] max-w-[480px] text-center">Скрытые ошибки, которые мешают вам выйти в топ и увеличить продажи на {{ mp.title }}</p>
@@ -256,8 +262,9 @@ onMounted(() => {
             <p class="md:text-[20px] text-[12px] font-[600] leading-[30px]">{{ item.title }}</p>
           </div>
         </div>
-
-        <div id="slideshow"  class="relative overflow-hidden min-h-[400px] w-full -mb-32 lg:-mb-0  sm:my-0 z-0" :style="blockHeight !== 0 ? { height: blockHeight+150 + 'px' } : {height: '800px'}" >
+        {{ dynamicHeight }}
+        {{ blockHeight !== 0 ? 'height: ' + blockHeight + 'px' : '' }}
+        <div id="slideshow"  class="relative overflow-hidden min-h-[400px] w-full -mb-32 lg:-mb-0  sm:my-0 z-0" :style="dynamicHeight" >
           <transition-group name="fade" tag="div">
             <div
               v-for="(slide, index) in content"
@@ -265,7 +272,7 @@ onMounted(() => {
               v-show="currentContent === slide.value"
               class="absolute w-full h-full lg:h-[580px] xl:h-[100%] -mb-20"
             >
-              <div class="flex w-full justify-between lg:flex-row flex-col p-4 md:p-12 gap-4 md:gap-12 bg-[#F7F7F7] rounded-2xl overflow-hidden" ref="contentBlock" :style="blockHeight !== 0 ? { height: blockHeight + 'px' } : {}">          
+              <div class="flex w-full justify-between lg:flex-row flex-col p-4 md:p-12 gap-4 md:gap-12 bg-[#F7F7F7] rounded-2xl overflow-hidden" ref="contentBlock" :style="blockHeight !== 0 ? 'height: ' + blockHeight + 'px' : ''">          
                 <div class="flex flex-col gap-3 md:gap-8 flex-1">
                   <p class="text-[18px] leading-[24px] md:font-[600] md:text-[24px] md:leading-[29px]">Как эту задачу решил Harmex:</p>
                   <div class="flex gap-3 items-center" v-for="item in content.find(item => item.value === currentContent).points">
@@ -446,10 +453,10 @@ onMounted(() => {
 
 #slideshow > div { 
   position: absolute; 
-  top: 10px; 
-  left: 10px; 
-  right: 10px; 
-  bottom: 10px; 
+  top: 0px; 
+  left: 0px; 
+  right: 0px; 
+  bottom: 0px; 
 }
 
 .fade-enter-active, .fade-leave-active {
