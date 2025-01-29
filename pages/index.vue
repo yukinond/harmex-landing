@@ -245,8 +245,10 @@ const videos = ref(
 
       <section class="w-full rounded-[12px] flex items-center lg:px-16 lg:py-24 py-8 px-6 bg-white flex-col gap-8 lg:gap-16">
         <h1 class="block-title">Почему выбирают HARMEX?</h1>
-        <div class="relative max-h-[200px] sm:max-h-[400px] lg:max-h-[476px] xl:max-h-none overflow-hidden rounded-lg">
-          <Nuxt-img src="/img/app.png" alt="Background" class="w-full h-full object-cover" />
+        <div class="image-container relative max-h-[300px] sm:max-h-[400px] lg:max-h-[376px] xl:max-h-none overflow-hidden rounded-lg">
+          <Nuxt-img src="/img/app.png" alt="Background" class="w-full h-full mt-10 lg:mt-0 lg:hidden noblur" />
+          <Nuxt-img src="/img/bg.jpeg" alt="Background" class="w-full h-full object-cover hidden lg:block max-h-[200px] sm:max-h-[400px] lg:max-h-[576px]"/>
+          <Nuxt-img src="/img/app.png" alt="Image" class="noblur absolute max-w-[90%] top-2/3 top-[10%] 2xl:-translate-y-0 left-1/2 transform -translate-x-1/2 rounded-md hidden lg:block" />
         </div>
 
 
@@ -454,15 +456,13 @@ const videos = ref(
 .image-container img {
   width: 100%;
   height: auto;
-  object-fit: cover; 
   object-position: start; 
-  /* filter: blur(4px); */
+  filter: blur(4px);
 }
 
 .image-container .noblur {
   filter: none;
 }
-
 
 
 @meddia (max-width: 640px) {
