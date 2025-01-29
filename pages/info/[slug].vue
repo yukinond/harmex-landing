@@ -265,13 +265,13 @@ onMounted(() => {
               class="absolute w-full h-full lg:h-[580px] xl:h-[100%] -mb-20"
             >
               <div class="flex w-full justify-between lg:flex-row flex-col p-4 md:p-12 gap-4 md:gap-12 bg-[#F7F7F7] rounded-2xl overflow-hidden" ref="contentBlock" :style="blockHeight !== 0 ? { height: blockHeight + 'px' } : {}">          
-                <div class="flex flex-col gap-6 md:gap-8 flex-1">
+                <div class="flex flex-col gap-3 md:gap-8 flex-1">
                   <p class="text-[18px] leading-[24px] md:font-[600] md:text-[24px] md:leading-[29px]">Как эту задачу решил Harmex:</p>
                   <div class="flex gap-3 items-center" v-for="item in content.find(item => item.value === currentContent).points">
                     <div class="w-[20px] h-[20px] flex items-center justify-center">
                       <Icon name="icon-park-solid:check-one" class="w-[20px] h-[20px] text-[--primary]"/>
                     </div>
-                    <p class="text-[#5A556B] text-[16px] leading-[24px] font-[500]">         
+                    <p class="text-[#5A556B] text-[12px] lg:text-[16px] leading-[24px] font-[500]">         
                       <span>{{ item.split(':')[0] }}:</span>
                       <br />
                       <span>{{ item.split(':')[1].trim() }}</span> 
