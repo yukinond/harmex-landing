@@ -187,10 +187,12 @@ const handleBlur = () => {
 
 const getBlockHeight = async () => {
   await nextTick(); 
+  console.log('contentBlock.value', contentBlock.value)
   if (contentBlock.value && contentBlock.value.length > 0) {
     const firstBlock = contentBlock.value[0];
-    
+    console.log('firstBlock', firstBlock)
     if (firstBlock) {
+      console.log('firstBlock.offsetHeight', firstBlock.offsetHeight)
       blockHeight.value = firstBlock.offsetHeight; 
     }
   }
@@ -207,6 +209,12 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('resize', getBlockHeight);
 });
+
+const dynamicHeight = computed(() => ({
+  height: blockHeight.value !== 0 ? `${blockHeight.value + 150}px` : '800px'
+}));
+
+
 
 onMounted(() => {
   setInterval(() => {
@@ -257,7 +265,7 @@ onMounted(() => {
           </div>
         </div>
 
-        <div id="slideshow"  class="relative overflow-hidden min-h-[400px] w-full -mb-32 lg:-mb-0  sm:my-0 z-0" :style="blockHeight !== 0 ? { height: blockHeight+150 + 'px' } : {height: '800px'}" >
+        <div id="slideshow"  class="relative overflow-visible min-h-[400px] w-full -mb-32 lg:-mb-0  sm:my-0 z-0" :style="blockHeight !== 0 ? { height: blockHeight+150 + 'px' } : {height: '800px'}" >
           <transition-group name="fade" tag="div">
             <div
               v-for="(slide, index) in content"
