@@ -3,24 +3,24 @@ import { mainArticles } from '~/data/articles/articles';
 
 const route = useRoute();
 const data = ref<any>({});
-onMounted(() => {
-  data.value = mainArticles.find((item: any) => item.id === route.params.uuid);
-});
 
 const formattedContent = computed(() => {
   if (data.value.content) {
     return data.value.content.map((section: any) => {
-      // Заменяем \n\n на <br><br>
       section.content = section.content.replace(/\n\n/g, '<br><br>');
       return section;
     });
   }
   return [];
 });
+
+onMounted(() => {
+  data.value = mainArticles.find((item: any) => item.id === route.params.uuid) || {};
+});
 </script>
 
 <template>
-  <div class="flex flex-col gap-0 bg-[#EAEAEA38]">
+  <div v-if="data && data.title" class="flex flex-col gap-0 bg-[#EAEAEA38]">
     <section
       class="flex flex-col gap-5 px-6 py-8 sm:pt-[64px] sm:pb-[80px] items-center justify-center bg-gradient-to-b from-[#FFFFFF] from-[45%] to-[#fef8f3] to-[100%] border-b border-[#0A0A0A12]"
     >
@@ -109,6 +109,13 @@ const formattedContent = computed(() => {
                 </a>
             </div>
     </section>
+  </div>
+  <div v-else class="w-full min-h-[calc(100vh-80px)] bg-[#F7F7F7] flex justify-center items-center">
+      <p
+        class="text-[30px] leading-[28px] font-[500] text-center w-full"
+      >
+        Пост не найден
+      </p>
   </div>
 </template>
 
