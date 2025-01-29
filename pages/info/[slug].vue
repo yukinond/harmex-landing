@@ -187,8 +187,9 @@ const handleBlur = () => {
 
 const getBlockHeight = async () => {
   await nextTick(); 
+  const windowWidth = window.innerWidth;
   if (contentBlock.value && contentBlock.value.length > 0) {
-    const firstBlock = contentBlock.value[0];
+    const firstBlock = windowWidth >= 1024 ? contentBlock.value[0] : contentBlock.value[2];
     
     if (firstBlock) {
       blockHeight.value = firstBlock.offsetHeight; 
