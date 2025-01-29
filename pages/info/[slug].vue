@@ -278,13 +278,13 @@ onMounted(() => {
           </div>
         </div>
 
-        <div id="slideshow"  class="relative overflow-visible min-h-[400px] w-full sm:my-0 z-0" :style="blockHeight !== 0 ? { height: blockHeight+150 + 'px' } : {height: '800px'}" >
+        <div id="slideshow"  class="relative overflow-visible min-h-[400px] w-full sm:my-0 z-0" :style="blockHeight !== 0 ? { height: blockHeight + 'px' } : {}" >
           <transition-group name="fade" tag="div">
             <div
               v-for="(slide, index) in content"
               :key="index"
               v-show="currentContent === slide.value"
-              class="absolute w-full h-full lg:h-[580px] xl:h-[100%]"
+              class="absolute w-full h-full lg:h-[580px] xl:h-[100%] max-h-[900px]"
             >
               <div class="flex w-full justify-between lg:flex-row flex-col p-4 md:p-12 gap-4 md:gap-12 bg-[#F7F7F7] rounded-2xl overflow-hidden" ref="contentBlock" :style="blockHeight !== 0 ? { height: blockHeight + 'px' } : {}">          
                 <div class="flex flex-col gap-3 md:gap-8">
@@ -497,10 +497,9 @@ onMounted(() => {
 
 #slideshow > div { 
   position: absolute; 
-  top: 10px; 
-  left: 10px; 
-  right: 10px; 
-  bottom: 10px; 
+  top: 0px; 
+  left: 0px; 
+  right: 0px; 
 }
 
 .fade-enter-active, .fade-leave-active {
