@@ -279,10 +279,10 @@ onMounted(() => {
                     </p>
                   </div>
                 </div>
-                <div class="relative lg:w-[45%] lg:max-w-[566px] max-h-[400px] lg:max-h-full lg:h-full flex lg:my-auto overflow-hidden rounded-xl">
+                <div class="relative min-h-[300px] lg:w-[45%] lg:max-w-[566px] max-h-[400px] lg:max-h-full lg:h-full flex lg:my-auto overflow-hidden rounded-xl">
                   <Nuxt-img 
                     :src="`/img/buisnessBlock/${slide.value}.png`" 
-                    class="w-full h-full object-contain rounded-xl"
+                    class="w-full h-full object-cover lg:object-contain rounded-xl"
                   />
                 </div>
               </div>
