@@ -21,22 +21,22 @@ const stepsBlock = ref([
   {
     title: 'Пополнение баланса',
     description: 'Вы можете пополнить баланс с физической карты, бизнес-карты или расчётного счёта — быстро и удобно.',
-    image: '/img/mpSteps/step1.png',
+    image: 'https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/mpSteps/step1.png',
   },
   {
     title: 'Выбор услуги',
     description: 'Ознакомьтесь с каталогом услуг или запросите необходимую услугу, подходящую для вашего бизнеса.',
-    image: '/img/mpSteps/step2.png',
+    image: 'https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/mpSteps/step2.png',
   },
   {
     title: 'Создание заказа',
     description: 'Запланируйте выполнение заказа в любое удобное время — услуга будет выполнена точно в срок.',
-    image: '/img/mpSteps/step3.png',
+    image: 'https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/mpSteps/step3.png',
   },
   {
     title: 'Отчётность',
     description: 'Вся информация о финансовых операциях, выполнении услуг и результатах доступна в вашем личном кабинете.',
-    image: '/img/mpSteps/step4.png',
+    image: 'https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/mpSteps/step4.png',
   },
 ])
 
@@ -286,7 +286,7 @@ onMounted(() => {
                 </div>
                 <div class="relative min-h-[300px] lg:w-[45%] lg:max-w-[566px] max-h-[400px] lg:max-h-full lg:h-full flex lg:my-auto overflow-hidden rounded-xl">
                   <Nuxt-img 
-                    :src="`/img/buisnessBlock/${slide.value}.png`" 
+                    :src="`https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/buisnessBlock/${slide.value}.png`" 
                     class="w-full h-full object-cover lg:object-contain rounded-xl"
                   />
                 </div>
@@ -299,7 +299,7 @@ onMounted(() => {
 
       <section class="bg-white py-14 px-6 lg:px-[120px] lg:pt-14 lg:pb-[112px] flex flex-col gap-8 lg:gap-14 justify-center items-center w-full" >
         <h1 class="block-title text-center"> Почему выбирают HARMEX?</h1>
-        <Nuxt-Img src="/img/harmex.svg" class="w-full max-w-[1120px] max-h-[700px] flex mx-auto"/>
+        <Nuxt-Img src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/harmex.svg" class="w-full max-w-[1120px] max-h-[700px] flex mx-auto"/>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div v-for="item in harmexPluses" class="bg-[#F4F4F4] p-6 rounded-[10px] w-full">
               <div class="bg-[--primary] text-white p-3 rounded-[10px] w-fit max-h-[49px] mb-16 "> 
@@ -403,7 +403,7 @@ onMounted(() => {
           <div class="flex lg:flex-row flex-col justify-between gap-8">
           <div class="flex flex-col justify-start ">
               <h1 class="text-[24px] leading-[29px] lg:text-[40px] lg:leading-[48px] font-[600] max-w-[507px] !text-left">Часто задаваемые вопросы</h1>
-              <Nuxt-Img src="/img/questMan.svg" class="hidden lg:flex max-w-[240px] max-h-[285px]" />
+              <Nuxt-Img src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/questMan.svg" class="hidden lg:flex max-w-[240px] max-h-[285px]" />
           </div>
 
           <div class="lg:w-1/2 lg:max-w-1/2 w-full ">

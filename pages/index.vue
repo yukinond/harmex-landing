@@ -31,22 +31,22 @@ const stepsBlockData = ref([
   {
     title: 'Пополнение баланса',
     text: 'Вы можете пополнить баланс с физической карты, бизнес-карты или расчётного счёта — быстро и удобно.',
-    image: '/img/steps/step1.png',
+    image: 'https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/steps/step1.png',
   },
   {
     title: 'Выбор услуги',
     text: 'Ознакомьтесь с каталогом услуг или запросите необходимую услугу, подходящую для вашего бизнеса.',
-    image: '/img/steps/step2.png',
+    image: 'https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/steps/step2.png',
   },
   {
     title: 'Создание заказа',
     text: 'Запланируйте выполнение заказа в любое удобное время — услуга будет выполнена точно в срок.',
-    image: '/img/steps/step3.png',
+    image: 'https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/steps/step3.png',
   },
   {
     title: 'Отчётность',
     text: 'Вся информация о финансовых операциях, выполнении услуг и результатах доступна в вашем личном кабинете.',
-    image: '/img/steps/step4.png',
+    image: 'https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/steps/step4.png',
   }
 ])
 
@@ -185,16 +185,16 @@ if (process.client) {
 const videos = ref(
   [
     {
-      video: '/videos/video1.mp4',
-      image: '/videos/video1.png'
+      video: 'https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/videos/video1.mp4',
+      image: 'https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/videos/video1.png'
     },
     {
-      video: '/videos/video2.mp4',
-      image: '/videos/video2.png'
+      video: 'https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/videos/video2.mp4',
+      image: 'https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/videos/video2.png'
     },
     {
-      video: '/videos/video3.mov',
-      image: '/videos/video3.png'
+      video: 'https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/videos/video3.mov',
+      image: 'https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/videos/video3.png'
     },
   ]
 )
@@ -206,7 +206,7 @@ const videos = ref(
 
         <div 
           class="absolute inset-0 lg:w-full w-[250%] xs:-left-[50%] xs:w-[200%] sm:left-[-20%] sm:w-[150%] bg-cover bg-no-repeat lg:translate-x-[35%]"
-          style="background-image: url('/img/reputationBg.png');">
+          style="background-image: url('https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/reputationBg.png');">
         </div>
 
         <div 
@@ -246,9 +246,9 @@ const videos = ref(
       <section class="w-full rounded-[12px] flex items-center lg:px-16 lg:py-24 py-8 px-6 bg-white flex-col gap-8 lg:gap-16">
         <h1 class="block-title">Почему выбирают HARMEX?</h1>
         <div class="image-container relative max-h-[300px] sm:max-h-[400px] lg:max-h-[376px] xl:max-h-none overflow-hidden rounded-lg">
-          <Nuxt-img src="/img/app.png" alt="Background" class="w-full h-full mt-10 lg:mt-0 lg:hidden noblur" />
-          <Nuxt-img src="/img/bg.jpeg" alt="Background" class="w-full h-full object-cover hidden lg:block max-h-[200px] sm:max-h-[400px] lg:max-h-[576px]"/>
-          <Nuxt-img src="/img/app.png" alt="Image" class="noblur absolute max-w-[90%] top-2/3 top-[10%] 2xl:-translate-y-0 left-1/2 transform -translate-x-1/2 rounded-md hidden lg:block" />
+          <Nuxt-img src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/app.png" alt="Background" class="w-full h-full mt-10 lg:mt-0 lg:hidden noblur" />
+          <Nuxt-img src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/bg.jpeg" alt="Background" class="w-full h-full object-cover hidden lg:block max-h-[200px] sm:max-h-[400px] lg:max-h-[576px]"/>
+          <Nuxt-img src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/app.png" alt="Image" class="noblur absolute max-w-[90%] top-2/3 top-[10%] 2xl:-translate-y-0 left-1/2 transform -translate-x-1/2 rounded-md hidden lg:block" />
         </div>
 
 
@@ -273,8 +273,8 @@ const videos = ref(
 
       <section class="w-full rounded-[12px] flex items-center py-8 px-6 lg:px-[137px] lg:py-[86px] bg-black flex-col gap-8 lg:gap-16 relative">
         <h1 class="font-[500] lg:text-[50px] lg:leading-[60px] text-[24px] leading-[28px] text-white max-w-[315px] sm:max-w-[684px] text-center">Простое управление услугами в 4 шага</h1>
-        <Nuxt-Img src="/img/stepsBlockDecoration/firstBlockImage.svg" class="w-[28px] h-[32px] absolute z-10 top-[550px] hidden lg:block" />
-        <Nuxt-Img src="/img/stepsBlockDecoration/secondBlockImage.svg" class="w-[28px] h-[19px] absolute z-10 top-[1100px] hidden lg:block" />
+        <Nuxt-Img src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/stepsBlockDecoration/firstBlockImage.svg" class="w-[28px] h-[32px] absolute z-10 top-[550px] hidden lg:block" />
+        <Nuxt-Img src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/stepsBlockDecoration/secondBlockImage.svg" class="w-[28px] h-[19px] absolute z-10 top-[1100px] hidden lg:block" />
         <div class="grid lg:grid-cols-2 grid-cols-1 gap-6 text-white ">
           <div v-for="(item, index) in stepsBlockData" :key="index" class="flex flex-col bg-[#121212] rounded-[21px] border border-[#202122] p-9 relative" >
             <p class="order-1 mb-9 text-[14px] leading-[17px] font-[500]">{{ index + 1 }}.</p>
@@ -285,8 +285,8 @@ const videos = ref(
             />
             <p class="mb-3.5 font-[500] leading-[26px] text-[21px]" :class="index % 4 === 0 || index % 4 === 1 ? 'order-3' : 'order-3'">{{ item.title }}</p>
             <p class="text-[14px] leading-[17px] font-[400] max-w-[274px]" :class="index % 4 === 0 || index % 4 === 1 ? 'order-3' : 'order-3'">{{ item.text }}</p>
-            <Nuxt-Img v-if="index == 0" src="/img/stepsBlockDecoration/dashedLine.svg" class="w-[630px] h-[23px] absolute -bottom-[5%] translate-x-1/2 hidden lg:block" />
-            <Nuxt-Img v-if="index !== stepsBlockData.length - 1" src="/img/stepsBlockDecoration/connector.svg" class="h-10 w-10 absolute -bottom-10 left-[45%] block lg:hidden z-[8]" />
+            <Nuxt-Img v-if="index == 0" src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/stepsBlockDecoration/dashedLine.svg" class="w-[630px] h-[23px] absolute -bottom-[5%] translate-x-1/2 hidden lg:block" />
+            <Nuxt-Img v-if="index !== stepsBlockData.length - 1" src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/stepsBlockDecoration/connector.svg" class="h-10 w-10 absolute -bottom-10 left-[45%] block lg:hidden z-[8]" />
           </div>
         </div>
         <a href="#contact">
@@ -368,7 +368,7 @@ const videos = ref(
         <div class="flex lg:flex-row flex-col gap-6 w-full sm:max-w-[60%] lg:w-full">
           <div v-for="(item, index) in mainArticles" class="flex flex-col flex-1">
             <Nuxt-Link :to="`/blog/${item.id}`" class="w-full bg-[#F7F7F7] rounded-lg">           
-               <Nuxt-Img :src="`/img/articles/main${index + 1}.png`" class="w-full rounded-lg object-fi"  />
+               <Nuxt-Img :src="`https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/articles/main${index + 1}.png`" class="w-full rounded-lg object-fi"  />
             </Nuxt-Link>
             <div class="px-[16px] py-8 flex flex-col gap-3">
               <div class="flex justify-between mb-1">
@@ -398,7 +398,7 @@ const videos = ref(
         <div class="flex lg:flex-row flex-col justify-between gap-8">
           <div class="flex flex-col justify-start ">
             <h1 class="text-[24px] leading-[29px] lg:text-[40px] lg:leading-[48px] font-[600] max-w-[507px] !text-left">Часто задаваемые вопросы</h1>
-            <Nuxt-Img src="/img/questMan.svg" class="hidden lg:flex max-w-[240px] max-h-[285px]" />
+            <Nuxt-Img src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/questMan.svg" class="hidden lg:flex max-w-[240px] max-h-[285px]" />
           </div>
 
           <div class="lg:w-1/2 lg:max-w-1/2 w-full ">

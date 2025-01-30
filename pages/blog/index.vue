@@ -14,7 +14,7 @@ import { mainArticles } from '~/data/articles/articles';
             <div class="flex lg:flex-row flex-col gap-6 w-full ">
                 <div v-for="(item, index) in mainArticles" class="flex flex-col flex-1">
                     <Nuxt-Link :to="`/blog/${item.id}`" class="w-full bg-[#F7F7F7] rounded-lg">           
-                        <Nuxt-Img :src="`/img/articles/main${index + 1}.png`" class="w-full rounded-lg object-fi"  />
+                        <Nuxt-Img :src="`https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/articles/main${index + 1}.png`" class="w-full rounded-lg object-fi"  />
                     </Nuxt-Link>
                     <div class="px-[16px] py-8 flex flex-col gap-3">
                     <div class="flex justify-between mb-1">

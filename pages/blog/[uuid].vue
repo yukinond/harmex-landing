@@ -43,7 +43,7 @@ onMounted(() => {
         class="flex flex-col w-full lg:max-w-[70%] items-center justify-center gap-6"
       >
         <Nuxt-Img
-          :src="data.image"
+          :src="`https://ozonmpportal.hb.vkcs.cloud/harmex/landing1${data.image}`"
           class="w-full max-h-[320px] sm:max-h-[520px] 2xl:max-h-[720px] flex mx-auto object-cover rounded-2xl"
         />
         <div class="flex justify-between mb-1 w-full">
@@ -91,7 +91,7 @@ onMounted(() => {
               {{ section.subheading }}
             </h2>
             <p
-              class="text-[18px] leading-[28px] font-[400] text-[#1D1D1D]"
+              class="text-[18px] leading-[28px] font-[400] text-[#1D1D1D] block-blue"
               v-html="section.content"
             ></p>
           </div>
@@ -150,8 +150,28 @@ onMounted(() => {
     text-align: left;
     width: 100%;
 }
-ol {
-  list-style-type: none;  /* Убирает нумерацию */
-  padding-left: 0;  /* Убирает отступ слева */
+
+.block-blue {
+  background-color: #E4F4FF;
+  border-radius: 0px;
+  padding: 16px;
+}
+
+.block-red {
+  background-color: #FFE4F2;
+  border-radius: 0px;
+  padding: 16px;
+}
+
+.block-yellow {
+  background-color: #F1BB6B;
+  border-radius: 0px;
+  padding: 16px;
+}
+
+.comment {
+  border-left: 1px solid #E86B35;
+  border-radius: 0px;
+  padding: 16px;
 }
 </style>

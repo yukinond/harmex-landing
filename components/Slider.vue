@@ -8,16 +8,16 @@
 
   const slideGroups = ref([
     {
-      before: `/img/example.svg`,
-      after: '/img/example.svg',
+      before: `https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/example.svg`,
+      after: 'https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/example.svg',
     },
     {
-      before: '/img/example.svg',
-      after: '/img/example.svg',
+      before: 'https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/example.svg',
+      after: 'https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/example.svg',
     },
     {
-      before: '/img/example.svg',
-      after: '/img/example.svg',
+      before: 'https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/example.svg',
+      after: 'https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/example.svg',
     },
   ]);
 
