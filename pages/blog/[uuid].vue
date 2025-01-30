@@ -91,7 +91,7 @@ onMounted(() => {
               {{ section.subheading }}
             </h2>
             <p
-              class="text-[18px] leading-[28px] font-[400] text-[#1D1D1D] block-blue"
+              class="text-[18px] leading-[28px] font-[400] text-[#1D1D1D]"
               v-html="section.content"
             ></p>
           </div>
