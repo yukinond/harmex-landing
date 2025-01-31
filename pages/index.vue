@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { data } from '~/data/content';
-import { mainArticles } from '~/data/articles/articles';
+// import { mainArticles } from '~/data/articles/articles';
 
 const appData = ref(data);
 const harmexPluses = ref([

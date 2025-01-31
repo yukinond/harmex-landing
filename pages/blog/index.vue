@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { mainArticles } from '~/data/articles/articles';
+// import { mainArticles } from '~/data/articles/articles';
 
 const articles = ref([]) as any
 const loadingArticles = ref(true)
