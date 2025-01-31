@@ -51,4 +51,9 @@ export default defineNuxtConfig({
       },
     },
   },
+
+  image: {
+    domains: ["ozonmpportal.hb.vkcs.cloud"],
+    provider: "static", 
+  },
 })
