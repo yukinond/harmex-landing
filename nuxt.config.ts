@@ -2,10 +2,13 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
-  modules: ['@nuxtjs/tailwindcss', '@nuxt/image', '@nuxt/icon', "@pinia/nuxt", "@pinia-plugin-persistedstate/nuxt", '@vueuse/nuxt'],
+  modules: ['@nuxtjs/tailwindcss', '@nuxt/image', '@nuxt/icon', "@pinia/nuxt", "@pinia-plugin-persistedstate/nuxt", '@vueuse/nuxt', '@nuxtjs/robots'],
   app: {
     head: {
-      title: 'Harmex',        
+      title: 'Harmex',
+      meta: [
+        { name: 'robots', content: 'noindex, nofollow' } // Запрещает индексацию
+      ],
       link: [
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: 'anonymous' },
@@ -19,5 +22,11 @@ export default defineNuxtConfig({
   },
   css: [
     '@/assets/style/global.css' 
-  ]
+  ],
+  runtimeConfig: {
+    MONGODB_URI: process.env.MONGODB_URI, 
+  },
+  nitro: {
+    plugins: ['~/server/index.ts']
+  }
 })

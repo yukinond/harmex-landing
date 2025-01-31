@@ -3,16 +3,46 @@ import { mainArticles } from '~/data/articles/articles';
 
 const route = useRoute();
 const data = ref<any>({});
-
-const formattedContent = computed(() => {
+  const formattedContent = computed(() => {
   if (data.value.content) {
-    return data.value.content.map((section: any) => {
-      section.content = section.content.replace(/\n\n/g, '<br><br>');
-      return section;
-    });
+    return data.value.content.map((section: any) => ({
+      subheading: section.subheading,
+      class: section.class || "default-block",
+      content: section.content.map((para: any) => ({
+        text: para.text.replace(/\n/g, '<br>'),
+        class: para.class || 'default-text'
+      }))
+    }));
   }
   return [];
 });
+
+// Функция для маппинга классов параграфов
+const getClass = (className: string) => {
+  const classMap: Record<string, string> = {
+    "violation-list": "text-[18px] leading-[28px] font-[400] text-black list-disc pl-0",
+    "step-list": "text-[18px] leading-[28px] font-[400] text-black list-decimal pl-0",
+    "default": "text-[18px] leading-[28px] font-[400] text-[#1D1D1D]",
+    "comment": "border-l-[1px] border-[#E86B35] p-4 italic before:content-['«'] after:content-['»']",
+    "block-blue": "bg-[#E4F4FF] p-4 rounded-none",
+    "block-yellow": "bg-[#F1BB6B] p-4 rounded-none",
+    "block-red": "bg-[#FFE4F2] p-4 rounded-none",
+  };
+  return classMap[className] || classMap["default"];
+};
+
+// Функция для маппинга классов блока (заголовок + контент)
+// const getBlockClass = (className: string) => {
+//   const blockClassMap: Record<string, string> = {
+//     "block-blue": "bg-[#E4F4FF] p-4 rounded-none",
+//     "block-yellow": "bg-[#F1BB6B] p-4 rounded-none",
+//     "block-red": "bg-[#FFE4F2] p-4 rounded-none",
+//     "comment": "border-l-[1px] border-[#E86B35] p-4",
+//     "default-block": ""
+//   };
+//   return blockClassMap[className] || blockClassMap["default-block"];
+// };
+
 
 onMounted(() => {
   data.value = mainArticles.find((item: any) => item.id === route.params.uuid) || {};
@@ -54,50 +84,42 @@ onMounted(() => {
             <Icon name="uil:eye" class="w-6 h-6 text-[#0A0A0A73]" /> 300
           </span>
         </div>
-        <div class="grid grid-cols-3 sm:grid-cols-3 whitespace-nowrap rounded-xl px-2 py-4 sm:p-4 bg-[#F7F7F7] w-full text-[12px] leading-[20px] sm:text-[18px] sm:leading-[27px] font-[400]">
+        <div class="grid grid-cols-3 whitespace-nowrap rounded-xl px-2 py-4 sm:p-4 bg-[#F7F7F7] w-full text-[12px] leading-[20px] sm:text-[18px] sm:leading-[27px] font-[400]">
           <div class="flex flex-col gap-2.5">
-            <p class="text-[#98989A]">
-              Имя автора
-            </p>
-            <p >
-              {{ data.author }}
-            </p>
+            <p class="text-[#98989A]">Имя автора</p>
+            <p>{{ data.author }}</p>
           </div>
           <div class="flex flex-col gap-2.5">
-            <p class="text-[#98989A]">
-              Дата публикации
-            </p>
-            <p >
-              {{ data.date }}
-            </p>
+            <p class="text-[#98989A]">Дата публикации</p>
+            <p>{{ data.date }}</p>
           </div>
           <div class="flex flex-col gap-2.5">
-            <p class="text-[#98989A]">
-              Время чтения
-            </p>
-            <p >10 минут</p>
+            <p class="text-[#98989A]">Время чтения</p>
+            <p>10 минут</p>
           </div>
         </div>
 
-        <div v-if="formattedContent.length" class="flex flex-col gap-8 w-full">
+        <div v-if="formattedContent.length" class="flex flex-col gap-6 w-full">
           <div
             v-for="(section, index) in formattedContent"
             :key="index"
-            class="flex flex-col gap-4"
+            class="flex flex-col gap-4 rounded-lg"
           >
-            <h2
-              class="text-[24px] leading-[32px] font-[600] text-[#1D1D1D] mb-2"
-            >
+            <h2 class="text-[24px] leading-[32px] font-[600] text-[#1D1D1D] mb-2">
               {{ section.subheading }}
             </h2>
-            <p
-              class="text-[18px] leading-[28px] font-[400] text-[#1D1D1D]"
-              v-html="section.content"
-            ></p>
+            <div class="flex flex-col gap-4" :class="getClass(section.class)">
+              <div v-for="(para, pIndex) in section.content" :key="pIndex"  >
+                <p :class="getClass(para.class)" v-html="para.text"></p>
+              </div>
+            </div>
+            
           </div>
         </div>
       </div>
     </section>
+
+
     <section class="w-full b-white py-8 px-6 lg:px-16 lg:py-20 flex justify-center items-center bg-white">
             <div class="rounded-xl bg-[--primary] flex lg:flex-row flex-col gap-6 justify-between py-8 px-6 lg:p-16 w-full items-center">
                 <div class="flex flex-col gap-6 text-white">
