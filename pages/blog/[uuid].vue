@@ -80,7 +80,7 @@ const { $dayjs } = useNuxtApp()
         class="flex flex-col w-full lg:max-w-[70%] items-center justify-center gap-6"
       >
         <Nuxt-Img
-          :src="`https://ozonmpportal.hb.vkcs.cloud/harmex/landing1${article.image}`"
+          :src="article.image"
           class="w-full max-h-[320px] sm:max-h-[520px] 2xl:max-h-[720px] flex mx-auto object-cover rounded-2xl"
         />
         <div class="flex justify-between mb-1 w-full">

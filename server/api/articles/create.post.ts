@@ -15,10 +15,10 @@ export default eventHandler(async (event) => {
       title: body.title,
       description: body.description,
       image: body.image,
+      article: body.sections,
       author: body.author,
       date: body.date,
       category: body.category,
-      sections: body.sections,
       uuid: uuid(),
       readTime: body.readTime,
     });
