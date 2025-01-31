@@ -1,11 +1,31 @@
 <script setup lang="ts">
 import { mainArticles } from '~/data/articles/articles';
 
+const loadingArticles = ref(true)
 const route = useRoute();
-const data = ref<any>({});
-  const formattedContent = computed(() => {
-  if (data.value.content) {
-    return data.value.content.map((section: any) => ({
+const article = ref<any>({});
+
+async function getArticles() {
+  loadingArticles.value = true
+  const uuid = route.params.uuid
+  if(uuid) {
+    const { data } = await useFetch('/api/articles/getOne', {
+        method: 'GET',
+        query: {
+            uuid: uuid,
+        }
+    })
+    if(data.value) {
+      article.value = data.value
+    }
+  }
+  loadingArticles.value = false
+}
+getArticles()
+
+const formattedContent = computed(() => {
+  if (article.value.article) {
+    return article.value.article.map((section: any) => ({
       subheading: section.subheading,
       class: section.class || "default-block",
       content: section.content.map((para: any) => ({
@@ -17,7 +37,6 @@ const data = ref<any>({});
   return [];
 });
 
-// Функция для маппинга классов параграфов
 const getClass = (className: string) => {
   const classMap: Record<string, string> = {
     "violation-list": "text-[18px] leading-[28px] font-[400] text-black list-disc pl-0",
@@ -31,38 +50,26 @@ const getClass = (className: string) => {
   return classMap[className] || classMap["default"];
 };
 
-// Функция для маппинга классов блока (заголовок + контент)
-// const getBlockClass = (className: string) => {
-//   const blockClassMap: Record<string, string> = {
-//     "block-blue": "bg-[#E4F4FF] p-4 rounded-none",
-//     "block-yellow": "bg-[#F1BB6B] p-4 rounded-none",
-//     "block-red": "bg-[#FFE4F2] p-4 rounded-none",
-//     "comment": "border-l-[1px] border-[#E86B35] p-4",
-//     "default-block": ""
-//   };
-//   return blockClassMap[className] || blockClassMap["default-block"];
-// };
-
-
-onMounted(() => {
-  data.value = mainArticles.find((item: any) => item.id === route.params.uuid) || {};
-});
+const { $dayjs } = useNuxtApp()
+// onMounted(() => {
+//   data.value = mainArticles.find((item: any) => item.id === route.params.uuid) || {};
+// });
 </script>
 
 <template>
-  <div v-if="data && data.title" class="flex flex-col gap-0 bg-[#EAEAEA38]">
+  <div v-if="article && article.title" class="flex flex-col gap-0 bg-[#EAEAEA38]">
     <section
       class="flex flex-col gap-5 px-6 py-8 sm:pt-[64px] sm:pb-[80px] items-center justify-center bg-gradient-to-b from-[#FFFFFF] from-[45%] to-[#fef8f3] to-[100%] border-b border-[#0A0A0A12]"
     >
       <h1
         class="text-[28px] leading-[33px] sm:text-[48px] sm:leading-[56px] font-[700] w-full max-w-[80%] text-center text-[#1D1D1D]"
       >
-        {{ data.title }}
+        {{ article.title }}
       </h1>
       <p
         class="text-[18px] leading-[28px] font-[400] text-[#0A0A0AB2] text-center w-full max-w-[80%]"
       >
-        {{ data.description }}
+        {{ article.description }}
       </p>
     </section>
 
@@ -73,12 +80,12 @@ onMounted(() => {
         class="flex flex-col w-full lg:max-w-[70%] items-center justify-center gap-6"
       >
         <Nuxt-Img
-          :src="`https://ozonmpportal.hb.vkcs.cloud/harmex/landing1${data.image}`"
+          :src="`https://ozonmpportal.hb.vkcs.cloud/harmex/landing1${article.image}`"
           class="w-full max-h-[320px] sm:max-h-[520px] 2xl:max-h-[720px] flex mx-auto object-cover rounded-2xl"
         />
         <div class="flex justify-between mb-1 w-full">
           <p class="text-[16px] leading-[24px] font-[500] text-[--primary]">
-            {{ data.category }}
+            {{ article.category }}
           </p>
           <span class="text-[#0A0A0AB2] flex items-center gap-3">
             <Icon name="uil:eye" class="w-6 h-6 text-[#0A0A0A73]" /> 300
@@ -87,11 +94,11 @@ onMounted(() => {
         <div class="grid grid-cols-3 whitespace-nowrap rounded-xl px-2 py-4 sm:p-4 bg-[#F7F7F7] w-full text-[12px] leading-[20px] sm:text-[18px] sm:leading-[27px] font-[400]">
           <div class="flex flex-col gap-2.5">
             <p class="text-[#98989A]">Имя автора</p>
-            <p>{{ data.author }}</p>
+            <p>{{ article.author }}</p>
           </div>
           <div class="flex flex-col gap-2.5">
             <p class="text-[#98989A]">Дата публикации</p>
-            <p>{{ data.date }}</p>
+            <p>{{ $dayjs(article.date).format('DD.MM.YYYY') }}</p>
           </div>
           <div class="flex flex-col gap-2.5">
             <p class="text-[#98989A]">Время чтения</p>
@@ -132,7 +139,10 @@ onMounted(() => {
             </div>
     </section>
   </div>
-  <div v-else class="w-full min-h-[calc(100vh-80px)] bg-[#F7F7F7] flex justify-center items-center">
+  <div v-else-if="loadingArticles" class="flex w-full justify-center items-center min-h-[calc(50vh-80px)]">
+    <div class="lds-dual-ring "></div>
+  </div>
+  <div v-else class="w-full min-h-[calc(50vh-80px)] bg-[#F7F7F7] flex justify-center items-center">
       <p
         class="text-[30px] leading-[28px] font-[500] text-center w-full"
       >

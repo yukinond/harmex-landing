@@ -115,7 +115,7 @@ function scrollTop() {
       </div>
       <div class="h-full lg:flex hidden">
         <div class="flex items-center h-full" :class="{ 'px-1.5 border-l border-l-[#E8E8E8]': route.name === 'index' }">
-          <a href="https://app.harmex.ru/register" target="_blank" rel="noopener noreferrer" class="btn-ghost">
+          <a href="https://app.harmex.ru/register" target="_blank" rel="noopener noreferrer" class="btn-ghost flex items-center">
             <Icon name="ep:user" class="w-5 h-5" />
             Войти
           </a>
@@ -172,7 +172,7 @@ function scrollTop() {
           </a>
         </div>
         <div class="flex items-center  w-full">
-          <a href="https://app.harmex.ru/register" target="_blank" rel="noopener noreferrer" class="btn-ghost">
+          <a href="https://app.harmex.ru/register" target="_blank" rel="noopener noreferrer" class="btn-ghost  flex items-center" >
             <Icon name="ep:user" class="w-5 h-5 -ml-3.5" />
             Войти
           </a>

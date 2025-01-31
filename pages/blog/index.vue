@@ -1,5 +1,23 @@
 <script setup lang="ts">
 import { mainArticles } from '~/data/articles/articles';
+
+const articles = ref([]) as any
+const loadingArticles = ref(true)
+
+async function getArticles() {
+  loadingArticles.value = true
+    const { data } = await useFetch('/api/articles/getArticles', {
+        method: 'GET',
+        query: {
+            main: true,
+        }
+    })
+    if(data.value) {
+        articles.value = data.value.slice(0, 3)
+    }
+  loadingArticles.value = false
+}
+getArticles()
 </script>
 <template>
     <div class="flex flex-col gap-0 bg-[#EAEAEA38]">
@@ -11,9 +29,9 @@ import { mainArticles } from '~/data/articles/articles';
 
         <section class="w-full rounded-[12px] flex items-center py-8 px-6 lg:p-16 lg:py-20  bg-white flex-col gap-12">
             <h1 class="block-title">Популярные статьи</h1>
-            <div class="flex lg:flex-row flex-col gap-6 w-full ">
-                <div v-for="(item, index) in mainArticles" class="flex flex-col flex-1">
-                    <Nuxt-Link :to="`/blog/${item.id}`" class="w-full bg-[#F7F7F7] rounded-lg">           
+            <div class="flex lg:flex-row flex-col gap-6 w-full justify-center">
+                <div v-if="articles && articles.length"  v-for="(item, index) in articles" class="flex flex-col flex-1">
+                    <Nuxt-Link :to="`/blog/${item.uuid}`" class="w-full bg-[#F7F7F7] rounded-lg">           
                         <Nuxt-Img :src="`https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/articles/main${index + 1}.png`" class="w-full rounded-lg object-fi"  />
                     </Nuxt-Link>
                     <div class="px-[16px] py-8 flex flex-col gap-3">
@@ -24,10 +42,11 @@ import { mainArticles } from '~/data/articles/articles';
                         300
                         </span>
                     </div>
-                    <Nuxt-Link :to="`/blog/${item.id}`" class="font-[600] text-[20px] leading-[28px]">{{ item.title }}</Nuxt-Link>
+                    <Nuxt-Link :to="`/blog/${item.uuid}`" class="font-[600] text-[20px] leading-[28px]">{{ item.title }}</Nuxt-Link>
                     <p class="font-[400] text-[15px] leading-[24px] text-[#0A0A0AB2]">{{ item.description }} </p>
                     </div>
                 </div>
+                <div v-else-if="loadingArticles" class="lds-dual-ring"></div>
             </div>
         </section>
 

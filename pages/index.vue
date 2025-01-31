@@ -198,6 +198,24 @@ const videos = ref(
     },
   ]
 )
+
+const articles = ref([]) as any
+const loadingArticles = ref(true)
+
+async function getArticles() {
+  loadingArticles.value = true
+    const { data } = await useFetch('/api/articles/getArticles', {
+        method: 'GET',
+        query: {
+            main: true,
+        }
+    })
+    if(data.value) {
+        articles.value = data.value.slice(0, 3)
+    }
+  loadingArticles.value = false
+}
+getArticles()
 </script>
 
 <template>
@@ -366,8 +384,8 @@ const videos = ref(
       <section class="w-full rounded-[12px] flex items-center py-8 px-6 lg:p-16  bg-white flex-col gap-12">
         <h1 class="block-title">Наш блог</h1>
         <div class="flex lg:flex-row flex-col gap-6 w-full sm:max-w-[60%] lg:w-full">
-          <div v-for="(item, index) in mainArticles" class="flex flex-col flex-1">
-            <Nuxt-Link :to="`/blog/${item.id}`" class="w-full bg-[#F7F7F7] rounded-lg">           
+          <div v-if="articles && articles.length > 0" v-for="(item, index) in articles" class="flex flex-col flex-1">
+            <Nuxt-Link :to="`/blog/${item.uuid}`" class="w-full bg-[#F7F7F7] rounded-lg">           
                <Nuxt-Img :src="`https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/articles/main${index + 1}.png`" class="w-full rounded-lg object-fi"  />
             </Nuxt-Link>
             <div class="px-[16px] py-8 flex flex-col gap-3">
@@ -378,7 +396,7 @@ const videos = ref(
                   300
                 </span>
               </div>
-              <Nuxt-Link :to="`/blog/${item.id}`" class="font-[600] text-[20px] leading-[28px]">
+              <Nuxt-Link :to="`/blog/${item.uuid}`" class="font-[600] text-[20px] leading-[28px]">
                 {{ item.title }}
               </Nuxt-Link>
               <p class="font-[400] text-[15px] leading-[24px] text-[#0A0A0AB2]"> 
@@ -386,6 +404,7 @@ const videos = ref(
               </p>
             </div>
           </div>
+          <div v-else-if="loadingArticles" class="lds-dual-ring"></div>
         </div>
         <Nuxt-Link to="/blog" class="btn-primary flex gap-3 items-center">
             <span>Перейти в блог</span>

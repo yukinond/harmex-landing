@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { uuid } from 'uuidv4';
 
 const ContentSchema = new mongoose.Schema({
   text: String,
@@ -12,14 +13,16 @@ const SectionSchema = new mongoose.Schema({
 });
 
 const ArticleSchema = new mongoose.Schema({
-  id: { type: String, unique: true },
-  title: String,
-  description: String,
+  title: { type: String, required: true },
+  description: { type: String, required: true },
   image: String,
   article: [SectionSchema],
-  author: String,
-  date: String,
-  category: String,
-});
+  author: { type: String, required: true },
+  date: { type: String, required: true },
+  category: { type: String, required: true },
+  views: { type: Number, default: 0 },
+  uuid: { type: String, default: () => uuid() },
+  readTime: { type: String, default: '10 минут' },
+}, { timestamps: true });
 
-export const Article = mongoose.model('Article', ArticleSchema)
+export const Article = mongoose.model('Article', ArticleSchema);
