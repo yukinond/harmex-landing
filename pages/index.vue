@@ -208,7 +208,8 @@ async function getArticles() {
         method: 'GET',
         query: {
             main: true,
-        }
+        },
+        watch: false
     })
     if(data.value) {
         articles.value = data.value.slice(0, 3)

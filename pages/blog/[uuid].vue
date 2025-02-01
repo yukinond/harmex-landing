@@ -1,6 +1,7 @@
 <script setup lang="ts">
 // import { mainArticles } from '~/data/articles/articles';
 
+const persistedStore = usePersistedStore();
 const loadingArticles = ref(true)
 const route = useRoute();
 const article = ref<any>({});
@@ -8,47 +9,104 @@ const article = ref<any>({});
 async function getArticles() {
   loadingArticles.value = true
   const uuid = route.params.uuid
+
+  if (!persistedStore.viewedArticles) {
+    persistedStore.viewedArticles = [];
+  }
+  
+  const hasViewed = persistedStore.viewedArticles.includes(uuid);
   if(uuid) {
+    const query = hasViewed ? { uuid: uuid } : { uuid: uuid, plus: true };
+    console.log('query', query);
     const { data } = await useFetch('/api/articles/getOne', {
         method: 'GET',
-        query: {
-            uuid: uuid,
-        }
+        query: query,
+        watch: false,
     })
     if(data.value) {
       article.value = data.value
+      if (!hasViewed) {
+        persistedStore.viewedArticles.push(uuid);
+      }
     }
   }
   loadingArticles.value = false
 }
-getArticles()
 
-const formattedContent = computed(() => {
-  if (article.value.article) {
-    return article.value.article.map((section: any) => ({
-      subheading: section.subheading,
-      class: section.class || "default-block",
-      content: section.content.map((para: any) => ({
-        text: para.text.replace(/\n/g, '<br>'),
-        class: para.class || 'default-text'
-      }))
-    }));
-  }
-  return [];
+console.trace()
+onMounted(() => {
+  nextTick(() => {
+    getArticles();
+  });
 });
 
-const getClass = (className: string) => {
-  const classMap: Record<string, string> = {
-    "violation-list": "text-[18px] leading-[28px] font-[400] text-black list-disc pl-0",
-    "step-list": "text-[18px] leading-[28px] font-[400] text-black list-decimal pl-0",
-    "default": "text-[18px] leading-[28px] font-[400] text-[#1D1D1D]",
-    "comment": "border-l-[1px] border-[#E86B35] p-4 italic before:content-['«'] after:content-['»']",
-    "block-blue": "bg-[#E4F4FF] p-4 rounded-none",
-    "block-yellow": "bg-[#F1BB6B] p-4 rounded-none",
-    "block-red": "bg-[#FFE4F2] p-4 rounded-none",
-  };
-  return classMap[className] || classMap["default"];
-};
+const formatParagraph = (para: any): string => {
+        let formattedText = para.text.replace(/\n/g, '<br>') 
+        const markers: { position: number; tag: string }[] = []
+      
+        const addMarkers = (formatArray: any[], tag: string) => {
+          formatArray.forEach(({ start, end }) => {
+            markers.push({ position: start, tag: `<${tag}>` })
+            markers.push({ position: end, tag: `</${tag}>` })
+          })
+        }
+      
+        addMarkers(para.bold || [], 'b')
+        addMarkers(para.italic || [], 'i')
+        addMarkers(para.underline || [], 'u')
+      
+        markers.sort((a, b) => a.position - b.position)
+      
+        let offset = 0
+        markers.forEach(({ position, tag }) => {
+          formattedText =
+            formattedText.slice(0, position + offset) + tag + formattedText.slice(position + offset)
+          offset += tag.length
+        })
+      
+        return formattedText
+    }
+
+  const formattedContent = computed(() => {
+    if (article.value?.article) {  // <-- Исправлено с article.sections на article.article
+      return article.value?.article.map((section: any) => ({
+        subheading: section.subheading,
+        headingClass: section.headingClass,
+        class: section.class || 'default-block',
+        content: section.content.map((para: any) => ({
+          text: formatParagraph(para),
+          class: para.class || 'default-text',
+        })),
+      }))
+    }
+    return []
+})
+
+
+  const getClass = (className: string) => {
+    const classMap: Record<string, string> = {
+      'violation-list': 'text-[18px] leading-[28px] font-[400] text-black list-disc pl-0',
+      'step-list': 'text-[18px] leading-[28px] font-[400] text-black list-decimal pl-0',
+      default: 'text-[18px] leading-[28px] font-[400] text-[#1D1D1D]',
+      comment: "border-l-[1px] border-[#E86B35] p-4 italic before:content-['«'] after:content-['»']",
+      'block-blue': 'bg-[#E4F4FF] p-4 rounded-none',
+      'block-yellow': 'bg-[#FFFAE4] p-4 rounded-none',
+      'block-red': 'bg-[#FFE4F2] p-4 rounded-none',
+    }
+    return classMap[className] || classMap['default']
+  }
+
+const getHeadingClass = (className: string) => {
+    const headingClassMap: Record<string, string> = {
+      'h1-default': 'text-3xl font-normal',
+      'h2-default': 'text-2xl font-normal',
+      'h3-default': 'text-xl font-normal',
+      'h1-bold': 'text-3xl font-bold',
+      'h2-bold': 'text-2xl font-bold',
+      'h3-bold': 'text-xl font-bold',
+    }
+    return headingClassMap[className] || headingClassMap['h2-default']
+  }
 
 const { $dayjs } = useNuxtApp()
 // onMounted(() => {
@@ -88,7 +146,7 @@ const { $dayjs } = useNuxtApp()
             {{ article.category }}
           </p>
           <span class="text-[#0A0A0AB2] flex items-center gap-3">
-            <Icon name="uil:eye" class="w-6 h-6 text-[#0A0A0A73]" /> 300
+            <Icon name="uil:eye" class="w-6 h-6 text-[#0A0A0A73]" /> {{ article.views }}
           </span>
         </div>
         <div class="grid grid-cols-3 whitespace-nowrap rounded-xl px-2 py-4 sm:p-4 bg-[#F7F7F7] w-full text-[12px] leading-[20px] sm:text-[18px] sm:leading-[27px] font-[400]">
@@ -105,24 +163,18 @@ const { $dayjs } = useNuxtApp()
             <p>10 минут</p>
           </div>
         </div>
+        <div v-show="formattedContent.length" class="flex flex-col gap-6 w-full">
+            <div v-for="(section, index) in formattedContent" :key="index" class="flex flex-col gap-4 rounded-lg">
+              <h2 :class="getHeadingClass(section.headingClass)">
+                {{ section.subheading }}
+              </h2>
 
-        <div v-if="formattedContent.length" class="flex flex-col gap-6 w-full">
-          <div
-            v-for="(section, index) in formattedContent"
-            :key="index"
-            class="flex flex-col gap-4 rounded-lg"
-          >
-            <h2 class="text-[24px] leading-[32px] font-[600] text-[#1D1D1D] mb-2">
-              {{ section.subheading }}
-            </h2>
-            <div class="flex flex-col gap-4" :class="getClass(section.class)">
-              <div v-for="(para, pIndex) in section.content" :key="pIndex"  >
-                <p :class="getClass(para.class)" v-html="para.text"></p>
+              <div class="flex flex-col gap-4" :class="getClass(section.class)">
+                <p v-for="(para, pIndex) in section.content" :key="pIndex" :class="getClass(para.class)" v-html="para.text"></p>
               </div>
+              
             </div>
-            
           </div>
-        </div>
       </div>
     </section>
 

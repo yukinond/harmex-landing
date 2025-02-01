@@ -3,11 +3,15 @@ import { uuid } from 'uuidv4';
 
 const ContentSchema = new mongoose.Schema({
   text: String,
+  bold: [{start: Number, end: Number }], 
+  italic: [{start: Number, end: Number }],
+  underline: [{start: Number, end: Number }],
   class: String,
 });
 
 const SectionSchema = new mongoose.Schema({
   subheading: String,
+  headingClass: String,
   content: [ContentSchema],
   class: String,
 });

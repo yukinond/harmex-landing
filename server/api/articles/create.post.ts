@@ -7,6 +7,7 @@ export default eventHandler(async (event) => {
 
     console.log('Полученные данные:', body);
 
+    console.log('body', body);
     if (!body.title || !body.description || !body.author || !body.date || !body.category || !Array.isArray(body.sections)) {
       throw createError({ statusCode: 400, statusMessage: 'Все поля должны быть заполнены и sections должен быть массивом' });
     }
