@@ -1,5 +1,4 @@
 import { Article } from '@/server/lib/models/Article';
-import { uuid } from 'uuidv4';
 
 export default eventHandler(async (event) => {
     const query = getQuery(event);

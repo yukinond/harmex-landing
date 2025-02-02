@@ -1,6 +1,7 @@
 <script setup lang="ts">
 // import { mainArticles } from '~/data/articles/articles';
 
+const mainArticles = ref([]) as any
 const articles = ref([]) as any
 const loadingArticles = ref(true)
 
@@ -14,7 +15,8 @@ async function getArticles() {
         watch: false
     })
     if(data.value) {
-        articles.value = data.value.slice(0, 3)
+        mainArticles.value = data.value.slice(0, 3)
+        articles.value = data.value.slice(3)
     }
   loadingArticles.value = false
 }
@@ -31,7 +33,7 @@ getArticles()
         <section class="w-full rounded-[12px] flex items-center py-8 px-6 lg:p-16 lg:py-20  bg-white flex-col gap-12">
             <h1 class="block-title">Популярные статьи</h1>
             <div class="flex lg:flex-row flex-col gap-6 w-full justify-center">
-                <div v-if="articles && articles.length"  v-for="(item, index) in articles" class="flex flex-col flex-1">
+                <div v-if="mainArticles && mainArticles.length"  v-for="(item, index) in mainArticles" class="flex flex-col flex-1">
                     <Nuxt-Link :to="`/blog/${item.uuid}`" class="w-full bg-[#F7F7F7] rounded-lg">           
                         <Nuxt-Img :src="`https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/articles/main${index + 1}.png`" class="w-full rounded-lg object-fi"  />
                     </Nuxt-Link>
@@ -40,7 +42,7 @@ getArticles()
                         <p class="text-[16px] leading-[24px] font-[500] text-[--primary]">{{ item.category }}</p>
                         <span class="text-[#0A0A0AB2] flex items-center gap-3">
                         <Icon name="uil:eye" class="w-6 h-6 text-[#0A0A0A73]" />
-                        300
+                        {{ item.views }}
                         </span>
                     </div>
                     <Nuxt-Link :to="`/blog/${item.uuid}`" class="font-[600] text-[20px] leading-[28px]">{{ item.title }}</Nuxt-Link>

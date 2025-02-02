@@ -88,7 +88,7 @@ const formatParagraph = (para: any): string => {
       'violation-list': 'text-[18px] leading-[28px] font-[400] text-black list-disc pl-0',
       'step-list': 'text-[18px] leading-[28px] font-[400] text-black list-decimal pl-0',
       default: 'text-[18px] leading-[28px] font-[400] text-[#1D1D1D]',
-      comment: "border-l-[1px] border-[#E86B35] p-4 italic before:content-['«'] after:content-['»']",
+      comment: "border-l-[1px] border-[#E86B35] p-4 before:content-['«'] after:content-['»'] italic",
       'block-blue': 'bg-[#E4F4FF] p-4 rounded-none',
       'block-yellow': 'bg-[#FFFAE4] p-4 rounded-none',
       'block-red': 'bg-[#FFE4F2] p-4 rounded-none',
@@ -169,8 +169,23 @@ const { $dayjs } = useNuxtApp()
                 {{ section.subheading }}
               </h2>
 
-              <div class="flex flex-col gap-4" :class="getClass(section.class)">
-                <p v-for="(para, pIndex) in section.content" :key="pIndex" :class="getClass(para.class)" v-html="para.text"></p>
+              <div class="flex flex-col gap-4">
+                <template v-for="(para, pIndex) in section.content" :key="pIndex">
+                  <ol v-if="para.class === 'step-list'" class="list-decimal pl-5">
+                    <li v-for="(line, lineIndex) in para.text.split('<br>')" 
+                        :key="`${pIndex}-${lineIndex}`"
+                        v-html="line">
+                    </li>
+                  </ol>
+
+                  <ul v-else-if="para.class === 'violation-list'" class="list-disc pl-5">
+                    <li v-for="(line, lineIndex) in para.text.split('<br>')" 
+                        :key="`${pIndex}-${lineIndex}`"
+                        v-html="line">
+                    </li>
+                  </ul>
+                  <p v-else :class="getClass(para.class)" v-html="para.text"></p>
+                </template>
               </div>
               
             </div>
@@ -233,29 +248,5 @@ const { $dayjs } = useNuxtApp()
     padding: 16px;
     text-align: left;
     width: 100%;
-}
-
-.block-blue {
-  background-color: #E4F4FF;
-  border-radius: 0px;
-  padding: 16px;
-}
-
-.block-red {
-  background-color: #FFE4F2;
-  border-radius: 0px;
-  padding: 16px;
-}
-
-.block-yellow {
-  background-color: #F1BB6B;
-  border-radius: 0px;
-  padding: 16px;
-}
-
-.comment {
-  border-left: 1px solid #E86B35;
-  border-radius: 0px;
-  padding: 16px;
 }
 </style>

@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { uuid } from 'uuidv4';
+import { v4 as uuidv4 } from 'uuid'
 
 const ContentSchema = new mongoose.Schema({
   text: String,
@@ -22,7 +22,7 @@ const ArticleSchema = new mongoose.Schema({
   image: String,
   article: [SectionSchema],
   author: { type: String, required: true },
-  date: { type: String, required: true },
+  date: { type: Date, required: true },
   category: { type: String, required: true },
   views: { type: Number, default: 0 },
   uuid: { type: String, default: () => uuid() },

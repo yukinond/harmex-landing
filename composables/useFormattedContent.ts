@@ -60,7 +60,7 @@ export const useFormattedContent = (article: any) => {
       'violation-list': 'text-[18px] leading-[28px] font-[400] text-black list-disc pl-0',
       'step-list': 'text-[18px] leading-[28px] font-[400] text-black list-decimal pl-0',
       default: 'text-[18px] leading-[28px] font-[400] text-[#1D1D1D]',
-      comment: "border-l-[1px] border-[#E86B35] p-4 italic before:content-['«'] after:content-['»']",
+      comment: "border-l-[1px] border-[#E86B35] p-4 before:content-['«'] after:content-['»'] comment",
       'block-blue': 'bg-[#E4F4FF] p-4 rounded-none',
       'block-yellow': 'bg-[#FFFAE4] p-4 rounded-none',
       'block-red': 'bg-[#FFE4F2] p-4 rounded-none',

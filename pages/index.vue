@@ -394,7 +394,7 @@ getArticles()
                 <p class="text-[16px] leading-[24px] font-[500] text-[--primary]">{{ item.category}}</p>
                 <span class="text-[#0A0A0AB2] flex items-center gap-3">
                   <Icon name="uil:eye" class="w-6 h-6 text-[#0A0A0A73]" />
-                  300
+                  {{ item.views }}
                 </span>
               </div>
               <Nuxt-Link :to="`/blog/${item.uuid}`" class="font-[600] text-[20px] leading-[28px]">

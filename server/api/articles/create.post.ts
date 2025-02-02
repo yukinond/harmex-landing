@@ -1,5 +1,5 @@
 import { Article } from '@/server/lib/models/Article';
-import { uuid } from 'uuidv4';
+import { v4 as uuidv4 } from 'uuid'
 
 export default eventHandler(async (event) => {
   try {
@@ -18,9 +18,9 @@ export default eventHandler(async (event) => {
       image: body.image,
       article: body.sections,
       author: body.author,
-      date: body.date,
+      date: new Date(body.date),
       category: body.category,
-      uuid: uuid(),
+      uuid: uuidv4(),
       readTime: body.readTime,
     });
     console.log('Перед сохранением:', newArticle);

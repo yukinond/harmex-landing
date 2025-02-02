@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { uuid } from 'uuidv4'
+import { v4 as uuidv4 } from 'uuid'
 
 const article = reactive({
   title: '',
@@ -27,8 +27,8 @@ const article = reactive({
 })
 
 const classOptions = [
-  { value: 'violation-list', label: 'Список' },
-  { value: 'step-list', label: 'Список шагов' },
+  { value: 'violation-list', label: 'Маркированный список' },
+  { value: 'step-list', label: 'Нумерованный список' },
   { value: 'default', label: 'Обычный текст' },
   { value: 'comment', label: 'Комментарий' },
   { value: 'block-blue', label: 'Синий блок' },
@@ -44,6 +44,13 @@ const headingClassOptions = [
   { value: 'h2-bold', label: 'H2 Жирный' },
   { value: 'h3-bold', label: 'H3 Жирный' },
 ]
+
+const { formattedContent, getHeadingClass, getClass } = useFormattedContent(article)
+
+const { upload } = useS3Object()
+const loading = ref(false)
+const imgName = ref('')
+const { $dayjs } = useNuxtApp()
 
 const addSection = () => {
   article.sections.push({
@@ -74,28 +81,57 @@ const addParagraph = (index: any) => {
 const saveArticle = async () => {
   const newArticle = {
     ...article,
-    // date: new Date().toISOString().split('T')[0]
-  }
+  };
 
   try {
     const response = await fetch('/api/articles/create', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newArticle),
-    })
-    const data = await response.json()
-    console.log('data', data)
-    // alert('Статья успешно сохранена!');
+    });
+
+    if (!response.ok) { 
+      // Выбросим ошибку с текстом ответа
+      const errorData = await response.json();
+      throw new Error(errorData.statusMessage || 'Ошибка при создании статьи');
+    }
+
+    const data = await response.json();
+    console.log('data', data);
+
+    // Очистка полей после успешного сохранения
+    Object.assign(article, {
+      title: '',
+      description: '',
+      image: '',
+      author: '',
+      date: '',
+      category: '',
+      readTime: '',
+      sections: [
+        {
+          subheading: '',
+          headingClass: 'h2-default',
+          content: [
+            {
+              text: '',
+              bold: [] as { start: number; end: number }[],
+              italic: [] as { start: number; end: number }[],
+              underline: [] as { start: number; end: number }[],
+              class: 'default',
+            },
+          ],
+        },
+      ],
+    });
+
+    alert('Статья успешно сохранена!');
   } catch (error) {
-    console.error('Ошибка при сохранении статьи:', error)
+    console.error('Ошибка при сохранении статьи:', error.message);
+    alert(`Ошибка: ${error.message}`);
   }
-}
+};
 
-const { formattedContent, getHeadingClass, getClass } = useFormattedContent(article)
-
-const { upload } = useS3Object()
-const loading = ref(false)
-const imgName = ref('')
 
 async function uploadToS3(event: Event) {
   loading.value = true
@@ -110,7 +146,7 @@ async function uploadToS3(event: Event) {
 
   imgName.value = file.name
 
-  const fileName = 'harmex/landing1/articles/' + uuid()
+  const fileName = 'harmex/landing1/articles/' + uuidv4()
   try {
     const result = await upload(file, { key: fileName })
     if (!result) {
@@ -134,8 +170,6 @@ async function uploadToS3(event: Event) {
     loading.value = false
   }
 }
-
-const { $dayjs } = useNuxtApp()
 
 const formatText = (
   sectionIndex: number,
@@ -171,6 +205,14 @@ const formatText = (
 
     textarea.setSelectionRange(end, end)
   }
+}
+
+function removeParagraph(sectionIndex: number, paragraphIndex: number) {
+  article.sections[sectionIndex].content.splice(paragraphIndex, 1)
+}
+
+function removeSection(sectionIndex: number) {
+  article.sections.splice(sectionIndex, 1)
 }
 
 </script>
@@ -250,13 +292,14 @@ const formatText = (
                 {{ option.label }}
               </option>
             </select>
+            <button class="text-red-500 h-5 w-5 text-[12px] rounded-sm border-b  border-[--primary]" @click="removeSection(index)">X</button>
           </div>
           <div
             v-for="(paragraph, pIndex) in section.content"
             :key="pIndex"
             class="flex flex-col space-y-2"
           >
-            <div class="flex space-x-2">
+            <div class="flex space-x-2"> 
               <textarea
                 :id="'editor-' + pIndex"
                 v-model="paragraph.text"
@@ -272,8 +315,8 @@ const formatText = (
                   {{ option.label }}
                 </option>
               </select>
+              <button class="p-0 text-red-500 h-5 w-5 text-[12px] " @click="removeParagraph(index, pIndex)">X</button>
             </div>
-            {{ paragraph }}
             <div class="flex space-x-2">
               <button
                 type="button"
@@ -309,7 +352,7 @@ const formatText = (
         <button
           type="button"
           @click="addSection"
-          class="bg-green-500 text-white px-4 py-2 rounded"
+          class="bg-green-500 text-white px-4 py-2 rounded mr-2"
         >
           Добавить раздел
         </button>
@@ -331,7 +374,7 @@ const formatText = (
 
       <div class="px-4 lg:px-6 py-20 flex flex-col items-center bg-white">
         <div class="flex flex-col w-full lg:max-w-[70%] items-center gap-6">
-          <Nuxt-Img v-show="article.image" :src="article.image" class="w-full max-h-[320px] mx-auto object-cover rounded-2xl" />
+          <Nuxt-Img v-if="article.image && article.image.startsWith('http')" :src="article.image" class="w-full max-h-[320px] mx-auto object-cover rounded-2xl" />
           <div v-show="article.category" class="flex justify-between w-full">
             <p class="text-[16px] leading-[24px] font-[500] text-[--primary]">
               {{ article.category }}
@@ -361,11 +404,26 @@ const formatText = (
               <h2 :class="getHeadingClass(section.headingClass)">
                 {{ section.subheading }}
               </h2>
+              <!-- {{ section.content }} -->
+              <div class="flex flex-col gap-4">
+                <template v-for="(para, pIndex) in section.content" :key="pIndex">
+                  <ol v-if="para.class === 'step-list'" class="list-decimal pl-5">
+                    <li v-for="(line, lineIndex) in para.text.split('<br>')" 
+                        :key="`${pIndex}-${lineIndex}`"
+                        v-html="line">
+                    </li>
+                  </ol>
 
-              <div class="flex flex-col gap-4" :class="getClass(section.class)">
-                <p v-for="(para, pIndex) in section.content" :key="pIndex" :class="getClass(para.class)" v-html="para.text"></p>
+                  <ul v-else-if="para.class === 'violation-list'" class="list-disc pl-5">
+                    <li v-for="(line, lineIndex) in para.text.split('<br>')" 
+                        :key="`${pIndex}-${lineIndex}`"
+                        v-html="line">
+                    </li>
+                  </ul>
+                  <p v-else :class="getClass(para.class)" v-html="para.text"></p>
+                </template>
               </div>
-              
+
             </div>
           </div>
         </div>
