@@ -18,9 +18,11 @@ async function getArticles(page = 1) {
   });
 
   if (data.value) {
-    mainArticles.value = data.value.mainArticles; 
+    if(page === 1){
+      mainArticles.value = data.value.mainArticles;
+      totalPages.value = Math.ceil(data.value.totalCount / limit);
+    }
     articles.value = data.value.articles;
-    totalPages.value = Math.ceil(data.value.totalCount / limit);
   }
 
   loadingArticles.value = false;
@@ -73,7 +75,7 @@ function goToPage(page: number) {
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
                 <div class="flex flex-col flex-1" v-for="(item, index) in articles" :key="item.uuid">
                     <Nuxt-Link :to="`/blog/${item.uuid}`" class="w-full bg-[#F7F7F7] rounded-lg">
-                        <Nuxt-Img :src="`https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/articles/main${index + 1}.png`" loading="lazy" class="w-full rounded-lg object-fi"  />
+                        <Nuxt-Img :src="item.image" loading="lazy" class="w-full rounded-lg object-fi"  />
                     </Nuxt-Link>
                     <div class="px-[16px] py-8 flex flex-col gap-3">
                         <div class="flex justify-between mb-1">

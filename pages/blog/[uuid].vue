@@ -17,7 +17,7 @@ async function getArticles() {
   const hasViewed = persistedStore.viewedArticles.includes(uuid);
   if(uuid) {
     const query = hasViewed ? { uuid: uuid } : { uuid: uuid, plus: true };
-    console.log('query', query);
+    // console.log('query', query);
     const { data } = await useFetch('/api/articles/getOne', {
         method: 'GET',
         query: query,

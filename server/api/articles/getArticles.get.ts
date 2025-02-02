@@ -15,13 +15,16 @@ export default eventHandler(async (event) => {
         .limit(3);
         return { mainArticles };
     } else {
-        const mainArticles = await Article.find({ date: { $lte: now } })
-        .sort({ views: -1 })
-        .select('-_id')
-        .limit(3);
-        const totalCount = await Article.countDocuments({ date: { $lte: now } }); 
+        let mainArticles: any[] = [];
+        let totalCount = 0;
+        if (page === 1) {
+        mainArticles = await Article.find({ date: { $lte: now } })
+            .sort({ views: -1 })
+            .select('-_id')
+            .limit(3);
+        totalCount = await Article.countDocuments({ date: { $lte: now } }); 
+        }
         const articles = await Article.find({ date: { $lte: now } })
-            .sort({ date: -1 })
             .select('-_id')
             .skip(skip)
             .limit(limit);

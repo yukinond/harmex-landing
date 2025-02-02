@@ -91,15 +91,12 @@ const saveArticle = async () => {
     });
 
     if (!response.ok) { 
-      // Выбросим ошибку с текстом ответа
       const errorData = await response.json();
       throw new Error(errorData.statusMessage || 'Ошибка при создании статьи');
     }
 
     const data = await response.json();
-    console.log('data', data);
 
-    // Очистка полей после успешного сохранения
     Object.assign(article, {
       title: '',
       description: '',
@@ -200,8 +197,6 @@ const formatText = (
     } else {
       content[formatType].push(selectionObject)
     }
-
-    console.log(`Выделенный текст (${formatType}):`, selectionObject)
 
     textarea.setSelectionRange(end, end)
   }
