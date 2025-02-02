@@ -212,7 +212,7 @@ async function getArticles() {
         watch: false
     })
     if(data.value) {
-        articles.value = data.value.slice(0, 3)
+        articles.value = data.value.mainArticles
     }
   loadingArticles.value = false
 }

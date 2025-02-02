@@ -1,26 +1,41 @@
 <script setup lang="ts">
 // import { mainArticles } from '~/data/articles/articles';
 
-const mainArticles = ref([]) as any
-const articles = ref([]) as any
-const loadingArticles = ref(true)
+const articles = ref([]) as any;
+const mainArticles = ref([]) as any;
+const loadingArticles = ref(false);
+const currentPage = ref(1);
+const totalPages = ref(1);
+const limit = 15; 
 
-async function getArticles() {
-  loadingArticles.value = true
-    const { data } = await useFetch('/api/articles/getArticles', {
-        method: 'GET',
-        query: {
-            main: true,
-        },
-        watch: false
-    })
-    if(data.value) {
-        mainArticles.value = data.value.slice(0, 3)
-        articles.value = data.value.slice(3)
-    }
-  loadingArticles.value = false
+async function getArticles(page = 1) {
+  loadingArticles.value = true;
+  
+  const { data } = await useFetch('/api/articles/getArticles', {
+    method: 'GET',
+    query: { page, limit },
+    watch: false,
+  });
+
+  if (data.value) {
+    mainArticles.value = data.value.mainArticles; 
+    articles.value = data.value.articles;
+    totalPages.value = Math.ceil(data.value.totalCount / limit);
+  }
+
+  loadingArticles.value = false;
 }
-getArticles()
+getArticles();
+
+
+getArticles();
+
+function goToPage(page: number) {
+  if (page >= 1 && page <= totalPages.value) {
+    currentPage.value = page;
+    getArticles(page);
+  }
+}
 </script>
 <template>
     <div class="flex flex-col gap-0 bg-[#EAEAEA38]">
@@ -55,41 +70,53 @@ getArticles()
 
         <section class="w-full rounded-[12px] flex items-center py-8 px-6 lg:p-16 lg:py-20  bg-white flex-col gap-12">
             <h1 class="block-title">Выберите интересующую статью</h1>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full ">
-                <div class="flex flex-col flex-1" v-for="(item, index) in 15" :key="item">
-                    <!-- <Nuxt-Img :src="'/img/blog.svg'" class="w-full h-1/2" /> -->
-                    <Nuxt-Link to="/blog/1" class="min-h-[248px] w-full bg-[#F7F7F7] rounded-lg"></Nuxt-Link>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+                <div class="flex flex-col flex-1" v-for="(item, index) in articles" :key="item.uuid">
+                    <Nuxt-Link :to="`/blog/${item.uuid}`" class="w-full bg-[#F7F7F7] rounded-lg">
+                        <Nuxt-Img :src="`https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/articles/main${index + 1}.png`" loading="lazy" class="w-full rounded-lg object-fi"  />
+                    </Nuxt-Link>
                     <div class="px-[16px] py-8 flex flex-col gap-3">
-                    <div class="flex justify-between mb-1">
-                        <p class="text-[16px] leading-[24px] font-[500] text-[--primary]">Категория</p>
-                    </div>
-                    <Nuxt-Link to="/blog/1" class="font-[600] text-[20px] leading-[28px]">Статья {{ index+1 }}</Nuxt-Link>
-                    <p class="font-[400] text-[15px] leading-[24px] text-[#0A0A0AB2]"> Краткое описание статьи в 1-2 предложения. </p>
-                    <div class="flex justify-between">
-                        <div class="text-[#0A0A0AB2] flex items-center gap-3">
-                            <Icon name="uil:calendar" class="w-6 h-6 text-[#0A0A0A73]" />
-                            17 Sep, 2024
+                        <div class="flex justify-between mb-1">
+                            <p class="text-[16px] leading-[24px] font-[500] text-[--primary]">{{ item.category }}</p>
                         </div>
-                        <div class="text-[#0A0A0AB2] flex items-center gap-3">
-                            <Icon name="uil:eye" class="w-6 h-6 text-[#0A0A0A73]" />
-                            300
+                        <Nuxt-Link :to="`/blog/${item.uuid}`" class="font-[600] text-[20px] leading-[28px]">{{ item.title }}</Nuxt-Link>
+                        <p class="font-[400] text-[15px] leading-[24px] text-[#0A0A0AB2]">{{ item.description }}</p>
+                        <div class="flex justify-between">
+                            <div class="text-[#0A0A0AB2] flex items-center gap-3">
+                                <Icon name="uil:calendar" class="w-6 h-6 text-[#0A0A0A73]" />
+                                {{ new Date(item.date).toLocaleDateString() }}
+                            </div>
+                            <div class="text-[#0A0A0AB2] flex items-center gap-3">
+                                <Icon name="uil:eye" class="w-6 h-6 text-[#0A0A0A73]" />
+                                {{ item.views }}
+                            </div>
                         </div>
-                    </div>
                     </div>
                 </div>     
             </div>
             <div class="flex gap-1.5 justify-center">
-                    <button type="button" aria-label="Предыдущая страница" class="btn-circle flex items-center justify-center">
-                        <Icon name="uil:arrow-left" class="w-5 h-5" />
-                    </button>
-                    <button type="button" :aria-label="`Страница ${item}`" class="flex btn-circle items-center justify-center !bg-inherit" v-for="item in 3" :key="item">
-                        {{ item }}
-                    </button>
-                    <button type="button" aria-label="Следующая страница" class="btn-circle flex items-center justify-center">
-                        
-                        <Icon name="uil:arrow-right" class="w-5 h-5" />
-                    </button>
-                </div>
+                <button type="button" aria-label="Предыдущая страница"
+                    class="btn-circle flex items-center justify-center"
+                    @click="goToPage(currentPage - 1)"
+                    :disabled="currentPage === 1">
+                    <Icon name="uil:arrow-left" class="w-5 h-5" />
+                </button>
+
+                <button v-for="page in totalPages" :key="page" type="button"
+                    class="flex btn-circle items-center justify-center"
+                    :class="{ '!bg-gray-800 !text-white': page === currentPage }"
+                    @click="goToPage(page)">
+                    {{ page }}
+                </button>
+
+                <button type="button" aria-label="Следующая страница"
+                    class="btn-circle flex items-center justify-center"
+                    @click="goToPage(currentPage + 1)"
+                    :disabled="currentPage === totalPages">
+                    <Icon name="uil:arrow-right" class="w-5 h-5" />
+                </button>
+            </div>
+
         </section>
 
         <section class="w-full b-white py-8 px-6 lg:px-16 lg:py-20 flex justify-center items-center">

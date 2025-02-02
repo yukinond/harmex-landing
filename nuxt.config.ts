@@ -11,8 +11,23 @@ export default defineNuxtConfig({
   app: {
     head: {
       title: 'Harmex',
+      htmlAttrs: {
+        lang: 'ru',
+      },
       meta: [
-        { name: 'robots', content: 'noindex, nofollow' }
+        { name: 'robots', content: 'noindex, nofollow' },
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        {
+          'http-equiv': 'Content-Security-Policy',
+          'content': 'upgrade-insecure-requests',
+        },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { name: 'description', content: 'Harmex. Репутация и продажи под вашим контролем! Harmex предоставляет инструменты, которыеповысят ваши продажи, узнаваемость и привлекательность на популярных онлайн-площадках.' },
+        {
+          name: 'apple-mobile-web-app-status-bar-style',
+          content: 'black-translucent',
+        },
       ],
       link: [
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },

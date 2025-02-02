@@ -2,24 +2,30 @@ import { Article } from '@/server/lib/models/Article';
 
 export default eventHandler(async (event) => {
     const query = getQuery(event);
-    const now = new Date(); // Текущая дата
+    const now = new Date();
 
-    let articles;
+    const page = parseInt(query.page as string) || 1;
+    const limit = parseInt(query.limit as string) || 6;
+    const skip = (page - 1) * limit;
 
     if (query.main === 'true') { 
-        articles = await Article.find({
-            date: { $lte: now } // Фильтр статей с датой не в будущем
-        })
+        const mainArticles = await Article.find({ date: { $lte: now } })
         .sort({ views: -1 })
         .select('-_id')
         .limit(3);
+        return { mainArticles };
     } else {
-        articles = await Article.find({
-            date: { $lte: now }
-        })
+        const mainArticles = await Article.find({ date: { $lte: now } })
         .sort({ views: -1 })
-        .select('-_id');
+        .select('-_id')
+        .limit(3);
+        const totalCount = await Article.countDocuments({ date: { $lte: now } }); 
+        const articles = await Article.find({ date: { $lte: now } })
+            .sort({ date: -1 })
+            .select('-_id')
+            .skip(skip)
+            .limit(limit);
+
+        return { mainArticles, articles, totalCount };
     }
-    console.log('articles', articles);
-    return articles;
 });
