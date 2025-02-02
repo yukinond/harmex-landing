@@ -238,11 +238,11 @@ getArticles()
             Harmex предоставляет инструменты, которые <br> повысят ваши продажи, узнаваемость и <span class="hidden sm:inline"><br></span> привлекательность на популярных онлайн-площадках.
           </p>
           <div class="flex gap-3">
-            <button @click="navigateTo('https://app.harmex.ru/auth', { external: true })" class="btn-primary lg:h-[60px] lg:!px-[32px]">
+            <button type="button" aria-label="Попробовать" @click="navigateTo('https://app.harmex.ru/auth', { external: true })" class="btn-primary lg:h-[60px] lg:!px-[32px]">
               Попробовать
             </button>
             <a href="#contact">
-              <button class="btn-glass lg:h-[60px] lg:!px-[32px] flex gap-3 items-center whitespace-nowrap">
+              <button type="button" aria-label="Обратный звонок" class="btn-glass lg:h-[60px] lg:!px-[32px] flex gap-3 items-center whitespace-nowrap">
                 <Icon name="lucide:phone" class="w-5 h-5"/>
                 <span>Обратный звонок</span>
               </button>
@@ -265,9 +265,9 @@ getArticles()
       <section class="w-full rounded-[12px] flex items-center lg:px-16 lg:py-24 py-8 px-6 bg-white flex-col gap-8 lg:gap-16">
         <h1 class="block-title">Почему выбирают HARMEX?</h1>
         <div class="image-container relative max-h-[300px] sm:max-h-[400px] lg:max-h-[376px] xl:max-h-none overflow-hidden rounded-lg">
-          <Nuxt-img src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/app.png" alt="Background" class="w-full h-full mt-10 lg:mt-0 lg:hidden noblur" />
-          <Nuxt-img src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/bg.jpeg" alt="Background" class="w-full h-full object-cover hidden lg:block max-h-[200px] sm:max-h-[400px] lg:max-h-[576px]"/>
-          <Nuxt-img src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/app.png" alt="Image" class="noblur absolute max-w-[90%] top-2/3 top-[10%] 2xl:-translate-y-0 left-1/2 transform -translate-x-1/2 rounded-md hidden lg:block" />
+          <Nuxt-img src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/app.png" loading="lazy" alt="Background" class="w-full h-full mt-10 lg:mt-0 lg:hidden noblur" />
+          <Nuxt-img src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/bg.jpeg" loading="lazy" alt="Background" class="w-full h-full object-cover hidden lg:block max-h-[200px] sm:max-h-[400px] lg:max-h-[576px]"/>
+          <Nuxt-img src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/app.png" loading="lazy" alt="Image" class="noblur absolute max-w-[90%] top-2/3 top-[10%] 2xl:-translate-y-0 left-1/2 transform -translate-x-1/2 rounded-md hidden lg:block" />
         </div>
 
 
@@ -282,7 +282,7 @@ getArticles()
             </div>
         </div>
         <a href="#contact">
-          <button class="btn-primary flex gap-3">
+          <button type="button" aria-label="Обратный звонок" class="btn-primary flex gap-3">
             <Icon name="lucide:phone" class="w-5 h-5"/>
             <span>Обратный звонок</span>
           </button>
@@ -292,8 +292,8 @@ getArticles()
 
       <section class="w-full rounded-[12px] flex items-center py-8 px-6 lg:px-[137px] lg:py-[86px] bg-black flex-col gap-8 lg:gap-16 relative">
         <h1 class="font-[500] lg:text-[50px] lg:leading-[60px] text-[24px] leading-[28px] text-white max-w-[315px] sm:max-w-[684px] text-center">Простое управление услугами в 4 шага</h1>
-        <Nuxt-Img src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/stepsBlockDecoration/firstBlockImage.svg" class="w-[28px] h-[32px] absolute z-10 top-[550px] hidden lg:block" />
-        <Nuxt-Img src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/stepsBlockDecoration/secondBlockImage.svg" class="w-[28px] h-[19px] absolute z-10 top-[1100px] hidden lg:block" />
+        <Nuxt-Img src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/stepsBlockDecoration/firstBlockImage.svg" loading="lazy" class="w-[28px] h-[32px] absolute z-10 top-[550px] hidden lg:block" />
+        <Nuxt-Img src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/stepsBlockDecoration/secondBlockImage.svg" loading="lazy" class="w-[28px] h-[19px] absolute z-10 top-[1100px] hidden lg:block" />
         <div class="grid lg:grid-cols-2 grid-cols-1 gap-6 text-white ">
           <div v-for="(item, index) in stepsBlockData" :key="index" class="flex flex-col bg-[#121212] rounded-[21px] border border-[#202122] p-9 relative" >
             <p class="order-1 mb-9 text-[14px] leading-[17px] font-[500]">{{ index + 1 }}.</p>
@@ -304,12 +304,12 @@ getArticles()
             />
             <p class="mb-3.5 font-[500] leading-[26px] text-[21px]" :class="index % 4 === 0 || index % 4 === 1 ? 'order-3' : 'order-3'">{{ item.title }}</p>
             <p class="text-[14px] leading-[17px] font-[400] max-w-[274px]" :class="index % 4 === 0 || index % 4 === 1 ? 'order-3' : 'order-3'">{{ item.text }}</p>
-            <Nuxt-Img v-if="index == 0" src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/stepsBlockDecoration/dashedLine.svg" class="w-[630px] h-[23px] absolute -bottom-[5%] translate-x-1/2 hidden lg:block" />
-            <Nuxt-Img v-if="index !== stepsBlockData.length - 1" src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/stepsBlockDecoration/connector.svg" class="h-10 w-10 absolute -bottom-10 left-[45%] block lg:hidden z-[8]" />
+            <Nuxt-Img v-if="index == 0" src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/stepsBlockDecoration/dashedLine.svg" loading="lazy" class="w-[630px] h-[23px] absolute -bottom-[5%] translate-x-1/2 hidden lg:block" />
+            <Nuxt-Img v-if="index !== stepsBlockData.length - 1" src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/stepsBlockDecoration/connector.svg" loading="lazy" class="h-10 w-10 absolute -bottom-10 left-[45%] block lg:hidden z-[8]" />
           </div>
         </div>
         <a href="#contact">
-          <button class="btn-primary flex gap-3">
+          <button type="button" aria-label="Обратный звонок" class="btn-primary flex gap-3">
             <Icon name="lucide:phone" class="w-5 h-5"/>
             <span>Обратный звонок</span>
           </button>
@@ -338,8 +338,11 @@ getArticles()
                 :src="review.image"
                 alt="Видео"
                 class="w-full h-full object-cover"
+                loading="lazy"
               />
               <button
+                type="button"
+                aria-label="Play"
                 v-if="index === 1"
                 class="absolute h-[52px] top-[calc(50%-26px)] left-1/2 z-10  -translate-x-1/2 px-[12px] py-2 w-fit flex justify-center items-center bg-inherit border-[2.5px] border-[--primary] text-[--primary] font-semibold rounded-full opacity-100 lg:opacity-100 group-hover:opacity-100 transition-all"
                 @click="openVideo(review.video)"
@@ -356,8 +359,11 @@ getArticles()
                 :src="visibleVideos[1].image"
                 alt="Видео"
                 class="w-full h-full object-cover"
+                loading="lazy"
               />
               <button
+                type="button"
+                aria-label="Play"
                 class="absolute w-14 h-14 top-[calc(50%-16px)] z-10 left-1/2  -translate-x-1/2 px-3 py-2 flex justify-center items-center bg-inherit border-2 border-[--primary]  text-[--primary]  text-base font-semibold rounded-full opacity-100 lg:opacity-100 group-hover:opacity-100 transition-all"
                 @click="openVideo(visibleVideos[1].video)"
               >
@@ -367,8 +373,8 @@ getArticles()
           </div> 
 
           <div class="justify-center gap-10 sm:absolute  sm:top-1/2  w-full px-4 flex sm:justify-between lg:left-1/2 lg:-translate-x-1/2 lg:max-w-[80%]">
-            <button @click="prevSlide" class="bg-inherit border border-[#7f7f7f] bg-opacity-50 w-10 h-10 flex items-center text-white p-2 rounded-full"><Icon name="lucide:arrow-left" class="w-5 h-5 text-[#7f7f7f]"/></button>
-            <button @click="nextSlide" class="bg-inherit border border-[#7f7f7f] bg-opacity-50 w-10 h-10 flex items-center text-white p-2 rounded-full"><Icon name="lucide:arrow-right" class="w-10 h-10 text-[#7f7f7f]"/></button>
+            <button type="button" aria-label="Предыдущий слайд" @click="prevSlide" class="bg-inherit border border-[#7f7f7f] bg-opacity-50 w-10 h-10 flex items-center text-white p-2 rounded-full"><Icon name="lucide:arrow-left" class="w-5 h-5 text-[#7f7f7f]"/></button>
+            <button type="button" aria-label="Следующий слайд" @click="nextSlide" class="bg-inherit border border-[#7f7f7f] bg-opacity-50 w-10 h-10 flex items-center text-white p-2 rounded-full"><Icon name="lucide:arrow-right" class="w-10 h-10 text-[#7f7f7f]"/></button>
           </div>
         </div>
 
@@ -387,7 +393,7 @@ getArticles()
         <div class="flex lg:flex-row flex-col gap-6 w-full sm:max-w-[60%] lg:w-full">
           <div v-if="articles && articles.length > 0" v-for="(item, index) in articles" class="flex flex-col flex-1">
             <Nuxt-Link :to="`/blog/${item.uuid}`" class="w-full bg-[#F7F7F7] rounded-lg">           
-               <Nuxt-Img :src="`https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/articles/main${index + 1}.png`" class="w-full rounded-lg object-fi"  />
+               <Nuxt-Img :src="`https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/articles/main${index + 1}.png`" loading="lazy" class="w-full rounded-lg object-fi"  />
             </Nuxt-Link>
             <div class="px-[16px] py-8 flex flex-col gap-3">
               <div class="flex justify-between mb-1">
@@ -418,7 +424,7 @@ getArticles()
         <div class="flex lg:flex-row flex-col justify-between gap-8">
           <div class="flex flex-col justify-start ">
             <h1 class="text-[24px] leading-[29px] lg:text-[40px] lg:leading-[48px] font-[600] max-w-[507px] !text-left">Часто задаваемые вопросы</h1>
-            <Nuxt-Img src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/questMan.svg" class="hidden lg:flex max-w-[240px] max-h-[285px]" />
+            <Nuxt-Img src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/questMan.svg" loading="lazy" class="hidden lg:flex max-w-[240px] max-h-[285px]" />
           </div>
 
           <div class="lg:w-1/2 lg:max-w-1/2 w-full ">
@@ -452,7 +458,7 @@ getArticles()
               @input="formatPhone"
               class="w-full px-4 py-3 text-[14px] font-medium rounded-[10px] border border-gray-300 h-[60px]"
             />
-          <button class="btn-black">Отправить</button>
+          <button type="button" aria-label="Отправить" class="btn-black">Отправить</button>
           </div>
           <p class="font-[400] text-[12px] leading-[16px] text-[#323232A3]">
             Согласен на обработку и хранение моих персональных данных в соответствии с <a class="text-[#323232]" href="#">Условиями</a>

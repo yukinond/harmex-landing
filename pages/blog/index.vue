@@ -35,7 +35,7 @@ getArticles()
             <div class="flex lg:flex-row flex-col gap-6 w-full justify-center">
                 <div v-if="mainArticles && mainArticles.length"  v-for="(item, index) in mainArticles" class="flex flex-col flex-1">
                     <Nuxt-Link :to="`/blog/${item.uuid}`" class="w-full bg-[#F7F7F7] rounded-lg">           
-                        <Nuxt-Img :src="`https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/articles/main${index + 1}.png`" class="w-full rounded-lg object-fi"  />
+                        <Nuxt-Img :src="`https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/articles/main${index + 1}.png`" loading="lazy" class="w-full rounded-lg object-fi"  />
                     </Nuxt-Link>
                     <div class="px-[16px] py-8 flex flex-col gap-3">
                     <div class="flex justify-between mb-1">
@@ -79,14 +79,13 @@ getArticles()
                 </div>     
             </div>
             <div class="flex gap-1.5 justify-center">
-                    <button class="btn-circle flex items-center justify-center">
-                        
+                    <button type="button" aria-label="Предыдущая страница" class="btn-circle flex items-center justify-center">
                         <Icon name="uil:arrow-left" class="w-5 h-5" />
                     </button>
-                    <button class="flex btn-circle items-center justify-center !bg-inherit" v-for="item in 3" :key="item">
+                    <button type="button" :aria-label="`Страница ${item}`" class="flex btn-circle items-center justify-center !bg-inherit" v-for="item in 3" :key="item">
                         {{ item }}
                     </button>
-                    <button class="btn-circle flex items-center justify-center">
+                    <button type="button" aria-label="Следующая страница" class="btn-circle flex items-center justify-center">
                         
                         <Icon name="uil:arrow-right" class="w-5 h-5" />
                     </button>

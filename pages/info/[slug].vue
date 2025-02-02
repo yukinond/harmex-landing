@@ -236,12 +236,12 @@ onMounted(() => {
         <h1 class="text-[28px] leading-[33px] sm:text-[48px] sm:leading-[56px] font-[700] max-w-[632px] text-center text-[#1D1D1D]"> Репутация и продажи под вашим контролем на {{ mp.title }}!</h1>
         <p class="text-[18px] leading-[28px] font-[400] text-[#0A0A0AB2] max-w-[480px] text-center">Увеличивайте заказы и положительные отзывы 24/7 с Harmex — ваш надежный помощник в борьбе за высокий рейтинг и доверие клиентов!</p>
         <div class="flex gap-2">
-            <button @click="navigateTo('https://app.harmex.ru/auth', { external: true })" class="btn-primary lg:h-[60px] lg:!px-[32px] !max-h-[40px] flex items-center">
+            <button type="button" aria-label="Попробовать" @click="navigateTo('https://app.harmex.ru/auth', { external: true })" class="btn-primary lg:h-[60px] lg:!px-[32px] !max-h-[40px] flex items-center">
               Попробовать
               <Icon name="lucide:arrow-right" class="w-5 h-5 ml-1"/>
             </button>
             <a href="#contact">
-              <button class="btn-primary flex gap-3 !bg-white !font-[400] !text-black !max-h-[40px]">
+              <button type="button" aria-label="Обратный звонок" class="btn-primary flex gap-3 !bg-white !font-[400] !text-black !max-h-[40px]">
                 <Icon name="lucide:phone" class="w-5 h-5"/>
                 <span>Обратный звонок</span>
               </button>
@@ -256,7 +256,7 @@ onMounted(() => {
         </div>
         <div class="flex justify-between gap-8  lg:w-[50%] max-w-[600px] mx-auto">
           <div class="flex flex-col gap-6 items-center" v-for="item in content">
-            <button @click="[currentContent = item.value]" class="flex justify-center items-center btn-primary w-16 h-16" :class="{ '!bg-[#F7F7F7] !text-black': item.value !== currentContent }">
+            <button type="button" @click="[currentContent = item.value]" class="flex justify-center items-center btn-primary w-16 h-16" :class="{ '!bg-[#F7F7F7] !text-black': item.value !== currentContent }">
               <Icon :name="item.icon" class="w-7 h-7"/>
             </button>
             <p class="md:text-[20px] text-[12px] font-[600] leading-[30px]">{{ item.title }}</p>
@@ -288,6 +288,7 @@ onMounted(() => {
                   <Nuxt-img 
                     :src="`https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/buisnessBlock/${slide.value}.png`" 
                     class="w-full h-full object-cover lg:object-contain rounded-xl"
+                    loading="lazy"
                   />
                 </div>
               </div>
@@ -299,7 +300,7 @@ onMounted(() => {
 
       <section class="bg-white py-14 px-6 lg:px-[120px] lg:pt-14 lg:pb-[112px] flex flex-col gap-8 lg:gap-14 justify-center items-center w-full" >
         <h1 class="block-title text-center"> Почему выбирают HARMEX?</h1>
-        <Nuxt-Img src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/harmex.svg" class="w-full max-w-[1120px] max-h-[700px] flex mx-auto"/>
+        <Nuxt-Img src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/harmex.svg" class="w-full max-w-[1120px] max-h-[700px] flex mx-auto" loading="lazy"/>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div v-for="item in harmexPluses" class="bg-[#F4F4F4] p-6 rounded-[10px] w-full">
               <div class="bg-[--primary] text-white p-3 rounded-[10px] w-fit max-h-[49px] mb-16 "> 
@@ -310,7 +311,7 @@ onMounted(() => {
             </div>
         </div>
         <a href="#contact">
-          <button class="btn-primary flex gap-3 !rounded-3xl !bg-[#04201A] !font-[400]">
+          <button type="button" aria-label="Обратный звонок" class="btn-primary flex gap-3 !rounded-3xl !bg-[#04201A] !font-[400]">
             <Icon name="lucide:phone" class="w-5 h-5"/>
             <span>Обратный звонок</span>
           </button>
@@ -352,12 +353,13 @@ onMounted(() => {
                 :src="slide.image"
                 class="w-full lg:w-[90%]  object-fill flex max-w-[1500px] mx-auto rounded-md" 
                 alt="Finance image"
+                loading="lazy"
               />
             </div>
           </transition-group>
         </div>
         <a href="#contact" class="my-10 -mt-10 sm:mt-0 lg:-mt-32 xl:mt-20 z-10">
-          <button class="btn-primary flex gap-3 !rounded-3xl !bg-[#04201A] !font-[400]">
+          <button type="button" aria-label="Обратный звонок" class="btn-primary flex gap-3 !rounded-3xl !bg-[#04201A] !font-[400]">
             <Icon name="lucide:phone" class="w-5 h-5"/>
             <span>Обратный звонок</span>
           </button>
@@ -386,7 +388,7 @@ onMounted(() => {
             </div>
             <p class="text-[50px] leading-[60px] font-[600]">от {{ item.value }}</p>
             <p class="text-[#667085] text-[16px] leading-[24px]">{{ item.description }}</p>
-            <button class="mt-4 btn-primary h-[48px] text-[16px] leading-[24px]" @click="navigateTo('https://app.harmex.ru/auth', { external: true })">Выбрать тариф</button>
+            <button type="button" aria-label="Выбрать тариф" class="mt-4 btn-primary h-[48px] text-[16px] leading-[24px]" @click="navigateTo('https://app.harmex.ru/auth', { external: true })">Выбрать тариф</button>
           </div>
 
         </div>
@@ -403,16 +405,16 @@ onMounted(() => {
           <div class="flex lg:flex-row flex-col justify-between gap-8">
           <div class="flex flex-col justify-start ">
               <h1 class="text-[24px] leading-[29px] lg:text-[40px] lg:leading-[48px] font-[600] max-w-[507px] !text-left">Часто задаваемые вопросы</h1>
-              <Nuxt-Img src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/questMan.svg" class="hidden lg:flex max-w-[240px] max-h-[285px]" />
+              <Nuxt-Img src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/questMan.svg" class="hidden lg:flex max-w-[240px] max-h-[285px]" loading="lazy"/>
           </div>
 
           <div class="lg:w-1/2 lg:max-w-1/2 w-full ">
               <Accordion
-              v-for="(section, index) in sections"
-              :key="index"
-              :title="section.title"
-              :isOpen="openIndex === index"
-              @update:isOpen="handleAccordionToggle(index)"
+                v-for="(section, index) in sections"
+                :key="index"
+                :title="section.title"
+                :isOpen="openIndex === index"
+                @update:isOpen="handleAccordionToggle(index)"
               >
                 <div v-html="section.content"></div>
               </Accordion>
@@ -437,7 +439,7 @@ onMounted(() => {
               @input="formatPhone"
               class="w-full px-4 py-3 text-[14px] font-medium rounded-[10px] border border-gray-300 h-[60px]"
               />
-          <button class="btn-black">Отправить</button>
+          <button type="button" aria-label="Отправить" class="btn-black">Отправить</button>
           </div>
           <p class="font-[400] text-[12px] leading-[16px] text-[#323232A3]">
               Согласен на обработку и хранение моих персональных данных в соответствии с <a class="text-[#323232]" href="#">Условиями</a>

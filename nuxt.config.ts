@@ -3,18 +3,31 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
   modules: ['@nuxtjs/tailwindcss', '@nuxt/image', '@nuxt/icon', "@pinia/nuxt", "@pinia-plugin-persistedstate/nuxt", '@vueuse/nuxt', '@nuxtjs/robots', '@bg-dev/nuxt-s3'],
+  image: {
+    quality: 75,
+    format: ['webp', 'avif'],
+    provider: 'ipx', 
+  },
   app: {
     head: {
       title: 'Harmex',
       meta: [
-        { name: 'robots', content: 'noindex, nofollow' } // Запрещает индексацию
+        { name: 'robots', content: 'noindex, nofollow' }
       ],
       link: [
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: 'anonymous' },
         {
-          rel: 'stylesheet',
-          href: 'https://fonts.googleapis.com/css2?family=Golos+Text:wght@400..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap'
+          rel: 'preload',
+          href: 'https://fonts.googleapis.com/css2?family=Golos+Text:wght@400..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap',
+          as: 'style',
+          onload: "this.onload=null;this.rel='stylesheet'",
+        },
+        {
+          rel: 'preload',
+          href: 'https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap',
+          as: 'style',
+          onload: "this.onload=null;this.rel='stylesheet'"
         },
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.svg' },
       ]

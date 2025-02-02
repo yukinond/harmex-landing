@@ -26,7 +26,7 @@ onMounted(() => {
 
 <template>
   <div class="border-b border-[#E8E8E8]" :class="{ 'pb-5': isOpen }">
-    <button class="accordion" @click="toggleAccordion">
+    <button type="button" :aria-label="`${isOpen ? 'Закрыть вопрос' : 'Открыть вопрос'} ${title}`" class="accordion" @click="toggleAccordion">
       {{ title }}
       <Icon class="icon min-h-5 min-w-5" :class="{ 'rotate-45': isOpen, 'rotate-0': !isOpen }" name="prime:plus" />
     </button>

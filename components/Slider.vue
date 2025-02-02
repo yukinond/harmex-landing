@@ -3,23 +3,13 @@
   
   const currentSlide = ref(0);
   const persistedStore = usePersistedStore();
+  const store = useMainStore();
   const current = ref('wildberries')
   const isStoreReady = ref(false);
 
-  const slideGroups = ref([
-    {
-      before: `https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/example.svg`,
-      after: 'https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/example.svg',
-    },
-    {
-      before: 'https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/example.svg',
-      after: 'https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/example.svg',
-    },
-    {
-      before: 'https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/example.svg',
-      after: 'https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/example.svg',
-    },
-  ]);
+  const slideGroups = computed(() => {
+    return store.info[current.value].images;
+  });
 
   watchEffect(() => {
     if (persistedStore.current) {
@@ -51,21 +41,22 @@
       >
         <div class="image-group">
           <div class="text-[20px] font-[600] leading-[28px] mb-4 flex">До</div>
-          <NuxtImg :src="`/img/reviews/${persistedStore.current}/Before${index + 1}.png`" class="image" />
+          <NuxtImg :src="group.before" class="image" loading="lazy" alt="До HARMEX" />
         </div>
 
         <div class="image-group">
           <div class="text-[20px] font-[600] leading-[28px] mb-4 flex">После</div>
-          <NuxtImg :src="`/img/reviews/${persistedStore.current}/After${index + 1}.png`" class="image" />
+          <NuxtImg :src="group.after" class="image" loading="lazy" alt="После HARMEX"/>
         </div>
       </div>
     </div>
   </div>
 
-  <div v-if="current !== 'flowwow'" class="w-full flex gap-4 justify-center items-center mt-4">
+  <div v-if="slideGroups.length > 1" class="w-full flex gap-4 justify-center items-center mt-4">
     <button
       class="btn-circle prev-btn flex items-center justify-center"
       @click="prevSlide"
+      type="button"
       aria-label="Предыдущий слайд"
     >
       <Icon name="uil:arrow-left" class="w-4 h-4" />
@@ -73,6 +64,7 @@
     <button
       class="btn-circle next-btn flex items-center justify-center"
       @click="nextSlide"
+      type="button"
       aria-label="Следующий слайд"
     >
       <Icon name="uil:arrow-right" class="w-4 h-4" />

@@ -67,11 +67,11 @@ function scrollTop() {
     <header id="header" class="flex justify-between items-center h-[84px] px-3 bg-white " :class="{ 'mb-1.5 rounded-b-xl shadow-[2px_1px_7px_1px_rgba(0,_0,_0,_0.1)]' : route.name === 'index', 'lg:px-[calc(10%)]' : route.name !== 'index'}">
       <div class="flex gap-6">
         <Nuxt-Link to="/">
-          <nuxt-img class="w-[88px] h-[28px] ml-3" src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/logo.svg"></nuxt-img>
+          <nuxt-img class="w-[88px] h-[28px] ml-3" src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/logo.svg" loading="lazy"></nuxt-img>
         </Nuxt-Link>
 
         <div class="dropdown lg:flex hidden ">
-          <button class="dropbtn font-[500] text-[14px] leading-[17.5px] flex my-auto gap-1.5" @click="toggleDropdown">
+          <button type="button" aria-label="Открыть каталог" class="dropbtn font-[500] text-[14px] leading-[17.5px] flex my-auto gap-1.5" @click="toggleDropdown">
             Каталог 
             <Icon :name="popupVisible ? 'icon-park-outline:up' : 'icon-park-outline:right'" class="w-4 h-5 pointer-events-none" />
           </button>
@@ -79,7 +79,7 @@ function scrollTop() {
             <div v-if="popupVisible" class="dropdown-content full-width mt-8" id="myDropdown">
               <div  class="w-full rounded-md p-6 flex bg-white shadow-[0px_-1px_5px_-2px_rgba(0,_0,_0,_0.1)]">
                 <div class="flex flex-col gap-4 font-normal w-[25%] mr-6">
-                  <button v-for="item in popupData" :key="item.value" class="flex justify-between items-center w-full hover:text-[--primary] group" :class="{ 'text-[--primary]': item.value === currentPopup }" @click="currentPopup = item.value">
+                  <button type="button" :aria-label="`Открыть ${item.title}`" v-for="item in popupData" :key="item.value" class="flex justify-between items-center w-full hover:text-[--primary] group" :class="{ 'text-[--primary]': item.value === currentPopup }" @click="currentPopup = item.value">
                     <div class="flex gap-1.5 items-center">
                       <Icon :name="item.icon" class="w-5 h-5 text-[#7c7c7c] group-hover:text-[--primary]" :class="{ 'text-[--primary]': item.value === currentPopup }" />
                       <span class="font-[500] text-[16px] leading-[24px]">{{ item.title }}</span>
@@ -95,7 +95,7 @@ function scrollTop() {
                 <div class="vertical-divider"></div>
 
                 <div class="flex flex-col gap-4 ml-6">
-                  <button @click="navigateToSite(subItem.value, subItem.disabled)" :disabled="subItem.disabled" v-for="subItem in popupData.find(item => item.value === currentPopup).subItems || []" 
+                  <button type="button" :aria-label="`Перейти ${subItem.title}`" @click="navigateToSite(subItem.value, subItem.disabled)" :disabled="subItem.disabled" v-for="subItem in popupData.find(item => item.value === currentPopup).subItems || []" 
                       :key="subItem.value" 
                       class="flex gap-1.5 items-center disabled:text-[#f4f4f4]">
                     <span class="font-[400] text-[14px] leading-[26px] text-[#303940]">{{ subItem.title }}</span>
@@ -121,12 +121,12 @@ function scrollTop() {
           </a>
         </div>
         <div class="flex items-center h-full" :class="{ 'pl-3 border-l border-l-[#E8E8E8] ': route.name === 'index' }">
-          <button href="https://app.harmex.ru/register" target="_blank" rel="noopener noreferrer" class="btn-primary">
+          <button type="button" aria-label="Регистрация" href="https://app.harmex.ru/register" target="_blank" rel="noopener noreferrer" class="btn-primary">
             Регистрация
           </button>
         </div>
       </div>
-      <button class="btn-circle lg:hidden !bg-transparent !border-[#E5E9EB]">  
+      <button type="button" aria-label="Бургер" class="btn-circle lg:hidden !bg-transparent !border-[#E5E9EB]">  
         <div
           ref="navIcon"
           id="nav-icon3"
@@ -153,7 +153,7 @@ function scrollTop() {
         class="fixed flex-col top-0 left-0 w-full bg-white z-50 flex gap-5 items-start justify-start py-3 px-5 lg:hidden "
         :class="popupVisible ? 'h-screen' : 'h-fit'"
       >
-        <button class="btn-circle lg:hidden !bg-transparent !border-[#E5E9EB]">  
+        <button type="button" aria-label="Бургер" class="btn-circle lg:hidden !bg-transparent !border-[#E5E9EB]">  
           <div
             ref="navIcon"
             id="nav-icon3"
@@ -185,7 +185,7 @@ function scrollTop() {
           <a class="text-left" href="#" @click="toggleOpen">Калькулятор</a>
         </div>
         <div class="dropdown ">
-          <button class="dropbtn font-[500] text-[14px] leading-[17.5px] flex my-auto gap-1.5" @click="toggleDropdown">
+          <button type="button" aria-label="Открыть каталог" class="dropbtn font-[500] text-[14px] leading-[17.5px] flex my-auto gap-1.5" @click="toggleDropdown">
             Каталог 
             <Icon :name="popupVisible ? 'icon-park-outline:up' : 'icon-park-outline:right'" class="w-4 h-5 pointer-events-none" />
           </button>
@@ -194,7 +194,7 @@ function scrollTop() {
               <div  class="w-full rounded-md flex flex-col bg-white">
                 <div class="flex flex-col gap-4 font-normal w-full py-3 px-4">
                   <div v-for="item in popupData" :key="item.value" class="flex flex-col gap-4">
-                    <button  class="flex justify-between items-center w-full hover:text-[--primary] group" :class="{ 'text-[--primary]': item.value === currentPopup }" @click="currentPopup = item.value">
+                    <button type="button" :aria-label="`Открыть ${item.title}`" class="flex justify-between items-center w-full hover:text-[--primary] group" :class="{ 'text-[--primary]': item.value === currentPopup }" @click="currentPopup = item.value">
                       <div class="flex gap-1.5 items-center">
                         <Icon :name="item.icon" class="w-5 h-5 text-[#7c7c7c] group-hover:text-[--primary]" :class="{ 'text-[--primary]': item.value === currentPopup }" />
                         <span class="font-[500] text-[16px] leading-[24px]">{{ item.title }}</span>
@@ -206,7 +206,7 @@ function scrollTop() {
                       />
                     </button>
                     <div v-if="currentPopup === item.value" class="flex flex-col gap-4">
-                      <button :disabled="subItem.disabled" @click="navigateToSite(subItem.value, subItem.disabled)" v-for="subItem in item.subItems" 
+                      <button type="button" :aria-label="`Перейти ${subItem.title}`" :disabled="subItem.disabled" @click="navigateToSite(subItem.value, subItem.disabled)" v-for="subItem in item.subItems" 
                           :key="subItem.value" 
                           class="flex gap-1.5 items-center">
                         <span class="font-[400] text-[14px] leading-[26px] text-[#303940]">{{ subItem.title }}</span>
@@ -224,7 +224,7 @@ function scrollTop() {
     </header>
     <slot class="!z-1" />
     <footer id="footer" class="mt-1.5 rounded-xl rounded-b-none bg-[#323232] px-6 py-8 lg:p-16 flex flex-col gap-12">
-      <Nuxt-Img src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/footer/logo-white.svg" class="w-full max-w-[139px] min-h-[44px]" />
+      <Nuxt-Img src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/footer/logo-white.svg" class="w-full max-w-[139px] min-h-[44px]" loading="lazy"/>
       <div class="flex sm:flex-row flex-col justify-between gap-12">
         <div class="flex sm:flex-row flex-col gap-12 lg:gap-20 flex-wrap">
           <div v-for="item in popupData.slice(0, 4)" :key="item.value" class="flex flex-col gap-3 font-[600] text-[14px] leading-[18px]">
@@ -236,8 +236,8 @@ function scrollTop() {
         </div>
         <div class="flex flex-col gap-4 items-end text-white">
           <a class="text-[32px] leading-[38px] lg:text-[40px] lg:leading-[48px] font-[600]" href="tel:8 (964) 726 50 61">+7 964 726-50-61</a>
-          <a class="font-[500] text-[14px] leading-[17.5px] flex gap-3 items-center" href="https://t.me/HarmexSupport_bot" target="_blank" rel="noopener noreferrer"><Nuxt-Img src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/footer/support.svg" class="w-5 h-5" />Служба заботы</a>
-          <a class="font-[500] text-[14px] leading-[17.5px] flex gap-3 items-center" href="https://t.me/harmexpro_bot" target="_blank" rel="noopener noreferrer"><Nuxt-Img src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/footer/tg.svg" class="w-5 h-5" />Презентация Harmex</a>
+          <a class="font-[500] text-[14px] leading-[17.5px] flex gap-3 items-center" href="https://t.me/HarmexSupport_bot" target="_blank" rel="noopener noreferrer"><Nuxt-Img src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/footer/support.svg" class="w-5 h-5" loading="lazy"/>Служба заботы</a>
+          <a class="font-[500] text-[14px] leading-[17.5px] flex gap-3 items-center" href="https://t.me/harmexpro_bot" target="_blank" rel="noopener noreferrer"><Nuxt-Img src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/footer/tg.svg" class="w-5 h-5" loading="lazy"/>Презентация Harmex</a>
           <a class="mb-2 text-[16px] text-[#47A4D2]" href="mailto:info@harmex.ru">info@harmex.ru</a>
           <div class="mb-2 text-right flex flex-col gap-1.5">
             <p class="text-[16px]">Саратовская обл., г. Ртищево, ул. Пролетарская, д. 2, кв. 87</p>
@@ -247,7 +247,7 @@ function scrollTop() {
             <span class="text-[14px] text-[#ADADAD]">
               Наверх
             </span>
-            <button @click="scrollTop" class="btn-primary max-h-[42px] flex items-center"><Icon name="octicon:arrow-up-24" class="w-5 h-7 text-black" /></button>
+            <button type="button" aria-label="Наверх" @click="scrollTop" class="btn-primary max-h-[42px] flex items-center"><Icon name="octicon:arrow-up-24" class="w-5 h-7 text-black" /></button>
           </div>
         </div>
       </div>

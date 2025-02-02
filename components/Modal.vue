@@ -1,8 +1,8 @@
 <template>
   <div class="modal-overlay flex items-center " @click="$emit('close')">
 
-    <div class="modal relative h-fit w-fit lg:max-w-[60%]">
-      <button class="absolute lg:flex hidden top-2 -right-10 text-white" @click="$emit('close')">
+    <div @click.stop class="modal relative h-fit w-fit lg:max-w-[60%]">
+      <button type="button" aria-label="Закрыть модальное окно" class="absolute lg:flex hidden top-2 -right-10 text-white" @click="$emit('close')">
         <Icon name="material-symbols:close-rounded" class="w-10 h-10" />
       </button>
       <slot />

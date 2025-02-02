@@ -374,7 +374,7 @@ function removeSection(sectionIndex: number) {
 
       <div class="px-4 lg:px-6 py-20 flex flex-col items-center bg-white">
         <div class="flex flex-col w-full lg:max-w-[70%] items-center gap-6">
-          <Nuxt-Img v-if="article.image && article.image.startsWith('http')" :src="article.image" class="w-full max-h-[320px] mx-auto object-cover rounded-2xl" />
+          <Nuxt-Img v-if="article.image && article.image.startsWith('http')" :src="article.image" loading="lazy" class="w-full max-h-[320px] mx-auto object-cover rounded-2xl" />
           <div v-show="article.category" class="flex justify-between w-full">
             <p class="text-[16px] leading-[24px] font-[500] text-[--primary]">
               {{ article.category }}

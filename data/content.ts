@@ -42,10 +42,11 @@ export const data = ref([
     value: 'hotels',
     count: 8,
     subItems: [
-      { title: 'Суточно', value: 'sutochno', disabled: true },
+      { title: 'Суточно', value: 'sutochno', disabled: false },
+      { title: 'OZON Travel', value: 'ozonHotels', disabled: false },
+      { title: 'Avito Hotels', value: 'avitoHotels', disabled: false },
       { title: 'Циан', value: 'cian', disabled: true },
       { title: '101hotels', value: '101hotels', disabled: true },
-      { title: 'OZON Travel', value: 'ozon_travel', disabled: true },
       { title: 'Booking', value: 'booking', disabled: true },
       { title: 'Airbnb', value: 'airbnb', disabled: true },
       { title: 'OneTwoTrip', value: 'onetwotrip', disabled: true },
