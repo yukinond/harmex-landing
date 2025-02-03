@@ -174,14 +174,13 @@ const formatText = (
   formatType: 'bold' | 'italic' | 'underline'
 ) => {
   const textarea = document.getElementById(
-    `editor-${paragraphIndex}`
+    `editor-${sectionIndex}-${paragraphIndex}`
   ) as HTMLTextAreaElement
 
   if (textarea) {
     const start = textarea.selectionStart
     const end = textarea.selectionEnd
     const selectedText = textarea.value.substring(start, end)
-
     if (!selectedText) return 
 
     const content = article.sections[sectionIndex].content[paragraphIndex]
@@ -287,16 +286,17 @@ function removeSection(sectionIndex: number) {
                 {{ option.label }}
               </option>
             </select>
-            <button class="text-red-500 h-5 w-5 text-[12px] rounded-sm border-b  border-[--primary]" @click="removeSection(index)">X</button>
+            <button type="button" class="text-red-500 h-5 w-5 text-[12px] rounded-sm border-b  border-[--primary]" @click="removeSection(index)">X</button>
           </div>
           <div
             v-for="(paragraph, pIndex) in section.content"
             :key="pIndex"
             class="flex flex-col space-y-2"
-          >
+          >            {{ paragraph }}
+
             <div class="flex space-x-2"> 
               <textarea
-                :id="'editor-' + pIndex"
+                :id="'editor-' + index + '-' + pIndex"
                 v-model="paragraph.text"
                 placeholder="Текст"
                 class="w-full p-2 border rounded"
@@ -310,7 +310,7 @@ function removeSection(sectionIndex: number) {
                   {{ option.label }}
                 </option>
               </select>
-              <button class="p-0 text-red-500 h-5 w-5 text-[12px] " @click="removeParagraph(index, pIndex)">X</button>
+              <button type="button" class="p-0 text-red-500 h-5 w-5 text-[12px] " @click="removeParagraph(index, pIndex)">X</button>
             </div>
             <div class="flex space-x-2">
               <button
