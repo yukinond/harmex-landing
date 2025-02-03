@@ -177,7 +177,7 @@ export const useMainStore = defineStore('main', {
         ]
       },
       ozonHotels: {
-        title: 'OZON hotels',
+        title: 'OZON Travel',
         value: 'ozonHotels',
         disabled: false,
         price: {

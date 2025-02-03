@@ -230,7 +230,7 @@ function scrollTop() {
           <div v-for="item in popupData.slice(0, 4)" :key="item.value" class="flex flex-col gap-3 font-[600] text-[14px] leading-[18px]">
             <p class="text-white">{{ item.title }}</p>
             <div v-for="subItem in item.subItems.slice(0, 5)" :key="subItem.value" class="flex flex-col gap-3 text-[#ADADAD]">
-              <Nuxt-Link :to="subItem.disabled ? '' : `/info/${subItem.value}`" class="font-[400] text-[14px] leading-[17.5px] lg:leading-[26px] text-[#E8E8E8]">{{ subItem.title }}</Nuxt-Link>
+              <Button type="Button" @click="navigateToSite(subItem.value, subItem.disabled)" class="font-[400] text-[14px] leading-[17.5px] lg:leading-[26px] text-[#E8E8E8] text-left">{{ subItem.title }}</Button>
             </div>
           </div>
         </div>
