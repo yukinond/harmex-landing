@@ -292,8 +292,7 @@ function removeSection(sectionIndex: number) {
             v-for="(paragraph, pIndex) in section.content"
             :key="pIndex"
             class="flex flex-col space-y-2"
-          >            {{ paragraph }}
-
+          > 
             <div class="flex space-x-2"> 
               <textarea
                 :id="'editor-' + index + '-' + pIndex"
