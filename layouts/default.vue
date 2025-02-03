@@ -67,7 +67,7 @@ function scrollTop() {
     <header id="header" class="flex justify-between items-center h-[84px] px-3 bg-white " :class="{ 'mb-1.5 rounded-b-xl shadow-[2px_1px_7px_1px_rgba(0,_0,_0,_0.1)]' : route.name === 'index', 'lg:px-[calc(10%)]' : route.name !== 'index'}">
       <div class="flex gap-6">
         <Nuxt-Link alt="Перейти на главную" to="/">
-          <nuxt-img class="w-[88px] h-[28px] ml-3" src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/logo.svg" loading="lazy"></nuxt-img>
+          <nuxt-img alt="Logo" class="w-[88px] h-[28px] ml-3" src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/logo.svg" loading="lazy"></nuxt-img>
         </Nuxt-Link>
 
         <div class="dropdown lg:flex hidden ">
@@ -224,7 +224,7 @@ function scrollTop() {
     </header>
     <slot class="!z-1" />
     <footer id="footer" class="mt-1.5 rounded-xl rounded-b-none bg-[#323232] px-6 py-8 lg:p-16 flex flex-col gap-12">
-      <Nuxt-Img src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/footer/logo-white.svg" class="w-full max-w-[139px] min-h-[44px]" loading="lazy"/>
+      <Nuxt-Img alt="log-white" src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/footer/logo-white.svg" class="w-full max-w-[139px] min-h-[44px]" loading="lazy"/>
       <div class="flex sm:flex-row flex-col justify-between gap-12">
         <div class="flex sm:flex-row flex-col gap-12 lg:gap-20 flex-wrap">
           <div v-for="item in popupData.slice(0, 4)" :key="item.value" class="flex flex-col gap-3 font-[600] text-[14px] leading-[18px]">
@@ -236,8 +236,8 @@ function scrollTop() {
         </div>
         <div class="flex flex-col gap-4 items-end text-white">
           <a class="text-[32px] leading-[38px] lg:text-[40px] lg:leading-[48px] font-[600]" href="tel:8 (964) 726 50 61">+7 964 726-50-61</a>
-          <a class="font-[500] text-[14px] leading-[17.5px] flex gap-3 items-center" href="https://t.me/HarmexSupport_bot" target="_blank" rel="noopener noreferrer"><Nuxt-Img src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/footer/support.svg" class="w-5 h-5" loading="lazy"/>Служба заботы</a>
-          <a class="font-[500] text-[14px] leading-[17.5px] flex gap-3 items-center" href="https://t.me/harmexpro_bot" target="_blank" rel="noopener noreferrer"><Nuxt-Img src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/footer/tg.svg" class="w-5 h-5" loading="lazy"/>Презентация Harmex</a>
+          <a class="font-[500] text-[14px] leading-[17.5px] flex gap-3 items-center" href="https://t.me/HarmexSupport_bot" target="_blank" rel="noopener noreferrer"><Nuxt-Img alt="Support" src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/footer/support.svg" class="w-5 h-5" loading="lazy"/>Служба заботы</a>
+          <a class="font-[500] text-[14px] leading-[17.5px] flex gap-3 items-center" href="https://t.me/harmexpro_bot" target="_blank" rel="noopener noreferrer"><Nuxt-Img alt="Telegram" src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/footer/tg.svg" class="w-5 h-5" loading="lazy"/>Презентация Harmex</a>
           <a class="mb-2 text-[16px] text-[#47A4D2]" href="mailto:info@harmex.ru">info@harmex.ru</a>
           <div class="mb-2 text-right flex flex-col gap-1.5">
             <p class="text-[16px]">Саратовская обл., г. Ртищево, ул. Пролетарская, д. 2, кв. 87</p>
