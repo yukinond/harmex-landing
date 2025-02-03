@@ -7,6 +7,7 @@ export default defineNuxtConfig({
     quality: 75,
     format: ['webp', 'avif'],
     provider: 'ipx', 
+    domains: ['ozonmpportal.hb.vkcs.cloud'],
   },
   app: {
     head: {
