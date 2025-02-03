@@ -51,8 +51,8 @@ function goToPage(page: number) {
             <h1 class="block-title">Популярные статьи</h1>
             <div class="flex lg:flex-row flex-col gap-6 w-full justify-center">
                 <div v-if="mainArticles && mainArticles.length"  v-for="(item, index) in mainArticles" class="flex flex-col flex-1">
-                    <Nuxt-Link :to="`/blog/${item.uuid}`" class="w-full bg-[#F7F7F7] rounded-lg">           
-                        <Nuxt-Img :src="item.image" loading="lazy" class="w-full rounded-lg object-fi"  />
+                    <Nuxt-Link alt="Перейти к статье" :to="`/blog/${item.uuid}`" class="w-full bg-[#F7F7F7] rounded-lg">           
+                        <Nuxt-Img :src="item.image" loading="lazy" class="w-full rounded-lg object-fi" alt="Превью статьи"  />
                     </Nuxt-Link>
                     <div class="px-[16px] py-8 flex flex-col gap-3">
                     <div class="flex justify-between mb-1">
@@ -62,7 +62,7 @@ function goToPage(page: number) {
                         {{ item.views }}
                         </span>
                     </div>
-                    <Nuxt-Link :to="`/blog/${item.uuid}`" class="font-[600] text-[20px] leading-[28px]">{{ item.title }}</Nuxt-Link>
+                    <Nuxt-Link alt="Перейти к статье" :to="`/blog/${item.uuid}`" class="font-[600] text-[20px] leading-[28px]">{{ item.title }}</Nuxt-Link>
                     <p class="font-[400] text-[15px] leading-[24px] text-[#0A0A0AB2]">{{ item.description }} </p>
                     </div>
                 </div>
@@ -74,14 +74,14 @@ function goToPage(page: number) {
             <h1 class="block-title">Выберите интересующую статью</h1>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
                 <div class="flex flex-col flex-1" v-for="(item, index) in articles" :key="item.uuid">
-                    <Nuxt-Link :to="`/blog/${item.uuid}`" class="w-full bg-[#F7F7F7] rounded-lg">
-                        <Nuxt-Img :src="item.image" loading="lazy" class="w-full rounded-lg object-fi"  />
+                    <Nuxt-Link alt="Перейти к статье" :to="`/blog/${item.uuid}`" class="w-full bg-[#F7F7F7] rounded-lg">
+                        <Nuxt-Img :src="item.image" loading="lazy" class="w-full rounded-lg object-fi" alt="Превью статьи" />
                     </Nuxt-Link>
                     <div class="px-[16px] py-8 flex flex-col gap-3">
                         <div class="flex justify-between mb-1">
                             <p class="text-[16px] leading-[24px] font-[500] text-[--primary]">{{ item.category }}</p>
                         </div>
-                        <Nuxt-Link :to="`/blog/${item.uuid}`" class="font-[600] text-[20px] leading-[28px]">{{ item.title }}</Nuxt-Link>
+                        <Nuxt-Link alt="Перейти к статье" :to="`/blog/${item.uuid}`" class="font-[600] text-[20px] leading-[28px]">{{ item.title }}</Nuxt-Link>
                         <p class="font-[400] text-[15px] leading-[24px] text-[#0A0A0AB2]">{{ item.description }}</p>
                         <div class="flex justify-between">
                             <div class="text-[#0A0A0AB2] flex items-center gap-3">

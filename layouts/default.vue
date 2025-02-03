@@ -66,7 +66,7 @@ function scrollTop() {
   <div :class="{ 'px-1.5' : route.name === 'index',  }">
     <header id="header" class="flex justify-between items-center h-[84px] px-3 bg-white " :class="{ 'mb-1.5 rounded-b-xl shadow-[2px_1px_7px_1px_rgba(0,_0,_0,_0.1)]' : route.name === 'index', 'lg:px-[calc(10%)]' : route.name !== 'index'}">
       <div class="flex gap-6">
-        <Nuxt-Link to="/">
+        <Nuxt-Link alt="Перейти на главную" to="/">
           <nuxt-img class="w-[88px] h-[28px] ml-3" src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/logo.svg" loading="lazy"></nuxt-img>
         </Nuxt-Link>
 
@@ -230,7 +230,7 @@ function scrollTop() {
           <div v-for="item in popupData.slice(0, 4)" :key="item.value" class="flex flex-col gap-3 font-[600] text-[14px] leading-[18px]">
             <p class="text-white">{{ item.title }}</p>
             <div v-for="subItem in item.subItems.slice(0, 5)" :key="subItem.value" class="flex flex-col gap-3 text-[#ADADAD]">
-              <Button type="Button" @click="navigateToSite(subItem.value, subItem.disabled)" class="font-[400] text-[14px] leading-[17.5px] lg:leading-[26px] text-[#E8E8E8] text-left">{{ subItem.title }}</Button>
+              <button type="button" @click="navigateToSite(subItem.value, subItem.disabled)" class="font-[400] text-[14px] leading-[17.5px] lg:leading-[26px] text-[#E8E8E8] text-left">{{ subItem.title }}</button>
             </div>
           </div>
         </div>

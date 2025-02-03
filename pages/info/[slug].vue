@@ -240,7 +240,7 @@ onMounted(() => {
               Попробовать
               <Icon name="lucide:arrow-right" class="w-5 h-5 ml-1"/>
             </button>
-            <a href="#contact">
+            <a href="#contact" alt="Перейти в блок обратный звонок">
               <button type="button" aria-label="Обратный звонок" class="btn-primary flex gap-3 !bg-white !font-[400] !text-black !max-h-[40px]">
                 <Icon name="lucide:phone" class="w-5 h-5"/>
                 <span>Обратный звонок</span>
@@ -289,6 +289,7 @@ onMounted(() => {
                     :src="`https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/buisnessBlock/${slide.value}.png`" 
                     class="w-full h-full object-cover lg:object-contain rounded-xl"
                     loading="lazy"
+                    alt="Изображение слайда"
                   />
                 </div>
               </div>
@@ -300,7 +301,7 @@ onMounted(() => {
 
       <section class="bg-white py-14 px-6 lg:px-[120px] lg:pt-14 lg:pb-[112px] flex flex-col gap-8 lg:gap-14 justify-center items-center w-full" >
         <h1 class="block-title text-center"> Почему выбирают HARMEX?</h1>
-        <Nuxt-Img src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/harmex.svg" class="w-full max-w-[1120px] max-h-[700px] flex mx-auto" loading="lazy"/>
+        <Nuxt-Img src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/harmex.svg" alt="image" class="w-full max-w-[1120px] max-h-[700px] flex mx-auto" loading="lazy"/>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div v-for="item in harmexPluses" class="bg-[#F4F4F4] p-6 rounded-[10px] w-full">
               <div class="bg-[--primary] text-white p-3 rounded-[10px] w-fit max-h-[49px] mb-16 "> 
@@ -310,7 +311,7 @@ onMounted(() => {
               <p class="text-[#475467] font-[400] text-[16px] leading-[24px]">{{ item.text }}</p>
             </div>
         </div>
-        <a href="#contact">
+        <a href="#contact" alt="Перейти в блок обратный звонок">
           <button type="button" aria-label="Обратный звонок" class="btn-primary flex gap-3 !rounded-3xl !bg-[#04201A] !font-[400]">
             <Icon name="lucide:phone" class="w-5 h-5"/>
             <span>Обратный звонок</span>
@@ -352,13 +353,13 @@ onMounted(() => {
               <NuxtImg 
                 :src="slide.image"
                 class="w-full lg:w-[90%]  object-fill flex max-w-[1500px] mx-auto rounded-md" 
-                alt="Finance image"
+                alt="Slide image"
                 loading="lazy"
               />
             </div>
           </transition-group>
         </div>
-        <a href="#contact" class="my-10 -mt-10 sm:mt-0 lg:-mt-32 xl:mt-20 z-10">
+        <a href="#contact" class="my-10 -mt-10 sm:mt-0 lg:-mt-32 xl:mt-20 z-10" alt="Перейти в блок обратный звонок">
           <button type="button" aria-label="Обратный звонок" class="btn-primary flex gap-3 !rounded-3xl !bg-[#04201A] !font-[400]">
             <Icon name="lucide:phone" class="w-5 h-5"/>
             <span>Обратный звонок</span>
@@ -405,7 +406,7 @@ onMounted(() => {
           <div class="flex lg:flex-row flex-col justify-between gap-8">
           <div class="flex flex-col justify-start ">
               <h1 class="text-[24px] leading-[29px] lg:text-[40px] lg:leading-[48px] font-[600] max-w-[507px] !text-left">Часто задаваемые вопросы</h1>
-              <Nuxt-Img src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/questMan.svg" class="hidden lg:flex max-w-[240px] max-h-[285px]" loading="lazy"/>
+              <Nuxt-Img src="https://ozonmpportal.hb.vkcs.cloud/harmex/landing1/img/questMan.svg" alt="Вопросы" class="hidden lg:flex max-w-[240px] max-h-[285px]" loading="lazy"/>
           </div>
 
           <div class="lg:w-1/2 lg:max-w-1/2 w-full ">
@@ -442,7 +443,7 @@ onMounted(() => {
           <button type="button" aria-label="Отправить" class="btn-black">Отправить</button>
           </div>
           <p class="font-[400] text-[12px] leading-[16px] text-[#323232A3]">
-              Согласен на обработку и хранение моих персональных данных в соответствии с <a class="text-[#323232]" href="#">Условиями</a>
+              Согласен на обработку и хранение моих персональных данных в соответствии с <a  alt="Перейти к Условиям"class="text-[#323232]" href="#">Условиями</a>
           </p>
           </div>
       </section>

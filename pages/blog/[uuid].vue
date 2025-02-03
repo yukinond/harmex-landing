@@ -139,6 +139,7 @@ const { $dayjs } = useNuxtApp()
       >
         <Nuxt-Img
           :src="article.image"
+          alt="Превью статьи"
           class="w-full max-h-[320px] sm:max-h-[520px] 2xl:max-h-[720px] flex mx-auto object-cover rounded-2xl"
         />
         <div class="flex justify-between mb-1 w-full">
