@@ -5,11 +5,12 @@ export default defineEventHandler(async (event) => {
     event.node.res.setHeader('Content-Type', 'application/xml');
     
     const config = useRuntimeConfig(event);
-    const baseUrl = config.public.siteUrl || 'https://example.com';
+    const baseUrl = config.public.siteUrl || 'https://harmex.ru';
+    const now = new Date();
 
     const staticRoutes = ['/', '/blog'];
 
-    const articles = await Article.find({}, "slug uuid").lean();
+    const articles = await Article.find({ date: { $lte: now } }, "slug uuid").lean();
     
     const dynamicRoutes = [
         ...(Array.isArray(data) ? data.flatMap(item => 
