@@ -1,8 +1,22 @@
 <script lang="ts" setup>
 const route = useRoute();
+const config = useRuntimeConfig();
+const baseUrl = config.public.siteUrl || "https://harmex.ru";
 const mp = ref({}) as any;
 const persistedStore = usePersistedStore();
 const store = useMainStore();
+
+const canonicalUrl = computed(() => `${baseUrl}/info/${persistedStore.current || route.params.slug}`);
+
+useHead({
+  link: [
+    {
+      rel: "canonical",
+      href: canonicalUrl,
+    },
+  ],
+});
+
 const openIndex = ref(0);
 const currentIndex = ref(0);
 const currentContent = ref("security");

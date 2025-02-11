@@ -1,6 +1,15 @@
 <script lang="ts" setup>
 import { data } from "~/data/content";
 // import { mainArticles } from '~/data/articles/articles';
+const config = useRuntimeConfig();
+const baseUrl = config.public.siteUrl || "https://harmex.ru";
+const route = useRoute();
+
+const canonicalUrl = `${baseUrl}${route.path}`;
+
+useHead({
+  link: [{ rel: "canonical", href: canonicalUrl }],
+});
 
 const appData = ref(data);
 const harmexPluses = ref([

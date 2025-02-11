@@ -1,6 +1,9 @@
 <script setup lang="ts">
 // import { mainArticles } from '~/data/articles/articles';
 
+const config = useRuntimeConfig();
+const baseUrl = config.public.siteUrl || "https://harmex.ru";
+
 const persistedStore = usePersistedStore();
 const loadingArticles = ref(true);
 const route = useRoute();
@@ -62,13 +65,21 @@ async function getArticles() {
   loadingArticles.value = false;
 }
 
-
-
-console.trace();
 onMounted(() => {
   nextTick(() => {
     getArticles();
   });
+});
+
+const canonicalUrl = computed(() => {
+  if (article.value?.slug) {
+    return `${baseUrl}/blog/${article.value.slug}`;
+  }
+  return `${baseUrl}${route.path}`;
+});
+
+useHead({
+  link: [{ rel: "canonical", href: canonicalUrl }],
 });
 
 const formatParagraph = (para: any): string => {
